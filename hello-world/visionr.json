@@ -1,0 +1,46 @@
+{
+    "code": "EXP_HELLOWORLD",
+    "scripting": {
+        "srcDirs": [
+            "src/srv"
+        ]
+    },
+    "logging": {
+        "level": "info"
+    },
+    "db": {
+        "engine": "sqlite"
+    },
+    "server": {
+        "chromeDebugPort": 0,
+        "ports": {
+            "http": 8585,
+            "https": 8383
+        },
+        "registration": {
+            "enabled": false
+        },
+        "devel": false
+    },
+    "files": {
+		"module" : "demo",
+        "srvSrc": "src/srv", 
+        "formsDir": "src/forms",
+		"schemaSrc" : ["src/schema"],
+        "model": "src/model/index.js"
+    },
+    "modules": [],
+    "project": {
+        "files": [
+            ".gitignore",
+            "src/srv",
+            "share/public",
+            "target/client",
+            "target/forms",
+            "target/import",
+            "target/doc.sync"
+        ]
+    },
+    "additional" : {
+	}
+}

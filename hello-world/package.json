@@ -1,0 +1,16 @@
+{
+  "name": "hello-world",
+  "version": "1.0.0",
+  "scripts": {
+    "clean": "vr s clean data work target log upload -force",
+    
+    "build": "vr s compile",
+    "import": "vr s import",
+    "start" : "vr s start -devel",
+
+    "install": "npm run build && npm run import"
+  },
+  "author": "Plan-Vision",
+  "license": "MIT",
+  "description": "Simple VisionR project with 'Hello world!' log message on boot"
+}
