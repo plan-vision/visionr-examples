@@ -1,0 +1,110 @@
+{
+    "rack": {
+      "en-US": "Rack",
+      "fr-FR": "Rack",
+      "bg-BG": "Стелаж",
+      "de-DE": "Rack"
+    },
+    "name": {
+      "en-US": "Server",
+      "fr-FR": "Serveur", 
+      "bg-BG": "Сървър",
+      "de-DE": "Server"
+    },
+    "model": {
+      "en-US": "Model",
+      "fr-FR": "Modèle",
+      "bg-BG": "Модел",
+      "de-DE": "Modell"
+    },
+    "serial_number": {
+      "en-US": "Serial Number",
+      "fr-FR": "Numéro de série",
+      "bg-BG": "Сериен номер",
+      "de-DE": "Seriennummer"
+    },
+    "cpu_count": {
+      "en-US": "CPU Cores",
+      "fr-FR": "Cœurs du CPU",
+      "bg-BG": "CPU ядра",
+      "de-DE": "CPU Kerne"
+    },
+    "cpu_speed": {
+      "en-US": "CPU Speed", 
+      "fr-FR": "Vitesse du CPU",
+      "bg-BG": "CPU честота",
+      "de-DE": "CPU Taktfrequenz"
+    },
+    "memory": {
+      "en-US": "Memory",
+      "fr-FR": "Mémoire",
+      "bg-BG": "Памет", 
+      "de-DE": "Arbeitsspeicher"
+    },
+    "storage": {
+      "en-US": "Storage",
+      "fr-FR": "Stockage",
+      "bg-BG": "Хранилище",
+      "de-DE": "Speicher"
+    },
+    "status": {
+      "en-US": "Status",
+      "fr-FR": "Statut",
+      "bg-BG": "Статус",
+      "de-DE": "Status"
+    },
+    "option:online": {
+      "en-US": "Online",
+      "fr-FR": "En ligne",
+      "bg-BG": "Онлайн",
+      "de-DE": "Online"
+    },
+    "option:offline": {
+      "en-US": "Offline",
+      "fr-FR": "Hors ligne",
+      "bg-BG": "Офлайн",
+      "de-DE": "Offline"
+    },
+    "option:booting": {
+      "en-US": "Booting",
+      "fr-FR": "Démarrage",
+      "bg-BG": "Зареждане",
+      "de-DE": "Hochfahren"
+    },
+    "option:stopping": {
+      "en-US": "Stopping",
+      "fr-FR": "Arrêt",
+      "bg-BG": "Спиране",
+      "de-DE": "Anhalten"
+    },
+    "option:error": {
+      "en-US": "Error",
+      "fr-FR": "Erreur",
+      "bg-BG": "Грешка",
+      "de-DE": "Fehler"
+    },
+    "option:poweroff": {
+      "en-US": "Power Off",
+      "fr-FR": "Éteint",
+      "bg-BG": "Изключен",
+      "de-DE": "Ausgeschaltet"
+    },
+    "last_updated": {
+      "en-US": "Last Updated",
+      "fr-FR": "Dernière mise à jour",
+      "bg-BG": "Последна актуализация",
+      "de-DE": "Zuletzt aktualisiert"
+    },
+    "physical_admin": {
+      "en-US": "Physical Admin",
+      "fr-FR": "Admin physique",
+      "bg-BG": "Физически админ",
+      "de-DE": "Physischer Administrator"
+    },
+    "vendor": {
+      "en-US": "Vendor",
+      "fr-FR": "Fournisseur",
+      "bg-BG": "Доставчик",
+      "de-DE": "Lieferant"
+    }
+  }

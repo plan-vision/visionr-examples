@@ -1,0 +1,45 @@
+{
+    "code": "11_INFRA",
+    "scripting": {
+        "srcDirs": [
+            "src/srv"
+        ]
+    },
+    "logging": {
+        "level": "info"
+    },
+    "db": {
+        "engine": "sqlite"
+    },
+    "server": {
+        "chromeDebugPort": 0,
+        "ports": {
+            "http": 8585,
+            "https": 8383
+        },
+        "registration": {
+            "enabled": false
+        },
+        "devel": false
+    },
+    "files": {
+        "loader": "src/loader.js",
+        "schemaSrc": [
+            "src/schema"
+        ],
+        "formsDir": "src/forms",
+        "model": "src/model/index.js"
+    },
+    "modules": [],
+    "project": {
+        "files": [
+            ".gitignore",
+            "src/srv",
+            "share/public",
+            "target/client",
+            "target/forms",
+            "target/import",
+            "target/doc.sync"
+        ]
+    }
+}

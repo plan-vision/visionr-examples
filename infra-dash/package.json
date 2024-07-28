@@ -1,0 +1,13 @@
+{
+    "name": "infra",
+    "version": "0.0.1",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "visionr-icons": "github:plan-vision/visionr-icons"
+    }
+}
