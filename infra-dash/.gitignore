@@ -1,0 +1,8 @@
+log
+work
+upload
+target
+node_modules
+managed.json
+*.log
+backup
