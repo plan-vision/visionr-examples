@@ -53,6 +53,10 @@ module.exports = {
 		  'vendor': {
 			template: 'relation',
 			related: 'contacts.vendor'
+		  },
+		  'services': {
+			template: 'relation',
+			parent: 'infra.service.server'
 		  }
 		}
 	  },

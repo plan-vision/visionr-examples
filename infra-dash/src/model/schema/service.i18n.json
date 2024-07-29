@@ -1,0 +1,134 @@
+{
+  "service": {
+    "en-US": "Service",
+    "fr-FR": "Service",
+    "bg-BG": "Услуга",
+    "de-DE": "Dienst"
+  },
+  "name": {
+    "en-US": "Service Name",
+    "fr-FR": "Nom du Service",
+    "bg-BG": "Име на Услугата",
+    "de-DE": "Dienstname"
+  },
+  "description": {
+    "en-US": "Description",
+    "fr-FR": "Description",
+    "bg-BG": "Описание",
+    "de-DE": "Beschreibung"
+  },
+  "type": {
+    "en-US": "Type",
+    "fr-FR": "Type",
+    "bg-BG": "Тип",
+    "de-DE": "Typ"
+  },
+  "option:web": {
+    "en-US": "Web",
+    "fr-FR": "Web",
+    "bg-BG": "Уеб",
+    "de-DE": "Web"
+  },
+  "option:database": {
+    "en-US": "Database",
+    "fr-FR": "Base de données",
+    "bg-BG": "База данни",
+    "de-DE": "Datenbank"
+  },
+  "option:application": {
+    "en-US": "Application",
+    "fr-FR": "Application",
+    "bg-BG": "Приложение",
+    "de-DE": "Anwendung"
+  },
+  "option:cache": {
+    "en-US": "Cache",
+    "fr-FR": "Cache",
+    "bg-BG": "Кеш",
+    "de-DE": "Cache"
+  },
+  "option:monitoring": {
+    "en-US": "Monitoring",
+    "fr-FR": "Surveillance",
+    "bg-BG": "Наблюдение",
+    "de-DE": "Überwachung"
+  },
+  "option:other": {
+    "en-US": "Other",
+    "fr-FR": "Autre",
+    "bg-BG": "Друго",
+    "de-DE": "Andere"
+  },
+  "status": {
+    "en-US": "Status",
+    "fr-FR": "Statut",
+    "bg-BG": "Статус",
+    "de-DE": "Status"
+  },
+  "option:active": {
+    "en-US": "Active",
+    "fr-FR": "Actif",
+    "bg-BG": "Активен",
+    "de-DE": "Aktiv"
+  },
+  "option:inactive": {
+    "en-US": "Inactive",
+    "fr-FR": "Inactif",
+    "bg-BG": "Неактивен",
+    "de-DE": "Inaktiv"
+  },
+  "option:maintenance": {
+    "en-US": "Maintenance",
+    "fr-FR": "Maintenance",
+    "bg-BG": "Поддръжка",
+    "de-DE": "Wartung"
+  },
+  "option:deprecated": {
+    "en-US": "Deprecated",
+    "fr-FR": "Obsolète",
+    "bg-BG": "Остарял",
+    "de-DE": "Veraltet"
+  },
+  "version": {
+    "en-US": "Version",
+    "fr-FR": "Version",
+    "bg-BG": "Версия",
+    "de-DE": "Version"
+  },
+  "servers": {
+    "en-US": "Servers",
+    "fr-FR": "Serveurs",
+    "bg-BG": "Сървъри",
+    "de-DE": "Server"
+  },
+  "owner": {
+    "en-US": "Owner",
+    "fr-FR": "Propriétaire",
+    "bg-BG": "Собственик",
+    "de-DE": "Eigentümer"
+  },
+  "last_updated": {
+    "en-US": "Last Updated",
+    "fr-FR": "Dernière mise à jour",
+    "bg-BG": "Последно обновяване",
+    "de-DE": "Zuletzt aktualisiert"
+  },
+  "port": {
+    "en-US": "Port",
+    "fr-FR": "Port",
+    "bg-BG": "Порт",
+    "de-DE": "Port"
+  },
+  "url": {
+    "en-US": "URL",
+    "fr-FR": "URL",
+    "bg-BG": "URL",
+    "de-DE": "URL"
+  },
+  "dependencies": {
+    "en-US": "Dependencies",
+    "fr-FR": "Dépendances",
+    "bg-BG": "Зависимости",
+    "de-DE": "Abhängigkeiten"
+  }
+}
