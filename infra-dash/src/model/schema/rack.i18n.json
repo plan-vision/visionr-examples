@@ -1,0 +1,92 @@
+{
+    "name": {
+      "en-US": "Name",
+      "fr-FR": "Nom",
+      "bg-BG": "Име",
+      "de-DE": "Name"
+    },
+    "model": {
+      "en-US": "Model",
+      "fr-FR": "Modèle",
+      "bg-BG": "Модел",
+      "de-DE": "Modell"
+    },
+    "serial_number": {
+      "en-US": "Serial Number",
+      "fr-FR": "Numéro de Série",
+      "bg-BG": "Сериен Номер",
+      "de-DE": "Seriennummer"
+    },
+    "height": {
+      "en-US": "Height",
+      "fr-FR": "Hauteur",
+      "bg-BG": "Височина",
+      "de-DE": "Höhe"
+    },
+    "max_power": {
+      "en-US": "Maximum Power",
+      "fr-FR": "Puissance Maximale",
+      "bg-BG": "Максимална Мощност",
+      "de-DE": "Maximale Leistung"
+    },
+    "status": {
+      "en-US": "Status",
+      "fr-FR": "Statut",
+      "bg-BG": "Статус",
+      "de-DE": "Status"
+    },
+    "last_maintained": {
+      "en-US": "Last Maintained",
+      "fr-FR": "Dernière Maintenance",
+      "bg-BG": "Последна Поддръжка",
+      "de-DE": "Zuletzt Gewartet"
+    },
+    "servers": {
+      "en-US": "Servers",
+      "fr-FR": "Serveurs",
+      "bg-BG": "Сървъри",
+      "de-DE": "Server"
+    },
+    "current_power_usage": {
+      "en-US": "Current Power Usage",
+      "fr-FR": "Consommation Électrique Actuelle",
+      "bg-BG": "Текуща Консумация на Енергия",
+      "de-DE": "Aktueller Stromverbrauch"
+    },
+    "temperature": {
+      "en-US": "Temperature",
+      "fr-FR": "Température",
+      "bg-BG": "Температура",
+      "de-DE": "Temperatur"
+    },
+    "humidity": {
+      "en-US": "Humidity",
+      "fr-FR": "Humidité",
+      "bg-BG": "Влажност",
+      "de-DE": "Luftfeuchtigkeit"
+    },
+    "last_reading_time": {
+      "en-US": "Last Reading Time",
+      "fr-FR": "Heure de la Dernière Lecture",
+      "bg-BG": "Време на Последно Отчитане",
+      "de-DE": "Zeit der letzten Messung"
+    },
+    "option:operational": {
+      "en-US": "Operational",
+      "fr-FR": "Opérationnel",
+      "bg-BG": "В експлоатация",
+      "de-DE": "Betriebsbereit"
+    },
+    "option:maintenance": {
+      "en-US": "Maintenance",
+      "fr-FR": "Maintenance",
+      "bg-BG": "В поддръжка",
+      "de-DE": "Wartung"
+    },
+    "option:offline": {
+      "en-US": "Offline",
+      "fr-FR": "Hors ligne",
+      "bg-BG": "Офлайн",
+      "de-DE": "Offline"
+    }
+  }
