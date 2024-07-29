@@ -6,3 +6,4 @@ node_modules
 managed.json
 *.log
 backup
+*.sqlite.db*
