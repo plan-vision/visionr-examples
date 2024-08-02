@@ -1,14 +1,15 @@
 {
   "name": "hello-world",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "scripts": {
-    "clean": "vr s clean data work target log upload -force",
-    
-    "build": "vr s compile",
-    "import": "vr s import",
-    "start" : "vr s start -devel",
-
-    "install": "npm run build && npm run import"
+	"reset:all": "vr s clean data work target log upload -force && npm run build && npm run import",
+	"reset": "vr s clean data work target log -force && npm run build && npm run import",
+	"build": "vr s compile",
+	"update": "vr s compile model && vr s compile import && vr s import modules",
+	"import": "vr s import",
+	"start": "vr s start -enableshellapi -devel -chromedebugport 9000",
+	"devel": "vr s start -enableshellapi -devel",
+	"prod": "vr s start -enableshellapi"
   },
   "author": "Plan-Vision",
   "license": "MIT",
