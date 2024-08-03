@@ -20,7 +20,8 @@
         "registration": {
             "enabled": false
         },
-        "devel": false
+        "devel": false,
+        "engine" : "native"
     },
     "files": {
         "loader": "src/loader.js",

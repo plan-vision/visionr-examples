@@ -9,6 +9,8 @@
 	"import": "vr s import",
 	"start": "vr s start -enableshellapi -devel -chromedebugport 9000",
 	"devel": "vr s start -enableshellapi -devel",
+	"start:java": "vr s start -java -enableshellapi -devel -chromedebugport 9000",
+	"devel:java": "vr s start -java -enableshellapi -devel",	
 	"prod": "vr s start -enableshellapi"
   },
   "author": "Plan-Vision",
