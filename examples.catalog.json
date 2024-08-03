@@ -6,7 +6,7 @@
     },
     "infra-dash" : {
         "icon" : "public",
-        "name" : "hello-world-0.0.1-jre.all.zip",
+        "name" : "infra-dash-0.0.1-jre.all.zip",
         "url" : "https://github.com/plan-vision/visionr-examples/releases/download/test/infra-dash-0.0.1-jre.all.zip" 
     }
 }
