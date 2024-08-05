@@ -1,7 +1,7 @@
 vr.defineI18n(require('./service.i18n.json'));
 
 // for (var v of db.core.hierarchy.SELECT("path like 'infra%'")) { console.log([v.path, v.code, v.name]) };  
-
+ 
 module.exports = {
     icon: 'cloud',
     hierarchies: [
@@ -12,12 +12,12 @@ module.exports = {
                 "bg-BG": "По Сървър",
                 "de-DE": "Nach Server"
             },
-            code: 'infra.colocation.racks.servers',
-            path: 'infra.colocation.racks.servers',
+            code: 'infra.colocation.racks.servers.services',
+            path: 'infra.colocation.racks.servers.services',
             showElementCount: true,
             // defaultRecursive: true,
             // expandInitialDepth: 4,
-            showLeafs: true
+            // showLeafs: true
         }
     ],
     selectFromHierarchy: true,
@@ -83,7 +83,7 @@ module.exports = {
     forms: {
         viewParams: {
             table: {
-                columns: "icon, name, owner, description, type, status, version, servers, last_updated, port, url"
+                columns: "icon, name, owner, description, type, status, version, server, last_updated, port, url"
             },
         },
     },

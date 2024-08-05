@@ -27,7 +27,7 @@ module.exports = {
 		  },
 		  'cpu_speed': {
 			template: 'integer',
-			unit: 'MHz'
+			unit: 'MHz'	
 		  },
 		  'memory': {
 			template: 'integer',

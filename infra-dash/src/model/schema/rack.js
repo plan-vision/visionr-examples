@@ -1,5 +1,17 @@
 vr.defineI18n(require('./rack.i18n.json'));
 
+/*
+
+db.infra.colocation.COUNT()
+
+db.infra.colocation.VSQL("COUNT(racks)")
+
+db.infra.rack.COUNT("id IN (SELECT racks FROM infra.colocation)")
+
+db.infra.rack.VSQL({select: 'code', where: ' id IN (SELECT racks.id FROM infra.colocation)' })
+
+*/
+
 module.exports = {
     icon: 'server',
     properties: {
