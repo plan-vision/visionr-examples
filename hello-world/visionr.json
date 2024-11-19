@@ -1,36 +1,27 @@
 {
     "code": "EXP_HELLOWORLD",
-    "scripting": {
-        "srcDirs": [
-            "src/srv"
-        ]
+    "name": {
+        "de-DE": "Projekt-Standardwerte",
+        "en-US": "Project defaults"
     },
+    "description": null,
     "logging": {
         "level": "info"
     },
-    "db": {
-        "engine": "sqlite"
-    },
     "server": {
-        "chromeDebugPort": 0,
-        "ports": {
-            "http": 8585,
-            "https": 8383
-        },
+        "engine": "native",
+        "devel": false,
         "registration": {
             "enabled": false
-        },
-        "devel": false,
-        "engine" : "native"
+        }
     },
+    "additional": {},
+    "uuid": "jDJTy26dSRyfVlpAYtMW6g",
     "files": {
-		"module" : "demo",
-        "srvSrc": "src/srv", 
         "formsDir": "src/forms",
-		"schemaSrc" : ["src/schema"],
+        "srvSrc": "src/srv",
         "model": "src/model/index.js"
     },
-    "modules": [],
     "project": {
         "files": [
             ".gitignore",
@@ -42,6 +33,15 @@
             "target/doc.sync"
         ]
     },
-    "additional" : {
-	}
+    "manager": {
+        "disabledMaintenance": false,
+        "activeConfig": "DEFAULT",
+        "configs": [
+            "managed"
+        ]
+    },
+    "db": {
+        "engine": "sqlite"
+    },
+    "modules": null
 }

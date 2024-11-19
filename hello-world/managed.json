@@ -1,0 +1,13 @@
+{
+    "name": {
+        "de-DE": "Server-Standardwerte",
+        "en-US": "Server defaults"
+    },
+    "description": null,
+    "inherits": "visionr.json",
+    "server": {
+        "engine": "auto"
+    },
+    "additional": {},
+    "uuid": "uUAUWdY3Qoa4xl4S6jLqgQ"
+}

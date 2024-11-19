@@ -1,37 +1,26 @@
 {
     "code": "11_INFRA",
-    "scripting": {
-        "srcDirs": [
-            "src/srv"
-        ]
+    "name": {
+        "de-DE": "Projekt-Standardwerte",
+        "en-US": "Project defaults"
     },
+    "description": null,
     "logging": {
         "level": "info"
     },
-    "db": {
-        "engine": "sqlite"
-    },
     "server": {
-        "chromeDebugPort": 0,
-        "ports": {
-            "http": 8585,
-            "https": 8383
-        },
+        "engine": "native",
+        "devel": false,
         "registration": {
             "enabled": false
-        },
-        "devel": false,
-        "engine" : "native"
+        }
     },
+    "additional": {},
+    "uuid": "5BFbTOavS8aE-Dm_0WyopQ",
     "files": {
-        "loader": "src/loader.js",
-        "schemaSrc": [
-            "src/schema"
-        ],
         "formsDir": "src/forms",
         "model": "src/model/index.js"
     },
-    "modules": [],
     "project": {
         "files": [
             ".gitignore",
@@ -42,5 +31,16 @@
             "target/import",
             "target/doc.sync"
         ]
-    }
+    },
+    "manager": {
+        "disabledMaintenance": false,
+        "activeConfig": "DEFAULT",
+        "configs": [
+            "managed"
+        ]
+    },
+    "db": {
+        "engine": "pg"
+    },
+    "modules": null
 }

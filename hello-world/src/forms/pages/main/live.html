@@ -1,0 +1,18 @@
+<include shared ref="/app/layouts/common-sidenav"></include>	
+
+<variable #name value="Live-Test"></variable>
+<ng-template #main>
+	<div fxFlex style="position:relative">
+		<objectsview schema="demo.greeting" live embed menu>
+		</objectsview>
+	</div>
+</ng-template>
+
+<ng-template #side>
+	<div fxLayout="column" style="padding:10px">
+		<button mat-button (click)="root.createDialog('demo.greeting')">
+			NEW GREETING
+		</button>
+	
+	</div>
+</ng-template>

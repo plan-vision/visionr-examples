@@ -1,19 +1,22 @@
 {
-  "name": "hello-world",
-  "version": "0.0.1",
-  "scripts": {
-	"reset:all": "vr s clean data work target log upload -force && npm run build && npm run import",
-	"reset": "vr s clean data work target log -force && npm run build && npm run import",
-	"build": "vr s compile",
-	"update": "vr s compile model && vr s compile import && vr s import modules",
-	"import": "vr s import",
-	"start": "vr s start -enableshellapi -devel -chromedebugport 9000",
-	"devel": "vr s start -enableshellapi -devel",
-	"start:java": "vr s start -java -enableshellapi -devel -chromedebugport 9000",
-	"devel:java": "vr s start -java -enableshellapi -devel",	
-	"prod": "vr s start -enableshellapi"
-  },
-  "author": "Plan-Vision",
-  "license": "MIT",
-  "description": "Simple VisionR project with 'Hello world!' log message on boot"
+    "name": "hello-world",
+    "version": "0.0.1",
+    "scripts": {
+        "reset:all": "vr s clean data work target log upload -force && npm run build && npm run import",
+        "reset": "vr s clean data work target log -force && npm run build && npm run import",
+        "build": "vr s compile",
+        "update": "vr s compile model && vr s compile import && vr s import modules",
+        "import": "vr s import",
+        "start": "vr s start -enableshellapi -devel -chromedebugport 9000",
+        "devel": "vr s start -enableshellapi -devel",
+        "start:java": "vr s start -java -enableshellapi -devel -chromedebugport 9000",
+        "devel:java": "vr s start -java -enableshellapi -devel",
+        "prod": "vr s start -enableshellapi"
+    },
+    "author": "Plan-Vision",
+    "license": "MIT",
+    "description": "Simple VisionR project with 'Hello world!' log message on boot",
+    "nameI18n": {
+        "en-US": "Simple VisionR project with 'Hello world!' log message on boot"
+    }
 }
