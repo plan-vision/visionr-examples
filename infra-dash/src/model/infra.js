@@ -18,3 +18,21 @@ require("./data/colocation.data");
 require("./data/rack.data");
 require("./data/server.data");
 require("./data/service.data");
+
+
+/* 
+
+- creation mask
+- incident propagation
+- incident calendar
+- maintenance calendar
+- dashboard by errors
+- last month errors
+- all status by type barchart
+
+
+- spare parts
+
+- racks and servers instance of inventory
+
+*/
