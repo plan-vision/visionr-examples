@@ -21,10 +21,10 @@
         "build:release": "npm run reset:all && npm run zip:source && npm run zip:update && npm run zip:release",
         "release": "npm run build:full.clean && vrs import && npm run build:release"
     },
-    "author": "",
+    "author": "Plan-Vision",
     "license": "ISC",
-    "description": "",
+    "description": "Hello world public page with second restricted greetings page",
+    "icon" : "ar_on_you",
     "dependencies": {
-        
     }
 }
