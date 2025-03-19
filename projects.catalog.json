@@ -1,0 +1,10 @@
+{
+    "helloworld" : {
+        "icon" : "ar_on_you",
+        "description": "Basic project with one public and one restricted page"
+    },
+    "infradash" : {
+        "icon" : "public",
+        "description": "Simple infrastructure dashboard"
+    }
+}

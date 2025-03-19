@@ -1,0 +1,14 @@
+{
+    "name": "visionr-examples",
+    "version": "0.0.1",
+    "scripts": {
+        "helloworld:release" : "npm --prefix ./helloworld run release",
+        "infradash:release" : "npm --prefix ./helloworld run release",
+        "build:release": "npm run helloworld:release && npm run infradash:release",
+        "release": "npm run build:release"
+    },
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {}
+}

@@ -1,5 +1,5 @@
 {
-    "code": "EXP_HELLOWORLD",
+    "code": "11_INFRA",
     "name": {
         "de-DE": "Projekt-Standardwerte",
         "en-US": "Project defaults"
@@ -16,16 +16,15 @@
         }
     },
     "additional": {},
-    "uuid": "2PtwdVmsTBiMBug1leErMw",
+    "uuid": "5BFbTOavS8aE-Dm_0WyopQ",
     "files": {
         "formsDir": "src/forms",
-        "srvSrc": "src/srv",
         "model": "src/model/index.js"
     },
     "project": {
         "files": [
             ".gitignore",
-            "src/srv",
+            "src",
             "share/public",
             "target/client",
             "target/forms",
@@ -41,7 +40,29 @@
         ]
     },
     "db": {
-        "engine": "sqlite"
+        "engine": "pg"
     },
-    "modules": null
+    "modules": null,
+	"tasks":
+   	{
+   		"backup:clone" : {
+   			"name" : {
+   				"en-US": "Backup project clone"
+   			},
+   			"description" : {
+   				"en-US": "Create full backup of the project (project, database and uploads)"
+   			},
+			"args" : "server backup full"
+   		},
+   		"backup:upload" : {
+   			"name" : {
+   				"en-US": "Upload project clone"
+   			},
+   			"description" : {
+   				"en-US": "Create full backup of the project (project, database and uploads)"
+   			},
+			"args" : "server upload backup"
+   		}  
+		
+   	}
 }
