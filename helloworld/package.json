@@ -7,7 +7,6 @@
         "reset": "npm run clean:temp && npm run build && npm run import",
         "build": "vrs compile",
         "build:devel": "vrs compile",
-        "build:generated": "npm run generate:changelog",
         "build:full.clean": "npm run clean:temp && npm run build",
         "update": "vrs compile && vrs import modules",
         "update:devel": "vrs compile -devel && vrs import modules",
@@ -18,12 +17,14 @@
         "zip:source": "vrs backup target/helloworld-$NPM_PACKAGE_VERSION$-source.zip full -devel",
         "zip:update": "vrs backup target/helloworld-$NPM_PACKAGE_VERSION$-update.zip full",
         "zip:release": "vrs backup target/helloworld-$NPM_PACKAGE_VERSION$-release.zip full db -dbformat json",
-        "generate:changelog": "vr run @visionr/engine/gen-git-changelog",
         "generate:demo.installer": "vrs compile installer",
-        "build:release": "npm run reset:all && npm run build:generated && npm run zip:source && npm run zip:update && npm run zip:release",
+        "build:release": "npm run reset:all && npm run zip:source && npm run zip:update && npm run zip:release",
         "release": "npm run build:full.clean && vrs import && npm run build:release"
     },
     "author": "",
     "license": "ISC",
-    "description": ""    
+    "description": "",
+    "dependencies": {
+        
+    }
 }

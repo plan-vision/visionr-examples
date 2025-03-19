@@ -3,6 +3,7 @@
 ### general
 | Commit | Timestamp | Type | Description |
 | ------ | --------- | ---- | ----------- |
+| [ded0e15](https://github.com/plan-vision/visionr-examples/commit/ded0e15f82063839ac2e1ea227d7acc1f4b81fc7) | 2025-03-19 11:55 | update | rename projects and npm release scripts prepare |
 | [39d1bcd](https://github.com/plan-vision/visionr-examples/commit/39d1bcd4dcf1166a08dfa40531cec700f70f34ae) | 2024-11-19 18:29 | update | hello-world update |
 | [e0b45d7](https://github.com/plan-vision/visionr-examples/commit/e0b45d768ce99719a4fff402ad645f8b96cd9d74) | 2024-08-05 17:57 | update | outstanding wip |
 | [58a6813](https://github.com/plan-vision/visionr-examples/commit/58a68130644d4b0a5b3ce4cea04b24c8fcc82367) | 2024-08-03 19:09 | update | add npm run scripts & set default server.engine (visionr.json) to native |

@@ -1,11 +1,13 @@
 {
     "name": "visionr-examples",
-    "version": "0.0.1",
+    "version": "0.0.1-alpha1",
     "scripts": {
-        "helloworld:release" : "npm --prefix ./helloworld run release",
-        "infradash:release" : "npm --prefix ./helloworld run release",
-        "build:release": "npm run helloworld:release && npm run infradash:release",
-        "release": "npm run build:release"
+        "helloworld:release" : "cd helloworld && npm run release",
+        "infradash:release" : "cd infradash && npm run release",
+        "build:generated": "vr run @visionr/engine/gen-git-changelog",
+        "build:release": "npm run build:generated && npm run helloworld:release && npm run infradash:release",
+        "upload:release" : "vr run @visionr/engine/upl-git-release",
+        "release": "npm run build:release && npm upload:release"
     },
     "author": "",
     "license": "ISC",
