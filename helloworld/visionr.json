@@ -1,5 +1,5 @@
 {
-    "code": "11_INFRA",
+    "code": "EXP_HELLOWORLD",
     "name": {
         "de-DE": "Projekt-Standardwerte",
         "en-US": "Project defaults"
@@ -16,15 +16,16 @@
         }
     },
     "additional": {},
-    "uuid": "5BFbTOavS8aE-Dm_0WyopQ",
+    "uuid": "VxiaWQwMRW-XfPKxKrdbrw",
     "files": {
         "formsDir": "src/forms",
+        "srvSrc": "src/srv",
         "model": "src/model/index.js"
     },
     "project": {
         "files": [
             ".gitignore",
-            "src/srv",
+            "src",
             "share/public",
             "target/client",
             "target/forms",
@@ -40,7 +41,7 @@
         ]
     },
     "db": {
-        "engine": "pg"
+        "engine": "sqlite"
     },
     "modules": null
 }

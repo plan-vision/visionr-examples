@@ -1,0 +1,29 @@
+{
+    "name": "infradash",
+    "version": "0.0.1",
+    "scripts": {
+        "clean:temp": "vrs clean data work target log -force",
+        "reset:all": "vrs clean data work target log upload -force && npm run build && npm run import",
+        "reset": "npm run clean:temp && npm run build && npm run import",
+        "build": "vrs compile",
+        "build:devel": "vrs compile",
+        "build:full.clean": "npm run clean:temp && npm run build",
+        "update": "vrs compile && vrs import modules",
+        "update:devel": "vrs compile -devel && vrs import modules",
+        "import": "vrs import",
+        "start": "vrs start -devel -chromedebugport 9000",
+        "devel": "vrs start -devel",
+        "prod": "vrs start",
+        "zip:source": "vrs backup target/infradash-$NPM_PACKAGE_VERSION$-source.zip full -devel",
+        "zip:update": "vrs backup target/infradash-$NPM_PACKAGE_VERSION$-update.zip full",
+        "zip:release": "vrs backup target/infradash-$NPM_PACKAGE_VERSION$-release.zip full db -dbformat json",
+        "generate:demo.installer": "vrs compile installer",
+        "build:release": "npm run reset:all && npm run zip:source && npm run zip:update && npm run zip:release",
+        "release": "npm run build:full.clean && vrs import && npm run build:release"
+    },
+    "author": "Plan-Vision",
+    "license": "ISC",
+    "description": "Simple infrastructure dashboard",
+    "icon" : "public",
+    "dependencies": {}
+}
