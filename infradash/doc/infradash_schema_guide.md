@@ -5,7 +5,74 @@
 In VisionR, a schema defines the structure and characteristics of data objects within an application. It acts as a blueprint, specifying the properties, relationships, and behaviors of entities. VisionR approaches schema definition in a declarative and modular way, using JavaScript files and JSON configurations to create flexible and maintainable data models. Schemas in VisionR are not just about data structure; they also encompass aspects like internationalization (i18n), user interface forms (forms - though not yet implemented in detail in the example), and API interactions. The Infradash schemapull
 , as described in this guide, exemplifies this approach for modeling infrastructure components.
 
-## 2. Defining objectdefs
+## 2. Directory Structure and Organization
+
+VisionR projects follow a consistent directory structure that helps organize code and resources effectively. Here's how the directories are organized, using both the Infradash and Helloworld examples:
+
+```
+project-root/
+├── src/
+│   ├── forms/              # UI-related files
+│   │   └── pages/         # Page templates and components
+│   │       └── main/      # Main application pages
+│   ├── model/             # Data model definitions
+│   │   ├── index.js       # Module registration
+│   │   ├── *.i18n.json    # Module-level translations
+│   │   ├── *.js           # Module definition
+│   │   ├── data/          # Data instances (if any)
+│   │   └── schema/        # Schema definitions
+│   │       ├── *.js       # Individual schema files
+│   │       └── *.i18n.json # Schema-specific translations
+│   └── srv/               # Server-side logic
+│       └── loader.js      # Server initialization
+├── package.json           # Project dependencies
+└── visionr.json          # VisionR configuration
+```
+
+### Key Directories and Their Purpose
+
+1. **src/forms/**
+   - Contains UI-related files and templates
+   - Example: `helloworld/src/forms/pages/main/live.html` defines the main interface with a greeting creation button
+   - Templates use Angular-style syntax with custom VisionR components
+
+2. **src/model/**
+   - Core data model definitions
+   - `index.js`: Registers modules and their dependencies
+   - Module files (e.g., `infra.js`, `demo.hello-world.js`): Define modules and their objectdefs
+   - `.i18n.json` files: Store translations for module-level strings
+
+3. **src/model/schema/**
+   - Individual schema (objectdef) definitions
+   - Each schema has a `.js` file (e.g., `rack.js`, `server.js`) defining its structure
+   - Corresponding `.i18n.json` files for schema-specific translations
+   - Example: Infradash has `colocation.js`, `rack.js`, `server.js`, and `service.js`
+
+4. **src/model/data/**
+   - Optional directory for data instances
+   - Can contain initial data or examples
+   - Example: Infradash has empty `.data.js` files as placeholders
+
+5. **src/srv/**
+   - Server-side logic and services
+   - Contains validation, business logic, and data processing
+   - Example: `loader.js` handles server initialization
+
+### Project Examples
+
+1. **Helloworld Project**
+   - Simple example showing basic VisionR setup
+   - Single schema (`greeting.js`) with basic properties
+   - Demonstrates UI integration with `live.html`
+   - Shows module definition in `demo.hello-world.js`
+
+2. **Infradash Project**
+   - More complex example modeling infrastructure components
+   - Multiple related schemas (colocation → rack → server → service)
+   - Shows advanced features like hierarchies and relations
+   - Implements comprehensive i18n support
+
+## 3. Defining objectdefs
 
 In VisionR schemas, "objectdefs" (object definitions) are the core building blocks for defining entity types. They are defined as JavaScript modules that export a configuration object. This object specifies various aspects of the entity, including its properties, relationships, hierarchies, and more.
 
@@ -364,42 +431,117 @@ This displays objects of type `demo.greeting` with live updates, embedded in the
 
 ### - Using events with on_something code props
 
-Event handling in VisionR is implemented through event properties in schema definitions:
+Event handling in VisionR is implemented through event properties in schema definitions. Events allow you to define custom behavior that executes when specific actions occur on your objects, such as when they are created, updated, or deleted.
 
-1. **Event Declaration**: Events are declared in the `events` section of schema definitions. For example:
+#### Basic Event Structure
+
+Events are declared in the `events` section of schema definitions:
 
 ```javascript
-events : {    
-    'insert,update'(){
-        if (!db.nestedTransaction) {
-            require("sysmgr/workplace.srv").scheduleStateWriteJSON();
-            require("sysmgr/project.srv").syncServerHostExternal(this);
-        }
-    },
+// Example for infradash service.js
+events: {
     insert() {
-        // Code executed when an object is inserted
-        if (!db.nestedTransaction && this.workplace?.code && this.relative_path) {
-            const json = { id: this.id, workplace: this.workplace?.code, project: this.relative_path };
-            db.afterCommit(()=>{
-                if (!this.DELETED) /* may be temporary inserted and on commit deleted */
-                    JSCORE.Exec.getShellAPI().sendSignal('prj.add', json);    
-            });    
+        // Code executed when a new service is created
+        console.log(`New service created: ${this.name}`);
+        
+        // Update the last_updated timestamp
+        this.last_updated = new Date();
+    },
+    
+    update() {
+        // Code executed when a service is updated
+        console.log(`Service updated: ${this.name}`);
+        
+        // Update the last_updated timestamp
+        this.last_updated = new Date();
+    },
+    
+    delete() {
+        // Code executed when a service is deleted
+        console.log(`Service deleted: ${this.id}`);
+        
+        // Notify dependent systems
+        if (this.server) {
+            // Update server status or notify administrators
         }
     }
 }
 ```
 
-2. **Event Types**: The system supports various event types including:
-   - Database lifecycle events: `insert`, `update`, `delete`
-   - Combined events: `insert,update` (triggered on either insert or update)
-   - Form-related events: `applyChanges`, `applyConstraints`
-   - Custom events: These can be defined as needed for specific business logic
+#### Combined Events
 
-3. **Event Context**: Within event handlers, `this` refers to the current object instance, providing access to its properties and methods.
+You can handle multiple events with a single handler by using comma-separated event names:
 
-4. **Transaction Awareness**: Event handlers are transaction-aware, with checks like `if (!db.nestedTransaction)` to prevent recursive or duplicate processing.
+```javascript
+// Example for infradash server.js
+events: {
+    'insert,update'() {
+        // This code runs on both insert and update
+        this.last_updated = new Date();
+        
+        // Check if server status changed
+        if (this._original && this._original.status !== this.status) {
+            console.log(`Server ${this.name} status changed from ${this._original.status} to ${this.status}`);
+        }
+    }
+}
+```
 
-5. **Asynchronous Operations**: Events can schedule operations to occur after transaction commit using `db.afterCommit()`, ensuring data consistency.
+#### Transaction Awareness
+
+Event handlers are transaction-aware, allowing you to control when code executes:
+
+```javascript
+events: {
+    update() {
+        // Prevent recursive processing in nested transactions
+        if (!db.nestedTransaction) {
+            // Update related services when rack status changes
+            if (this._original && this._original.status !== this.status) {
+                // If rack goes offline, update all servers
+                if (this.status === 'offline') {
+                    this.servers.forEach(server => {
+                        server.status = 'poweroff';
+                        server.save();
+                    });
+                }
+            }
+        }
+    }
+}
+```
+
+#### Asynchronous Operations with afterCommit
+
+For operations that should occur only after a successful transaction, use `db.afterCommit()`:
+
+```javascript
+events: {
+    insert() {
+        // Schedule operations to run after successful commit
+        db.afterCommit(() => {
+            if (!this.DELETED) { // Check if object wasn't deleted before commit
+                // Send notification about new rack
+                notifyAdministrators(`New rack ${this.name} added to colocation ${this.colocation.name}`);
+                
+                // Update monitoring system
+                updateMonitoringSystem(this.id, 'new_rack');
+            }
+        });
+    }
+}
+```
+
+#### Event Context
+
+Within event handlers, `this` refers to the current object instance, providing access to:
+
+- All object properties (`this.name`, `this.status`, etc.)
+- Related objects through relations (`this.server`, `this.colocation`, etc.)
+- Original values before changes via `this._original` (in update events)
+- Helper methods like `save()` to persist changes
+
+Events are powerful tools for implementing business logic, maintaining data integrity, and integrating with external systems.
 
 ## 3. Working with i18n
 
@@ -416,131 +558,225 @@ Data instances in VisionR are typically created and managed through the user int
 
 ## 5. Constraints and Object Correlations
 
-VisionR provides several mechanisms for defining constraints on values and correlations between objects:
+The Infradash schema demonstrates various constraint mechanisms that VisionR provides for ensuring data integrity and maintaining relationships between objects. Here are the key constraint types with examples from the Infradash implementation:
 
-### - Unique Constraints
+### - Service Constraints
 
-The `uniques` property in a schema definition specifies which field combinations must be unique across all instances of an object:
+The `service.js` schema shows several types of constraints:
 
 ```javascript
-// From service.js
+// Unique constraint: No two services can have the same URL and port
 uniques: [
-    ['url', 'port'] // The combination of url and port must be unique
-]
-```
+    ['url', 'port']
+],
 
-You can define multiple unique constraints by adding more arrays to the `uniques` array.
-
-### - Validation Functions
-
-Custom validation logic can be implemented in server-side JavaScript files:
-
-```javascript
-// From project.srv.js
-exports.checkConstraints = function(details) {
-    var obj = details.object;
-    var errors = [];
-    
-    // Validate that paths are relative, not absolute
-    if (obj.forms_dir && shapi.isPathAbsolute(obj.forms_dir))
-        errors.push({
-            message: db.MSG('ERROR_PATH_IS_NOT_RELATIVE') + ' : ' + obj.SCHEMA.getProperty('forms_dir'),
-            type: 'error',
-            path: 'forms_dir'
-        });
-    
-    // More validation logic...
-    
-    return errors.length ? errors : undefined;
-}
-```
-
-### - Relation Constraints
-
-Relations define correlations between objects and can be mandatory or optional:
-
-```javascript
-// Mandatory relation (from rack.js)
-'colocation': {
-    template: 'relation.obligatory', // Must have a colocation
-    related: 'infra.colocation'
-}
-
-// Optional relation (from server.js)
-'vendor': {
-    template: 'relation', // May have a vendor
-    related: 'contacts.vendor'
-}
-```
-
-### - Event-based Validation
-
-The `applyConstraints` event handler can be used to validate objects during form submission:
-
-```javascript
-forms: {
-    applyConstraints(details, errors) {	
-        return require("sysmgr/project.srv").checkConstraints(details);
-    }
-}
-```
-
-### - Property Constraints
-
-Individual properties can have constraints:
-
-```javascript
-'cpu_count': {
-    template: 'integer',
-    default: 1,
-    min: 1,       // Minimum value
-    max: 256      // Maximum value
-}
-```
-
-### - Default Values
-
-Properties can have default values that are applied when a new object is created:
-
-```javascript
-'status': {
-    template: 'option.obligatory',
-    optionSet: {
-        code: 'rack_status',
-        options: ['operational', 'maintenance', 'offline']
-    },
-    default: 'operational' // Default value when created
-}
-```
-
-### - Conditional Visibility and Editability
-
-Properties can be conditionally visible or editable based on other property values:
-
-```javascript
-'error': {
-    template: 'text',
-    readonly: true,
-    forms: {
-        hidden(details) { 
-            return !details.object?.error; // Only visible if there's an error
+properties: {
+    'main.basic': {
+        // Required option from a predefined set
+        'type': {
+            template: 'option.obligatory',
+            optionSet: {
+                code: 'service_type',
+                options: ['web', 'database', 'application', 'cache', 'monitoring', 'other']
+            }
+        },
+        
+        // Optional relation to server
+        'server': {
+            template: 'relation',
+            related: 'infra.server'
+        },
+        
+        // Multiple relations for dependencies
+        'dependencies': {
+            template: 'relation',
+            related: 'infra.service',
+            multiple: true
         }
     }
 }
 ```
 
-### - Transaction-aware Validation
+### - Server Constraints
 
-Validation can be transaction-aware, allowing for complex validation scenarios:
+The `server.js` schema demonstrates numeric and unit constraints:
 
 ```javascript
-if (!db.nestedTransaction) {
-    // Only perform this validation if not in a nested transaction
-    // This prevents recursive validation
+properties: {
+    'main.basic': {
+        // Integer with default value
+        'cpu_count': {
+            template: 'integer',
+            default: 1
+        },
+        
+        // Integer with unit
+        'cpu_speed': { 
+            template: 'integer',
+            unit: 'MHz'
+        },
+        
+        // Integer with unit
+        'memory': {
+            template: 'integer',
+            unit: 'GB'
+        },
+        
+        // Required relation to rack
+        'rack': {
+            template: 'relation.obligatory',
+            related: 'infra.rack'
+        }
+    }
 }
 ```
 
-By combining these constraint mechanisms, VisionR enables the creation of robust data models with well-defined relationships and validation rules.
+### - Rack Constraints
+
+The `rack.js` schema shows measurement and monitoring constraints:
+
+```javascript
+properties: {
+    'main.basic': {
+        // Height in rack units
+        'height': {
+            template: 'integer',
+            unit: 'U',
+            min: 1,
+            max: 48  // Standard rack height
+        },
+        
+        // Power capacity
+        'max_power': {
+            template: 'integer',
+            unit: 'W',
+            min: 0
+        }
+    },
+    
+    'main.readings': {
+        // Read-only monitoring values
+        'current_power_usage': {
+            template: 'integer',
+            unit: 'W',
+            readonly: true
+        },
+        'temperature': {
+            template: 'double',
+            unit: '°C',
+            readonly: true
+        },
+        'humidity': {
+            template: 'double',
+            unit: '%',
+            readonly: true
+        }
+    }
+}
+```
+
+### - Infrastructure Validation Example
+
+Here's how you might implement custom validation for the Infradash infrastructure:
+
+```javascript
+// infra/service.srv.js
+exports.checkServiceConstraints = function(details) {
+    const service = details.object;
+    const errors = [];
+    
+    // Validate service configuration
+    if (service.type === 'web') {
+        // Web services must have a URL
+        if (!service.url) {
+            errors.push({
+                message: "Web services must have a URL",
+                type: 'error',
+                path: 'url'
+            });
+        }
+        
+        // Port must be in valid range
+        if (service.port && (service.port < 1 || service.port > 65535)) {
+            errors.push({
+                message: "Port must be between 1 and 65535",
+                type: 'error',
+                path: 'port'
+            });
+        }
+    }
+    
+    // Check circular dependencies
+    if (service.dependencies?.length) {
+        const dependencyChain = new Set([service.id]);
+        
+        function checkCircular(dep) {
+            if (dependencyChain.has(dep.id)) {
+                errors.push({
+                    message: "Circular dependency detected",
+                    type: 'error',
+                    path: 'dependencies'
+                });
+                return;
+            }
+            
+            dependencyChain.add(dep.id);
+            dep.dependencies?.forEach(checkCircular);
+            dependencyChain.delete(dep.id);
+        }
+        
+        service.dependencies.forEach(checkCircular);
+    }
+    
+    return errors.length ? errors : undefined;
+};
+```
+
+To use this validation in the service schema:
+
+```javascript
+// In service.js
+forms: {
+    applyConstraints(details, errors) {
+        return require("infra/service.srv").checkServiceConstraints(details);
+    }
+}
+```
+
+### - Relation Hierarchy Constraints
+
+The Infradash schema enforces a strict hierarchy through relations:
+
+1. **Colocation → Rack**: A rack must belong to exactly one colocation
+   ```javascript
+   // In rack.js
+   'colocation': {
+       template: 'relation.obligatory',
+       related: 'infra.colocation'
+   }
+   ```
+
+2. **Rack → Server**: A server must belong to exactly one rack
+   ```javascript
+   // In server.js
+   'rack': {
+       template: 'relation.obligatory',
+       related: 'infra.rack'
+   }
+   ```
+
+3. **Server → Service**: A service may be associated with one server
+   ```javascript
+   // In service.js
+   'server': {
+       template: 'relation',
+       related: 'infra.server'
+   }
+   ```
+
+This hierarchy ensures that infrastructure components maintain proper relationships and can be navigated from top to bottom (colocation → rack → server → service) or bottom to top.
+
+By combining these constraints, the Infradash schema maintains data integrity while providing flexibility for modeling complex infrastructure relationships.
 
 ## 6. Advanced UI and ERP Features
 
