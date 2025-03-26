@@ -2,7 +2,7 @@
 
 ## 1. What is a schema and how VisionR approaches it
 
-In VisionR, a schema defines the structure and characteristics of data objects within an application. It acts as a blueprint, specifying the properties, relationships, and behaviors of entities. VisionR approaches schema definition in a declarative and modular way, using JavaScript files and JSON configurations to create flexible and maintainable data models. Schemas in VisionR are not just about data structure; they also encompass aspects like internationalization (i18n), user interface forms (forms - though not yet implemented in detail in the example), and API interactions (api - also not yet implemented). The Infradash schemapull
+In VisionR, a schema defines the structure and characteristics of data objects within an application. It acts as a blueprint, specifying the properties, relationships, and behaviors of entities. VisionR approaches schema definition in a declarative and modular way, using JavaScript files and JSON configurations to create flexible and maintainable data models. Schemas in VisionR are not just about data structure; they also encompass aspects like internationalization (i18n), user interface forms (forms - though not yet implemented in detail in the example), and API interactions. The Infradash schemapull
 , as described in this guide, exemplifies this approach for modeling infrastructure components.
 
 ## 2. Defining objectdefs
@@ -193,6 +193,111 @@ VisionR's `relation` property type defines relationships between objectdefs. Mul
 *   **One-to-many:** Represented by a `relation` property on the "one" side with a corresponding `parent` property on the "many" side. Example: `colocation.js` has `'racks': { template: 'relation', parent: 'infra.rack.colocation' }`, and `rack.js` has `'colocation': { template: 'relation.obligatory', related: 'infra.colocation' }`. This defines a one-to-many relationship from Colocation to Rack (one Colocation can have many Racks).
 *   **Many-to-one:** Represented by a `relation` property without a `parent` on the "many" side, pointing to the "one" side. Example: `rack.js` has `'colocation': { template: 'relation.obligatory', related: 'infra.colocation' }`. This means many Racks belong to one Colocation.
 *   **Many-to-many/One-to-one:** While not explicitly shown in the base Infradash schema, many-to-many or one-to-one relationships could be modeled using `relation` properties on both sides, potentially with a `multiple: true` option (though `multiple: true` is commented out in `service.js` for the `server` relation, suggesting it might not be the standard way to handle multiplicity in relations). Deeper investigation into VisionR's relation implementation would be needed to confirm the best practices for many-to-many and one-to-one relationships.
+
+### - Object hierarchies for navigation and visualization
+
+VisionR allows defining hierarchical relationships between objects for navigation and visualization purposes. These hierarchies are separate from object inheritance and are used to create tree-like structures in the UI. Hierarchies are defined at the schema level using the `hierarchies` property:
+
+```javascript
+// From server.js
+hierarchies: [
+    {
+        name: {
+            "en-US": "By Server",
+            "fr-FR": "Par Serveur",
+            "bg-BG": "По Сървър",
+            "de-DE": "Nach Server"
+        },
+        code: 'infra.colocation.racks.servers',
+        path: 'infra.colocation.racks.servers',
+        showElementCount: true,
+        // defaultRecursive: true,
+        // expandInitialDepth: 4,
+        // showLeafs: true
+    }
+]
+```
+
+Key aspects of hierarchies include:
+
+1. **Path and Code Definition**: 
+   - The `path` property defines the hierarchical path through related objects, following a dot-notation pattern.
+   - The `code` property serves as a unique identifier for the hierarchy, typically matching the path.
+   - Both follow the pattern `[module].[entity1].[entity2]...` where:
+     - The first segment is the module name (e.g., `infra`)
+     - Subsequent segments represent entity types in the hierarchy (e.g., `colocation`, `racks`, `servers`)
+   - Each segment in the path corresponds to a relation property in the schema
+   - The path reflects the actual relationships between objects in the data model
+
+2. **Internationalized Names**: The `name` property provides translations for the hierarchy name in different languages.
+
+3. **Visualization Options**: Properties like `showElementCount`, `defaultRecursive`, and `expandInitialDepth` control how the hierarchy is displayed in the UI.
+
+4. **Multiple Hierarchies**: An object can participate in multiple hierarchies, allowing for different ways to navigate and visualize the same data.
+
+For example, in the Infradash schema, services are organized in a hierarchy under servers:
+
+```javascript
+// From service.js
+hierarchies: [
+    {
+        name: {
+            "en-US": "By Server",
+            "fr-FR": "Par Serveur",
+            "bg-BG": "По Сървър",
+            "de-DE": "Nach Server"
+        },
+        code: 'infra.colocation.racks.servers.services',
+        path: 'infra.colocation.racks.servers.services',
+        showElementCount: true
+    }
+]
+```
+
+This creates a complete hierarchy from colocation → rack → server → service, allowing users to navigate through the infrastructure components in a logical way. The path `infra.colocation.racks.servers.services` is constructed by:
+
+1. Starting with the module name (`infra`)
+2. Adding each entity type in the hierarchy, separated by dots
+3. Following the actual relation properties defined in the schemas:
+   - `colocation.js` has a `racks` relation
+   - `rack.js` has a `servers` relation
+   - `server.js` has a `services` relation
+
+More complex hierarchies can include additional configuration:
+
+```javascript
+hierarchies: [
+    {
+        code: 'system_manager.workplace.projects',
+        path: 'system_manager.workplace.projects',
+        name: db.MSG('HIERARCHY_SYSMSG_WORKPLACE_PROJECTS'),
+        count: true,
+        expandInitialDepth: 1,
+        schemaSet: [
+            'system_manager.workplace',
+            'system_manager.project'
+        ],
+        setupNew: {
+            remote: 'sysmgr/project.srv.remote',
+            api: 'setHierarchyContextNew'
+        }
+    }
+]
+```
+
+In this example:
+- `schemaSet` defines which schemas are included in the hierarchy
+- `setupNew` configures how new objects are created within the hierarchy context
+- `expandInitialDepth` controls the initial expansion level when the hierarchy is displayed
+
+Hierarchies can be used to:
+
+- Create navigation trees in the UI
+- Organize data in a dimensional structure
+- Reflect real-world relationships between objects
+- Provide different views of the same data based on different organizational principles
+
+This is particularly useful in ERP-like applications where data often has complex hierarchical relationships.
 
 ### - Different view types and UI customization
 
