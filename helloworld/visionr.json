@@ -16,10 +16,14 @@
         }
     },
     "additional": {},
-    "uuid": "VxiaWQwMRW-XfPKxKrdbrw",
+    "i18n": {
+        "import": "all"
+    },
+    "uuid": "HYZbZjmgS2aJo7oTNnSCkA",
     "files": {
         "formsDir": "src/forms",
         "srvSrc": "src/srv",
+        "sourceCode": true,
         "model": "src/model/index.js"
     },
     "project": {
@@ -44,7 +48,45 @@
         "engine": "sqlite"
     },
     "modules": null,
-    "i18n":{
-        "active" : "en-US,de-DE,en-GB,bg-BG,en-IN"
+    "tasks": {},
+    "services": {
+        "REST:test": {
+            "name": {
+                "en-US": "REST Test"
+            },
+            "description": {
+                "en-US": "Integrated REST service with automatic authentification by session (cookie). Process will be started and stopped on demand trough the visionr server"
+            },
+            "src": "src/service/test.js",
+            "standalone": false,
+            "enabled": true,
+            "type": "web_service",
+            "maxServiceMemoryMB": null,
+            "maxBackendMemoryMB": null,
+            "auth": "session,token",
+            "accessGroup": "administrators",
+            "paths": [
+                "/test/*"
+            ]
+        },
+        "REST:status.standalone": {
+            "name": {
+                "en-US": "REST server status"
+            },
+            "description": {
+                "en-US": "Standalone service that runs only in serviced mode through the service manager. Operates as a separate process chain"
+            },
+            "src": "src/service/test.js",
+            "standalone": true,
+            "enabled": true,
+            "type": "web_service",
+            "maxServiceMemoryMB": null,
+            "maxBackendMemoryMB": null,
+            "auth": "session,basic",
+            "accessGroup": "administrators",
+            "paths": [
+                "/status"
+            ]
+        }
     }
 }

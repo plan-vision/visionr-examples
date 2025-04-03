@@ -20,7 +20,7 @@ module.exports = {
 			viewParams : 
 			{
 				table : {
-					columns : "code,name@200,description@200,var1,txt1@200,int1,dbl1,dtm1,dtm2,dtm3,dtm4,dtm5,dtm6,opt1"
+					columns : "code,name@200,var1,txt1@200,int1,dbl1,dtm1,dtm2,dtm3,dtm4,dtm5,dtm6,opt1"
 				}
 			}
 		},
