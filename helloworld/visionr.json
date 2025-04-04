@@ -19,7 +19,7 @@
     "i18n": {
         "import": "all"
     },
-    "uuid": "HYZbZjmgS2aJo7oTNnSCkA",
+    "uuid": "rCg7x-EZRfyOHmGWVzUpvA",
     "files": {
         "formsDir": "src/forms",
         "srvSrc": "src/srv",
@@ -61,8 +61,8 @@
             "standalone": false,
             "enabled": true,
             "type": "web_service",
-            "maxServiceMemoryMB": null,
-            "maxBackendMemoryMB": null,
+            "maxServiceMemoryMB": 300,
+			"stopIdleMinutes":1,
             "auth": "session,token",
             "accessGroup": "administrators",
             "paths": [
@@ -80,8 +80,9 @@
             "standalone": true,
             "enabled": true,
             "type": "web_service",
-            "maxServiceMemoryMB": null,
-            "maxBackendMemoryMB": null,
+            "maxServiceMemoryMB": 300,
+            "maxBackendMemoryMB": 500,
+			"stopIdleMinutes":0.5,
             "auth": "session,basic",
             "accessGroup": "administrators",
             "paths": [
