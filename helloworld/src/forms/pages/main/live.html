@@ -3,8 +3,14 @@
 <variable #name value="Live-Test"></variable>
 <ng-template #main>
 	<div fxFlex style="position:relative">
-		<objectsview schema="demo.greeting" live embed menu>
-		</objectsview>
+		<variable #state persist></variable>
+		<variable #orderBy persist></variable>
+
+		<objectsview schema="demo.greeting" live embed menu
+			[(state)]="state.value"
+			[(orderBy)]="orderBy.value"
+		>
+	</objectsview>
 	</div>
 </ng-template>
 

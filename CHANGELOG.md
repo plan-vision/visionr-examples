@@ -16,11 +16,13 @@
 ### build
 | Commit | Timestamp | Type | Description |
 | ------ | --------- | ---- | ----------- |
+| [4186549](https://github.com/plan-vision/visionr-examples/commit/4186549475e9d3252ae6d833a880d108e60b540b) | 2025-04-03 09:50 | fix | generating release |
 | [816c94d](https://github.com/plan-vision/visionr-examples/commit/816c94db80b1e11d0d93de618c114430aefcb13a) | 2025-03-19 17:08 | update | automate project-catalog.json build |
 
 ### helloworld
 | Commit | Timestamp | Type | Description |
 | ------ | --------- | ---- | ----------- |
+| [cb8db32](https://github.com/plan-vision/visionr-examples/commit/cb8db3276eae230e4a0b12aba747c3b5e02f9dfc) | 2025-04-04 11:57 | update | visionr.json |
 | [76b4224](https://github.com/plan-vision/visionr-examples/commit/76b42248498d80e4d52bca99f874303917f98d8d) | 2025-03-26 13:57 | feat | add test properties to greeting def |
 
 ## 0.0.1

@@ -13,7 +13,8 @@
         "devel": false,
         "registration": {
             "enabled": false
-        }
+        },
+		"_timezone" : "America/New_York"
     },
     "additional": {},
     "i18n": {
