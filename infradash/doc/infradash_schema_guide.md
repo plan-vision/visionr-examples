@@ -613,13 +613,11 @@ properties: {
         // Integer with unit
         'cpu_speed': { 
             template: 'integer',
-            unit: 'MHz'
         },
         
         // Integer with unit
         'memory': {
             template: 'integer',
-            unit: 'GB'
         },
         
         // Required relation to rack

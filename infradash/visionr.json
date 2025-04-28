@@ -40,7 +40,7 @@
         ]
     },
     "db": {
-        "engine": "pg"
+        "engine": "sqlite"
     },
     "modules": null,
 	"tasks":

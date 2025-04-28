@@ -1,1 +1,6 @@
-{}
+{
+    "github.copilot.chat.codeGeneration.instructions": [
+        {
+            "text": "make good use of patch delete commands, and try matching fewer lines when replacing. we need to save on tokens as electricity costs in Africa a lot."
+        },
+    }
