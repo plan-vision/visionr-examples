@@ -18,13 +18,13 @@
         "zip:update": "vrs backup target/helloworld-$NPM_PACKAGE_VERSION$-update.zip full",
         "zip:release": "vrs backup target/helloworld-$NPM_PACKAGE_VERSION$-release.zip full db -dbformat json",
         "generate:demo.installer": "vrs compile installer",
-        "build:release": "npm run reset:all && npm run zip:source && npm run zip:update && npm run zip:release",
-        "release": "npm run build:full.clean && vrs import && npm run build:release"
+        "release": "npm run build:full.clean && vrs import && npm run zip:source && npm run zip:update && npm run zip:release"
     },
     "author": "Plan-Vision",
     "license": "ISC",
     "description": "Hello world public page with second restricted greetings page",
-    "icon" : "ar_on_you",
+    "icon": "ar_on_you",
     "dependencies": {
+        "express": "^4.21.2"
     }
 }
