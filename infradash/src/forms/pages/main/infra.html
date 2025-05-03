@@ -1,0 +1,73 @@
+
+<!-- @ICON folder_managed --> 
+
+<!-- NAME@en-US Infrastructure -->
+<!-- NAME@de-DE Infrastruktur -->
+<!-- NAME@bg-BG Инфраструктура -->
+<!-- NAME@fr-FR Infrastructure -->
+
+<!-- @ORDER 1000 -->
+  
+<variable #name value="Test"></variable>
+<variable #pagedef [value]="{
+	categories : [
+		{
+			code : 'overview',
+			name : 'Overview',
+		},	
+		{
+			code : 'settings',
+			name : root.i18n('LABEL_SETTINGS'),
+			expanded : false
+		}	
+	],
+	entries : [
+		{
+			code : 'colocation',
+			type : 'schema',
+			schema : 'infra.colocation',
+			category : 'overview',
+			hierarchy : 'infra.colocation:infra.colocation',
+			filter : {
+				status: 'operational'
+			}
+		},
+		{
+			code : 'server',
+			type : 'schema',
+			schema : 'infra.server',
+			category : 'overview',
+			hierarchy : 'infra.server:infra.colocation.racks.servers',
+			filter : {
+				status: 'online'
+			}
+		},
+		{
+			code : 'rack',
+			type : 'schema',
+			schema : 'infra.rack',
+			category : 'overview',
+			hierarchy : 'infra.rack:infra.colocation.racks',
+			filter : {
+				status: 'operational'
+			}
+		},
+		{
+			code : 'service',
+			type : 'schema',
+			schema : 'infra.service',
+			category : 'overview',
+			hierarchy : 'infra.service:infra.colocation.racks.servers.services',
+			filter : {
+				status: 'active'
+			}
+		},
+		{
+			type : 'settings',
+			category : 'settings',
+			module : 'infra'
+		}	
+	]
+}"></variable>
+
+<include shared ref="/widgets/model/page/common-main"></include>
