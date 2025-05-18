@@ -1,4 +1,4 @@
-## 0.0.1-alpha1
+## 0.0.1-alpha2.1
 
 ### general
 | Commit | Timestamp | Type | Description |
@@ -12,8 +12,6 @@
 | [def5e75](https://github.com/plan-vision/visionr-examples/commit/def5e759abb4fd9458c3fec2f577532e257defee) | 2025-03-26 12:55 | update | Detailed schema documentation based on projects infradash and manager |
 | [820681b](https://github.com/plan-vision/visionr-examples/commit/820681bcd0351573856e1bfac54a7aa0971f3f6c) | 2025-03-24 11:19 | update | gitignore upd |
 | [fe8e03e](https://github.com/plan-vision/visionr-examples/commit/fe8e03e3c528d23b5e9e95a0c73d334237b89ff4) | 2025-03-24 10:57 | update | new strings |
-| [87046d0](https://github.com/plan-vision/visionr-examples/commit/87046d0f75488e00ec0faf61aa8f19c335f81806) | 2025-03-19 16:35 | update | update |
-| [ded0e15](https://github.com/plan-vision/visionr-examples/commit/ded0e15f82063839ac2e1ea227d7acc1f4b81fc7) | 2025-03-19 11:55 | update | rename projects and npm release scripts prepare |
 | [1d3087c](https://github.com/plan-vision/visionr-examples/commit/1d3087c96ab2846a88fd8545073e65417ce236c6) | 2024-11-25 19:26 | update | server progress + infra plan |
 | [e710bd2](https://github.com/plan-vision/visionr-examples/commit/e710bd284546d6ccd3595471898a63ae49d8cca9) | 2024-11-25 19:25 | update | common vr args |
 
@@ -33,6 +31,14 @@
 | Commit | Timestamp | Type | Description |
 | ------ | --------- | ---- | ----------- |
 | [eb91a04](https://github.com/plan-vision/visionr-examples/commit/eb91a04dc68cfd3512fe7804be43f9cf7e38c9d1) | 2025-05-18 09:42 | fix | remove invalid property in pages index |
+
+## 0.0.1-alpha1
+
+### general
+| Commit | Timestamp | Type | Description |
+| ------ | --------- | ---- | ----------- |
+| [87046d0](https://github.com/plan-vision/visionr-examples/commit/87046d0f75488e00ec0faf61aa8f19c335f81806) | 2025-03-19 16:35 | update | update |
+| [ded0e15](https://github.com/plan-vision/visionr-examples/commit/ded0e15f82063839ac2e1ea227d7acc1f4b81fc7) | 2025-03-19 11:55 | update | rename projects and npm release scripts prepare |
 
 ## 0.0.1
 
