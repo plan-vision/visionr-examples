@@ -14,9 +14,9 @@
         "start": "vrs start -devel -chromedebugport 9000",
         "devel": "vrs start -devel",
         "prod": "vrs start",
-        "zip:source": "vrs backup target/helloworld-$NPM_PACKAGE_VERSION$-source.zip full -devel",
-        "zip:update": "vrs backup target/helloworld-$NPM_PACKAGE_VERSION$-update.zip full",
-        "zip:release": "vrs backup target/helloworld-$NPM_PACKAGE_VERSION$-release.zip full db -dbformat json",
+        "zip:source": "vrs backup target/helloworld-NPM_PACKAGE_VERSION-source.zip full -devel",
+        "zip:update": "vrs backup target/helloworld-NPM_PACKAGE_VERSION-update.zip full",
+        "zip:release": "vrs backup target/helloworld-NPM_PACKAGE_VERSION-release.zip full db -dbformat json",
         "generate:demo.installer": "vrs compile installer",
         "release": "npm run build:full.clean && vrs import && npm run zip:source && npm run zip:update && npm run zip:release"
     },
