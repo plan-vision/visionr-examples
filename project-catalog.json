@@ -2,6 +2,8 @@
     "helloworld": {
         "name": "helloworld-0.0.1-release.zip",
         "ver": "0.0.1",
+        "description": "Hello world public page with second restricted greetings page",
+        "icon": "ar_on_you",
         "releaseURL": "https://github.com/plan-vision/visionr-examples/releases/download/0.0.1-alpha1/helloworld-0.0.1-release.zip",
         "updateURL": "https://github.com/plan-vision/visionr-examples/releases/download/0.0.1-alpha1/helloworld-0.0.1-update.zip",
         "sourceURL": "https://github.com/plan-vision/visionr-examples/releases/download/0.0.1-alpha1/helloworld-0.0.1-source.zip"
@@ -9,6 +11,8 @@
     "infradash": {
         "name": "infradash-0.0.1-release.zip",
         "ver": "0.0.1",
+        "description": "Simple infrastructure dashboard",
+        "icon": "public",
         "releaseURL": "https://github.com/plan-vision/visionr-examples/releases/download/0.0.1-alpha1/infradash-0.0.1-release.zip",
         "updateURL": "https://github.com/plan-vision/visionr-examples/releases/download/0.0.1-alpha1/infradash-0.0.1-update.zip",
         "sourceURL": "https://github.com/plan-vision/visionr-examples/releases/download/0.0.1-alpha1/infradash-0.0.1-source.zip"

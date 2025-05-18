@@ -29,6 +29,11 @@
 | [cb8db32](https://github.com/plan-vision/visionr-examples/commit/cb8db3276eae230e4a0b12aba747c3b5e02f9dfc) | 2025-04-04 11:57 | update | visionr.json |
 | [76b4224](https://github.com/plan-vision/visionr-examples/commit/76b42248498d80e4d52bca99f874303917f98d8d) | 2025-03-26 13:57 | feat | add test properties to greeting def |
 
+### infradash
+| Commit | Timestamp | Type | Description |
+| ------ | --------- | ---- | ----------- |
+| [eb91a04](https://github.com/plan-vision/visionr-examples/commit/eb91a04dc68cfd3512fe7804be43f9cf7e38c9d1) | 2025-05-18 09:42 | fix | remove invalid property in pages index |
+
 ## 0.0.1
 
 ### general
