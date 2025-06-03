@@ -1,0 +1,45 @@
+name: Build on Linux (Ubuntu)
+
+permissions:
+  contents: write  # Needed for 'gh release create' to work with GITHUB_TOKEN
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+# linux does downloading and extraction fast, skip cache configuration
+
+jobs:
+  build-ubuntu:
+    name: Linux (Ubuntu) build
+    runs-on: ubuntu-latest
+
+    env:
+      VISIONR_VERSION: latest
+      PROJECT_NAME: visionr-examples
+
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install VisionR-Engine Globally (Linux)
+        if: steps.cache-visionr.outputs.cache-hit != 'true'
+        run: |
+          ASSET_URL=$(curl -s https://api.github.com/repos/plan-vision/visionr-engine.binary/releases/latest | grep "browser_download_url" | grep "visionr-engine-NPM-package" | cut -d '"' -f 4)
+          echo "Installing VisionR-Engine globally from source $ASSET_URL ..."
+          npm install -g "$ASSET_URL"
+
+      - name: Compile release and upload to GitHub  
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npm run release
+        shell: bash
+

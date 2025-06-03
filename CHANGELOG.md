@@ -1,15 +1,17 @@
-## 0.0.1-alpha1
+## 0.0.1-alpha2.1
 
 ### general
 | Commit | Timestamp | Type | Description |
 | ------ | --------- | ---- | ----------- |
+| [1599033](https://github.com/plan-vision/visionr-examples/commit/15990332ae25b139c4fbd8715d535509716a1449) | 2025-05-03 13:00 | update | movement of Jah people |
+| [9836aff](https://github.com/plan-vision/visionr-examples/commit/9836aff43744de26e8f4ebf5dba3a48ae3474f7f) | 2025-04-28 12:35 | update | old but cool |
+| [f64a16d](https://github.com/plan-vision/visionr-examples/commit/f64a16d6034d57cbfbd0dd9537d7593dfdf2d22c) | 2025-04-27 11:43 | update | fix project build / upload release |
+| [75d4515](https://github.com/plan-vision/visionr-examples/commit/75d45152d733b7dea9c8d2312cc2177eac479043) | 2025-04-26 17:58 | update | progress |
 | [7ac97a9](https://github.com/plan-vision/visionr-examples/commit/7ac97a94f0ee91d0120e1391d43d052350b2259e) | 2025-03-26 17:23 | update | Added a comprehensive "Directory Structure and Organization" section that: |
 | [0f6bfeb](https://github.com/plan-vision/visionr-examples/commit/0f6bfeb6422446048ea8fd30c2106e66f1020f12) | 2025-03-26 17:08 | update | progress on the doco + ticket booking proj setup |
 | [def5e75](https://github.com/plan-vision/visionr-examples/commit/def5e759abb4fd9458c3fec2f577532e257defee) | 2025-03-26 12:55 | update | Detailed schema documentation based on projects infradash and manager |
 | [820681b](https://github.com/plan-vision/visionr-examples/commit/820681bcd0351573856e1bfac54a7aa0971f3f6c) | 2025-03-24 11:19 | update | gitignore upd |
 | [fe8e03e](https://github.com/plan-vision/visionr-examples/commit/fe8e03e3c528d23b5e9e95a0c73d334237b89ff4) | 2025-03-24 10:57 | update | new strings |
-| [87046d0](https://github.com/plan-vision/visionr-examples/commit/87046d0f75488e00ec0faf61aa8f19c335f81806) | 2025-03-19 16:35 | update | update |
-| [ded0e15](https://github.com/plan-vision/visionr-examples/commit/ded0e15f82063839ac2e1ea227d7acc1f4b81fc7) | 2025-03-19 11:55 | update | rename projects and npm release scripts prepare |
 | [1d3087c](https://github.com/plan-vision/visionr-examples/commit/1d3087c96ab2846a88fd8545073e65417ce236c6) | 2024-11-25 19:26 | update | server progress + infra plan |
 | [e710bd2](https://github.com/plan-vision/visionr-examples/commit/e710bd284546d6ccd3595471898a63ae49d8cca9) | 2024-11-25 19:25 | update | common vr args |
 
@@ -24,6 +26,19 @@
 | ------ | --------- | ---- | ----------- |
 | [cb8db32](https://github.com/plan-vision/visionr-examples/commit/cb8db3276eae230e4a0b12aba747c3b5e02f9dfc) | 2025-04-04 11:57 | update | visionr.json |
 | [76b4224](https://github.com/plan-vision/visionr-examples/commit/76b42248498d80e4d52bca99f874303917f98d8d) | 2025-03-26 13:57 | feat | add test properties to greeting def |
+
+### infradash
+| Commit | Timestamp | Type | Description |
+| ------ | --------- | ---- | ----------- |
+| [eb91a04](https://github.com/plan-vision/visionr-examples/commit/eb91a04dc68cfd3512fe7804be43f9cf7e38c9d1) | 2025-05-18 09:42 | fix | remove invalid property in pages index |
+
+## 0.0.1-alpha1
+
+### general
+| Commit | Timestamp | Type | Description |
+| ------ | --------- | ---- | ----------- |
+| [87046d0](https://github.com/plan-vision/visionr-examples/commit/87046d0f75488e00ec0faf61aa8f19c335f81806) | 2025-03-19 16:35 | update | update |
+| [ded0e15](https://github.com/plan-vision/visionr-examples/commit/ded0e15f82063839ac2e1ea227d7acc1f4b81fc7) | 2025-03-19 11:55 | update | rename projects and npm release scripts prepare |
 
 ## 0.0.1
 
