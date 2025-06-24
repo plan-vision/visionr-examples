@@ -5,7 +5,7 @@
       "bg-BG": "Стелаж",
       "de-DE": "Rack"
     },
-    "name": {
+    "property:infra.server.name": {
       "en-US": "Server",
       "fr-FR": "Serveur", 
       "bg-BG": "Сървър",
@@ -16,12 +16,6 @@
       "fr-FR": "Modèle",
       "bg-BG": "Модел",
       "de-DE": "Modell"
-    },
-    "serial_number": {
-      "en-US": "Serial Number",
-      "fr-FR": "Numéro de série",
-      "bg-BG": "Сериен номер",
-      "de-DE": "Seriennummer"
     },
     "cpu_count": {
       "en-US": "CPU Cores",

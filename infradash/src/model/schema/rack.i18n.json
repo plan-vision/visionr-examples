@@ -1,5 +1,5 @@
 {
-  "name": {
+  "property:infra.rack.name": {
     "en-US": "Name",
     "fr-FR": "Nom",
     "bg-BG": "Име",

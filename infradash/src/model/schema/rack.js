@@ -13,7 +13,7 @@ db.infra.rack.VSQL({select: 'code', where: ' id IN (SELECT racks.id FROM infra.c
 */
 
 module.exports = {
-    icon: 'server',
+    icon: 'dns',
     properties: {
         /* BY CATEGORY */
         'main.basic': {

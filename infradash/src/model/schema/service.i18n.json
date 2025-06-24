@@ -5,17 +5,11 @@
     "bg-BG": "Услуга",
     "de-DE": "Dienst"
   },
-  "name": {
+  "property:infra.service.name": {
     "en-US": "Service Name",
     "fr-FR": "Nom du Service",
     "bg-BG": "Име на Услугата",
     "de-DE": "Dienstname"
-  },
-  "description": {
-    "en-US": "Description",
-    "fr-FR": "Description",
-    "bg-BG": "Описание",
-    "de-DE": "Beschreibung"
   },
   "type": {
     "en-US": "Type",
@@ -77,12 +71,6 @@
     "bg-BG": "Неактивен",
     "de-DE": "Inaktiv"
   },
-  "option:maintenance": {
-    "en-US": "Maintenance",
-    "fr-FR": "Maintenance",
-    "bg-BG": "Поддръжка",
-    "de-DE": "Wartung"
-  },
   "option:deprecated": {
     "en-US": "Deprecated",
     "fr-FR": "Obsolète",
@@ -106,12 +94,6 @@
     "fr-FR": "Propriétaire",
     "bg-BG": "Собственик",
     "de-DE": "Eigentümer"
-  },
-  "last_updated": {
-    "en-US": "Last Updated",
-    "fr-FR": "Dernière mise à jour",
-    "bg-BG": "Последно обновяване",
-    "de-DE": "Zuletzt aktualisiert"
   },
   "port": {
     "en-US": "Port",
