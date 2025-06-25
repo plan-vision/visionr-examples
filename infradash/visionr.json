@@ -19,7 +19,9 @@
     "uuid": "5BFbTOavS8aE-Dm_0WyopQ",
     "files": {
         "formsDir": "src/forms",
-        "model": "src/model/index.js"
+        "model": "src/model/index.js",	
+		"module" : "infra",
+        "loader": "src/srv/loader.js"
     },
     "project": {
         "files": [
