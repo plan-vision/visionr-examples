@@ -1,0 +1,104 @@
+{
+    "incident": {
+        "en-US": "Incident",
+        "fr-FR": "Incident",
+        "bg-BG": "Инцидент",
+        "de-DE": "Vorfall"
+    },
+    "incident.name": {
+        "en-US": "Name",
+        "fr-FR": "Nom",
+        "bg-BG": "Име",
+        "de-DE": "Name"
+    },
+    "incident.description": {
+        "en-US": "Description",
+        "fr-FR": "Description",
+        "bg-BG": "Описание",
+        "de-DE": "Beschreibung"
+    },
+    "incident.status": {
+        "en-US": "Status",
+        "fr-FR": "Statut",
+        "bg-BG": "Статус",
+        "de-DE": "Status"
+    },
+    "incident.severity": {
+        "en-US": "Severity",
+        "fr-FR": "Sévérité",
+        "bg-BG": "Сериозност",
+        "de-DE": "Schweregrad"
+    },
+    "incident.reported_date": {
+        "en-US": "Reported Date",
+        "fr-FR": "Date de signalement",
+        "bg-BG": "Дата на докладване",
+        "de-DE": "Meldedatum"
+    },
+    "incident.server": {
+        "en-US": "Server",
+        "fr-FR": "Serveur",
+        "bg-BG": "Сървър",
+        "de-DE": "Server"
+    },
+    "incident.code": {
+        "en-US": "Code",
+        "fr-FR": "Code",
+        "bg-BG": "Код",
+        "de-DE": "Code"
+    },
+    "incident.reported_data": {
+        "en-US": "Reported Data",
+        "fr-FR": "Données signalées",
+        "bg-BG": "Докладвани данни",
+        "de-DE": "Gemeldete Daten"
+    },
+    "incident_status.open": {
+        "en-US": "Open",
+        "fr-FR": "Ouvert",
+        "bg-BG": "Отворен",
+        "de-DE": "Offen"
+    },
+    "incident_status.in_progress": {
+        "en-US": "In Progress",
+        "fr-FR": "En cours",
+        "bg-BG": "В процес",
+        "de-DE": "In Bearbeitung"
+    },
+    "incident_status.resolved": {
+        "en-US": "Resolved",
+        "fr-FR": "Résolu",
+        "bg-BG": "Разрешен",
+        "de-DE": "Gelöst"
+    },
+    "incident_status.closed": {
+        "en-US": "Closed",
+        "fr-FR": "Fermé",
+        "bg-BG": "Затворен",
+        "de-DE": "Geschlossen"
+    },
+    "incident_severity.low": {
+        "en-US": "Low",
+        "fr-FR": "Faible",
+        "bg-BG": "Нисък",
+        "de-DE": "Niedrig"
+    },
+    "incident_severity.medium": {
+        "en-US": "Medium",
+        "fr-FR": "Moyen",
+        "bg-BG": "Среден",
+        "de-DE": "Mittel"
+    },
+    "incident_severity.high": {
+        "en-US": "High",
+        "fr-FR": "Élevé",
+        "bg-BG": "Висок",
+        "de-DE": "Hoch"
+    },
+    "incident_severity.critical": {
+        "en-US": "Critical",
+        "fr-FR": "Critique",
+        "bg-BG": "Критичен",
+        "de-DE": "Kritisch"
+    }
+}

@@ -5,10 +5,10 @@ module.exports = {
 	hierarchies: [
         {
             name: {
-                "en-US": "By Server",
-                "fr-FR": "Par Serveur",
-                "bg-BG": "По Сървър",
-                "de-DE": "Nach Server"
+                "en-US": "By collocation",
+				"fr-FR": "Par Colocation",
+                "bg-BG": "По колокация",
+                "de-DE": "Nach Colocation"
             },
             code: 'infra.colocation.racks.servers',
             path: 'infra.colocation.racks.servers',
@@ -16,7 +16,8 @@ module.exports = {
             // defaultRecursive: true,
             // expandInitialDepth: 4,
             // showLeafs: true
-        }
+        }, 
+
     ],
 	properties: {
 		/* BY CATEGORY */
@@ -73,7 +74,11 @@ module.exports = {
 		  'services': {
 			template: 'relation',
 			parent: 'infra.service.server'
-		  }
+		  },
+		  'incidents': {
+			template: 'relation',
+			parent: 'infra.incident.server'
+		  },
 		}
 	  },
 	events: {

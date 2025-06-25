@@ -7,9 +7,10 @@ vr.defineModule('infra',{
 	alias : 'infra',
 	objectdefs : {
 		colocation: require("./schema/colocation"), 
+		incident: require("./schema/incident"),
 		server: require("./schema/server"), 
 		rack: require("./schema/rack"),
-		service: require("./schema/service")  
+		service: require("./schema/service"),
 	},
 	version : '1.2'
 });
@@ -18,6 +19,7 @@ require("./data/colocation.data");
 require("./data/rack.data");
 require("./data/server.data");
 require("./data/service.data");
+require("./data/incident.data");
 
 
 /* 

@@ -63,6 +63,16 @@
 			}
 		},
 		{
+			code : 'incident',
+			type : 'schema',
+			schema : 'infra.incident',
+			category : 'overview',
+			hierarchy : 'infra.incident:infra.server.incidents',
+			filter : {
+				status: true
+			}
+		},
+		{
 			type : 'settings',
 			category : 'settings',
 			module : 'infra'
