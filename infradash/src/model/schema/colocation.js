@@ -14,17 +14,17 @@ module.exports = {
 				template: 'relation.obligatory',
 				related: 'library.country'
 			},
-			'racks': {
-				template: 'relation',
-				parent: 'infra.rack.colocation'
-			}
-		}
-	},
-	// events: {
-
-	// },
-	// forms: {
-
+            'racks': {
+                template: 'relation',
+                parent: 'infra.rack.colocation'
+            },
+            'components': {
+                template: 'relation',
+                parent: 'infra.component.colocation'
+            }
+        }
+    },
+	
 	// },
 	// api: {
 

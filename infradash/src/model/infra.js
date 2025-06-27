@@ -6,6 +6,7 @@ vr.defineModule('infra',{
 	//sortId : 1000
 	alias : 'infra',
 	objectdefs : {
+		component: require("./schema/component"),
 		colocation: require("./schema/colocation"), 
 		incident: require("./schema/incident"),
 		server: require("./schema/server"), 

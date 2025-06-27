@@ -67,7 +67,16 @@
 			type : 'schema',
 			schema : 'infra.incident',
 			category : 'overview',
-			hierarchy : 'infra.incident:infra.server.incidents',
+			hierarchy : 'infra.incident:infra.colocation.servers.incidents',
+			filter : {
+				status: true
+			}
+		},
+		{
+			code : 'component',
+			type : 'schema',
+			schema : 'infra.component',
+			category : 'overview',
 			filter : {
 				status: true
 			}

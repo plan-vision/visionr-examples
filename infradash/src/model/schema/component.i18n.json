@@ -1,0 +1,50 @@
+{
+    "serial_number": {
+        "en-US": "Serial Number",
+        "fr-FR": "Numéro de série",
+        "bg-BG": "Сериен номер",
+        "de-DE": "Seriennummer"
+    },
+    "server": {
+        "en-US": "Server",
+        "fr-FR": "Serveur",
+        "bg-BG": "Сървър",
+        "de-DE": "Server"
+    },
+    "colocation": {
+        "en-US": "Colocation",
+        "fr-FR": "Colocation",
+        "bg-BG": "Колокация",
+        "de-DE": "Colocation"
+    },
+    "is_operational": {
+        "en-US": "Is Operational",
+        "fr-FR": "Est opérationnel",
+        "bg-BG": "Оперативен ли е",
+        "de-DE": "Ist betriebsbereit"
+    },
+    "comment": {
+        "en-US": "Comment",
+        "fr-FR": "Commentaire",
+        "bg-BG": "Коментар",
+        "de-DE": "Kommentar"
+    },
+    "vendor": {
+        "en-US": "Vendor",
+        "fr-FR": "Fournisseur",
+        "bg-BG": "Доставчик",
+        "de-DE": "Anbieter"
+    },
+    "model": {
+        "en-US": "Model",
+        "fr-FR": "Modèle",
+        "bg-BG": "Модел",
+        "de-DE": "Modell"
+    },
+    "main.basic": {
+        "en-US": "Basic Information",
+        "fr-FR": "Informations de base",
+        "bg-BG": "Основна информация",
+        "de-DE": "Grundlegende Informationen"
+    }
+}
