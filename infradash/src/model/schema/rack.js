@@ -22,7 +22,27 @@ module.exports = {
             'sort_id': 'sortid.hidden',
             'colocation': {
                 template: 'relation.obligatory',
-                related: 'infra.colocation'
+                related: 'infra.colocation',
+                events: {
+                    'insert,update'() {
+                        console.log('Rack colocation insert/update event triggered.');
+                        for (const serv of this.servers || []) {
+                            for (const comp of serv.components || []) {
+                                comp.colocation = this.colocation;
+                                console.log(`Component ${comp.name} colocation updated to ${this.colocation}`);
+                            }
+                        }
+                    },
+                    delete() {
+                        console.log('Rack colocation delete event triggered.');
+                        for (const serv of this.OLD.servers || []) {
+                            for (const comp of serv.components || []) {
+                                comp.colocation = undefined;
+                                console.log(`Component ${comp.name} colocation set to undefined`);
+                            }
+                        }
+                    },
+                }
             },
             'name': {
                 template: 'text.i18n',
@@ -79,7 +99,15 @@ module.exports = {
         }
     },
     events: {
-
+        delete() {
+            console.log('Rack top-level delete event triggered.');
+            for (const serv of this.OLD.servers || []) {
+                for (const comp of serv.components || []) {
+                    comp.colocation = undefined;
+                    console.log(`Component ${comp.name} colocation set to undefined`);
+                }
+            }
+        },
     },
     forms: {
 
