@@ -10,8 +10,8 @@ module.exports = {
                 "bg-BG": "По Сървър",
                 "de-DE": "Nach Server"
             },
-            code: 'infra.collocation.server.incidents',
-            path: 'infra.collocation.server.incidents',
+            code: 'infra.colocation.racks.servers.incidents',
+            path: 'infra.colocation.racks.servers.incidents',
             showElementCount: true,
         },
     ],
