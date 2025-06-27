@@ -16,6 +16,12 @@
             "cwd":"c:\\Work\\visionr-examples\\infra-dash",
             "program": "c:\\work\\visionr-engine\\components\\cli\\src\\bin\\vr.js",
             "console": "integratedTerminal"
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "Attach to DevTools",
+            "port": 9000
         }
     ]
 }
