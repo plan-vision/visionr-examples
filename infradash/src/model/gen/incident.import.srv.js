@@ -1,4 +1,4 @@
-const data = require('./incidents.data')
+const data = require('../../srv/incidents.data')
 
 const url = "https://in2.plan-vision.com/manifest.json";
 
@@ -13,8 +13,6 @@ const url = "https://in2.plan-vision.com/manifest.json";
 // `));
 
 // require('infra/incident.import.srv').test()
-
-
 
 console.log('Starting incident import...');
 
