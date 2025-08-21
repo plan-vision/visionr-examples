@@ -3,6 +3,17 @@
 ### general
 | Commit | Timestamp | Type | Description |
 | ------ | --------- | ---- | ----------- |
+| [06e1163](https://github.com/plan-vision/visionr-examples/commit/06e116364a27445475374282a463f4c8bc6355cd) | 2025-06-27 16:18 | update | tempgen |
+| [d2b3b4c](https://github.com/plan-vision/visionr-examples/commit/d2b3b4c4e377b00309639e15d156d1bc9f081157) | 2025-06-27 16:13 | update | incident fix hierarchy |
+| [3248558](https://github.com/plan-vision/visionr-examples/commit/3248558d64d3a51744809e2c4e8f35a7e46ce6fd) | 2025-06-27 16:13 | update | incident import alpha 0.1 |
+| [4b218c3](https://github.com/plan-vision/visionr-examples/commit/4b218c32e29cc095c95c77467e7d08ceacdb710c) | 2025-06-27 16:13 | update | component update colocation scripts |
+| [2a68f57](https://github.com/plan-vision/visionr-examples/commit/2a68f57fbaa1ec3ec8ae1c135404874f1105e67a) | 2025-06-27 16:13 | update | add component entity |
+| [27194c6](https://github.com/plan-vision/visionr-examples/commit/27194c62fdeaf2b66188206d9a4b553992c29795) | 2025-06-27 16:11 | update | preliminary script info |
+| [76e2321](https://github.com/plan-vision/visionr-examples/commit/76e2321323929ade38b1d3d569074191e7c73e18) | 2025-06-27 16:10 | update | attach to debug from here |
+| [df31c67](https://github.com/plan-vision/visionr-examples/commit/df31c6775beb9d5e8e1eb6d77eadab27fce59d87) | 2025-06-27 16:10 | update | events |
+| [74018a1](https://github.com/plan-vision/visionr-examples/commit/74018a19c2f97f08abc9a439b75bd55ed3375921) | 2025-06-25 12:34 | update | ++incident |
+| [a6225ed](https://github.com/plan-vision/visionr-examples/commit/a6225ed1248d689e0fecc73e84322e5bcb69e863) | 2025-06-03 19:27 | update | clean |
+| [ccb0034](https://github.com/plan-vision/visionr-examples/commit/ccb0034fc11171fe273fab25f7127dd42b5bbbea) | 2025-06-03 19:19 | update | cleanup docos |
 | [1599033](https://github.com/plan-vision/visionr-examples/commit/15990332ae25b139c4fbd8715d535509716a1449) | 2025-05-03 13:00 | update | movement of Jah people |
 | [9836aff](https://github.com/plan-vision/visionr-examples/commit/9836aff43744de26e8f4ebf5dba3a48ae3474f7f) | 2025-04-28 12:35 | update | old but cool |
 | [f64a16d](https://github.com/plan-vision/visionr-examples/commit/f64a16d6034d57cbfbd0dd9537d7593dfdf2d22c) | 2025-04-27 11:43 | update | fix project build / upload release |
@@ -30,7 +41,28 @@
 ### infradash
 | Commit | Timestamp | Type | Description |
 | ------ | --------- | ---- | ----------- |
+| [62c0aeb](https://github.com/plan-vision/visionr-examples/commit/62c0aeb06fe969dce7c4d1966346022ecb7480d4) | 2025-06-24 18:01 | fix | i18n messages & icon |
 | [eb91a04](https://github.com/plan-vision/visionr-examples/commit/eb91a04dc68cfd3512fe7804be43f9cf7e38c9d1) | 2025-05-18 09:42 | fix | remove invalid property in pages index |
+
+### package.json
+| Commit | Timestamp | Type | Description |
+| ------ | --------- | ---- | ----------- |
+| [61ca4cc](https://github.com/plan-vision/visionr-examples/commit/61ca4cc1e0f1e013b9b78ac31920f1bae63b3b73) | 2025-05-18 11:00 | fix | cli auto replaced argument tokens fix |
+
+### github-ci
+| Commit | Timestamp | Type | Description |
+| ------ | --------- | ---- | ----------- |
+| [153b7b8](https://github.com/plan-vision/visionr-examples/commit/153b7b85ef42fb39bc84bf1a6f8c13933e56ad02) | 2025-05-18 11:25 | impl | linux-ci.yml workflow |
+
+### infra
+| Commit | Timestamp | Type | Description |
+| ------ | --------- | ---- | ----------- |
+| [e882af2](https://github.com/plan-vision/visionr-examples/commit/e882af207ff00b938efb7d01f7cdd4c175ed501a) | 2025-06-24 18:05 | fix | filter not working |
+
+### config
+| Commit | Timestamp | Type | Description |
+| ------ | --------- | ---- | ----------- |
+| [78619ba](https://github.com/plan-vision/visionr-examples/commit/78619baed80dbb0827b4542b43ae7df59b127ec6) | 2025-06-25 14:08 | upd | infradash visionr.json add missing loader config |
 
 ## 0.0.1-alpha1
 
