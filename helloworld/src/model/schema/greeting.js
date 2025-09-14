@@ -1,19 +1,26 @@
 module.exports = {     
 	'greeting' : { /* define schema (objectdef) by code 'greeting', full key would be 'demo.greeting' */
 		properties : {
-			'code' : 'code.unique', /* use template @visionr/model/core.property/core.unique | see https://github.com/plan-vision/visionr-engine/blob/master/components/model/core.property/code.unique.js */
-			'description' : false, /* false means : do not use default property api 'description' | see https://github.com/plan-vision/visionr-engine/blob/master/components/model/core.objectdef/default.js#L200  */ 
-			'var1'  : 'varchar',
-			'txt1'  : 'text',
-			'int1' : 'integer',
-			'dbl1' : 'double',
-			'dtm1' : 'datetime',
-			'dtm2' : 'millis',
-			'dtm3' : 'date',
-			'dtm4' : 'time',
-			'dtm5' : 'hoursmins',
-			'dtm6' : 'daymonth',
-			'opt1' : 'boolean.obligatory'
+
+			/* BY CATEGORY */
+			'main.basic':
+			{
+				'code' : 'code.unique', /* use template @visionr/model/core.property/core.unique | see https://github.com/plan-vision/visionr-engine/blob/master/components/model/core.property/code.unique.js */
+				'description' : false, /* false means : do not use default property api 'description' | see https://github.com/plan-vision/visionr-engine/blob/master/components/model/core.objectdef/default.js#L200  */ 
+				'var1'  : 'varchar',
+				'txt1'  : 'text',
+				'int1' : 'integer',
+				'dbl1' : 'double',
+				'dtm1' : 'datetime',
+				'dtm2' : 'millis',
+				'dtm3' : 'date',
+				'dtm4' : 'time',
+				'dtm5' : 'hoursmins',
+				'dtm6' : 'daymonth',
+				'opt1' : 'boolean.obligatory',
+				
+				'documents' : 'documents.file_upload' // documents property template , multiple related documents.file_upload 
+			}
 		},
 		forms : 
 		{

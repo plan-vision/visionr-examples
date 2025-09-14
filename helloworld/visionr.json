@@ -12,7 +12,7 @@
         "engine": "native",
         "devel": false,
         "registration": {
-            "enabled": false
+            "enabled": true
         },
 		"_timezone" : "America/New_York"
     },
