@@ -35,6 +35,7 @@
 ### helloworld
 | Commit | Timestamp | Type | Description |
 | ------ | --------- | ---- | ----------- |
+| [bf07cd1](https://github.com/plan-vision/visionr-examples/commit/bf07cd1434bb3e54157d540cde1337b7375222bc) | 2025-09-14 14:52 | update | enable registration and add documents in demo.greeting |
 | [cb8db32](https://github.com/plan-vision/visionr-examples/commit/cb8db3276eae230e4a0b12aba747c3b5e02f9dfc) | 2025-04-04 11:57 | update | visionr.json |
 | [76b4224](https://github.com/plan-vision/visionr-examples/commit/76b42248498d80e4d52bca99f874303917f98d8d) | 2025-03-26 13:57 | feat | add test properties to greeting def |
 

@@ -16,7 +16,9 @@
         },
 		"_timezone" : "America/New_York"
     },
-    "additional": {},
+    "additional": {
+		"web.upload.max_size_mb" : "1000"
+	},
     "i18n": {
         "import": "all"
     },
