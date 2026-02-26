@@ -14,7 +14,7 @@
         "start": "vrs start -devel -chromedebugport 9000",
         "devel": "vrs start -devel",
         "prod": "vrs start",
-        "zip:source": "vrs backup target/infradash-NPM_PACKAGE_VERSION-source.zip full -devel",
+        "zip:source": "vrs backup target/infradash-NPM_PACKAGE_VERSION-source.zip full -source",
         "zip:update": "vrs backup target/infradash-NPM_PACKAGE_VERSION-update.zip full",
         "zip:release": "vrs backup target/infradash-NPM_PACKAGE_VERSION-release.zip full db -dbformat json",
         "generate:demo.installer": "vrs compile installer",
