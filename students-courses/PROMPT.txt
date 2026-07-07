@@ -1,0 +1,193 @@
+Build a small VisionR demo app from an empty generated VisionR project for managing students and courses.
+
+Before editing, follow the local project guide:
+
+1. Read AGENTS.md in the project root.
+2. Run `vrs dir`.
+3. Read `<engine-root>/AGENTS.md`.
+4. Keep changes in project source only. Do not edit generated files under `target`, and do not reset/delete `data`, `work`, `log`, or `upload` except for generated runtime cache if a verify command is blocked by a stale LMDB cache.
+
+Use the model API in `src/model`. Use the current project module from `visionr.json.files.module` if the scaffold already has one. If the scaffold is intended to be renamed, set the project module to `demo` consistently in `visionr.json.files.module`, `src/model/index.js`, and the module file name/code. The examples below use `demo`; if keeping a different module code, replace `demo` everywhere with that module code.
+
+Create this application shape:
+
+- Objectdefs:
+  - `student`
+  - `course`
+- No separate participation/enrollment objectdef.
+- Course participation is modeled as a multiple relation property on `course` named `participants`, related to `<module>.student`.
+- Both `student` and `course` must have the standard `documents` upload property.
+- Use `varchar` for short single-line fields. Use `text` only where VisionR convention requires it, such as the standard student `name` template.
+
+Expected files:
+
+```text
+src/model/index.js
+src/model/<module>.module.js
+src/model/<module>.i18n.json
+src/model/schema/student.js
+src/model/schema/course.js
+src/model/data/<module>.data.js
+src/forms/pages/main/courses.html
+src/task/verify-project.js
+```
+
+Module file:
+
+- Define i18n from `./<module>.i18n.json`.
+- Define module `<module>` with alias `<module>`.
+- Register objectdefs:
+  - `student: require("./schema/student")`
+  - `course: require("./schema/course")`
+- Require `./data/<module>.data`.
+
+Student schema:
+
+- `icon: "person"`
+- Properties in `"main.basic"`:
+  - `code: "code.unique"`
+  - `name: { template: "text" }`
+  - `email: { template: "varchar" }`
+  - `program: { template: "varchar" }`
+  - `status` as `option.obligatory`, option set code `student_status`, options `["active", "inactive"]`
+  - `documents: { template: "documents" }`
+- Table columns:
+  - `code,name@220,email@260,program@180,status,documents`
+
+Course schema:
+
+- `icon: "school"`
+- Properties in `"main.basic"`:
+  - `code: "code.unique"`
+  - `title: { template: "varchar" }`
+  - `department: { template: "varchar" }`
+  - `credits: { template: "integer", default: 3 }`
+  - `status` as `option.obligatory`, option set code `course_status`, options `["active", "inactive", "planned"]`
+  - `participants` as a relation to `<module>.student` with `multiple: true`
+  - `documents: { template: "documents" }`
+- Table columns:
+  - `code,title@260,department@180,credits,status,participants@260,documents`
+
+I18n:
+
+Create complete English i18n labels in `src/model/<module>.i18n.json` for:
+
+- module label
+- page/category labels: `courses`, `students`
+- objectdefs: `objectdef:<module>.course`, `objectdef:<module>.student`
+- short object labels: `course`, `student`
+- all properties using both property keys and short keys where useful:
+  - `property:<module>.course.code`, `property:<module>.course.title`, `property:<module>.course.department`, `property:<module>.course.credits`, `property:<module>.course.status`, `property:<module>.course.participants`, `property:<module>.course.documents`
+  - `property:<module>.student.code`, `property:<module>.student.name`, `property:<module>.student.email`, `property:<module>.student.program`, `property:<module>.student.status`, `property:<module>.student.documents`
+  - `course.code`, `course.title`, `course.department`, `course.credits`, `course.status`, `course.participants`, `course.documents`
+  - `student.code`, `student.name`, `student.email`, `student.program`, `student.status`, `student.documents`
+- options:
+  - `option:active`
+  - `option:inactive`
+  - `option:planned`
+
+Sample data:
+
+Create three students:
+
+- `STU-001`: Maya Chen, `maya.chen@example.edu`, Computer Science, active
+- `STU-002`: Noah Patel, `noah.patel@example.edu`, Data Analytics, active
+- `STU-003`: Elena Garcia, `elena.garcia@example.edu`, Business Administration, inactive
+
+For student `name`, use an i18n object like:
+
+```javascript
+name: { "en-US": "Maya Chen" }
+```
+
+Create three courses:
+
+- `CS-101`: Introduction to Programming, Computer Science, 4 credits, active, participants `[STU-001]`
+- `DATA-220`: Applied Data Modeling, Data Science, 3 credits, active, participants `[STU-001, STU-002]`
+- `BUS-150`: Operations Management, Business, 3 credits, planned, participants `[STU-003]`
+
+For multiple relations in seed data, use arrays of relation references:
+
+```javascript
+participants: [
+  { SCHEMA: "<module>.student", code: "STU-001" },
+  { SCHEMA: "<module>.student", code: "STU-002" }
+]
+```
+
+Main page:
+
+Do not create or use `src/forms/pages/main/live.html` for this app. Create `src/forms/pages/main/courses.html`.
+
+The courses page must use the standard `common-main` mask pattern, not a custom `objectsview` with custom "NEW" buttons. It should include `/app/layouts/common-sidenav`, define `#name` as `Courses`, define `#pagedef`, and include `/widgets/model/page/common-main`.
+
+The `pagedef` should:
+
+- Set `defaultEntry: 'course'`
+- Have one category `{ code: 'courses', name: 'Courses' }`
+- Have two schema entries:
+  - `course`, schema `<module>.course`, icon `school`, name `Courses`
+  - `student`, schema `<module>.student`, icon `person`, name `Students`
+
+Add relevant sidenav filters in the page definition:
+
+Course entry filters:
+
+- Disable default `name` filter because course uses `title`, not `name`.
+- `title: { priority: 105, preview: true }`
+- `status: { priority: 115, preview: true }`
+- `department: { priority: 120 }`
+- `credits: { priority: 125 }`
+- `participants: { priority: 130 }`
+- `documents: { priority: 140 }`
+
+Student entry filters:
+
+- `name: { priority: 105, preview: true }`
+- `status: { priority: 115, preview: true }`
+- `email: { priority: 120 }`
+- `program: { priority: 125 }`
+- `documents: { priority: 135 }`
+
+Verify task:
+
+Create or update `src/task/verify-project.js` so `vr run verify-project` checks:
+
+- Project module matches the chosen module.
+- `VRAPI.prj.files.model` is `src/model/index.js`.
+- Imported data contains:
+  - 3 students
+  - 3 courses
+  - 2 participants for course `DATA-220`
+
+Use `VR.srv.call(function() { ... })` for backend checks and `await VR.srv.stop()` after the backend call.
+
+For the multiple relation count, do not assume the runtime object exposes `course.participants.length`. Count the generated relation value table. For module `demo`, the table is:
+
+```sql
+VISIONR.pv_demo_int_course_participants
+```
+
+If using another module code, adapt the generated table name accordingly, or inspect generated output after compile/import and use the actual table name. The check should return JSON like:
+
+```json
+{
+  "students": 3,
+  "courses": 3,
+  "dataModelingParticipants": 2
+}
+```
+
+Validation commands:
+
+Run, in order:
+
+```console
+npm run build
+npm run import
+vr run verify-project
+```
+
+If `vrs import` or `vr run verify-project` fails because of an engine registry lock outside the project workspace, rerun with the required approval/escalation instead of changing project source. If verify/import leaves a stale generated LMDB cache under `work/tmp/lmdb` and there is no active VisionR server/listener for the project, it is acceptable to delete only that generated cache directory and rerun verify. Do not delete `data`, `upload`, or other runtime state.
+
+Do not start the UI server unless explicitly asked. If asked to start it, use a visible terminal window so the user can see and close it.

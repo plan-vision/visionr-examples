@@ -27,7 +27,8 @@
         "formsDir": "src/forms",
         "srvSrc": "src/srv",
         "sourceCode": true,
-        "model": "src/model/index.js"
+        "model": "src/model/index.js",
+        "module" : "demo"
     },
     "project": {
         "files": [
@@ -92,5 +93,13 @@
                 "/status"
             ]
         }
+    },
+    "exports":{
+         "portable":{
+            "srcDir" : "portable",
+            "srcDef" : "demo/sysexp/portable.default",
+            "keepMax" : 4,
+            "accessGroup" : "administrators"
+         }   
     }
 }

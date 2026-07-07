@@ -1,0 +1,35 @@
+{
+    "code": "EXP_HELLOWORLD",    
+    "logging": {
+        "level": "info"
+    },
+    "server": {
+        "registration": {
+            "enabled": false
+        }
+    },
+    "additional": {
+		"web.upload.max_size_mb" : 50
+	},
+    "files": {
+        "model": "src/model/index.js",
+        "formsDir": "src/forms",
+        "srvSrc": "src/srv",
+		"module" : "demo"
+    },
+    "project": {
+        "files": [
+            "src/srv",
+            "target/client",
+            "target/forms",
+            "target/doc.sync",
+            "share/public",
+			
+			"target/aott"
+        ]      
+    },
+    "db": {
+        "engine": "sqlite"
+    },
+    "modules": null
+}

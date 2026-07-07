@@ -1,8 +1,8 @@
 {
     "name": "helloworld",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "scripts": {
-        "clean:temp": "vrs clean data work target log -force",
+        "clean:temp": "vrs clean work target log -force",
         "reset:all": "vrs clean data work target log upload -force && npm run build && npm run import",
         "reset": "npm run clean:temp && npm run build && npm run import",
         "build": "vrs compile",
@@ -18,7 +18,10 @@
         "zip:update": "vrs backup target/helloworld-NPM_PACKAGE_VERSION-update.zip full",
         "zip:release": "vrs backup target/helloworld-NPM_PACKAGE_VERSION-release.zip full db -dbformat json",
         "generate:demo.installer": "vrs compile installer",
-        "release": "npm run build:full.clean && vrs import && npm run zip:source && npm run zip:update && npm run zip:release"
+        "release": "npm run build:full.clean && vrs import && npm run zip:source && npm run zip:update && npm run zip:release",
+
+		"sysexp": "vrs compile sysexp && vrs sysexp snapshot"
+		
     },
     "author": "Plan-Vision",
     "license": "ISC",

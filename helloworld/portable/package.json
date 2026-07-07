@@ -1,0 +1,15 @@
+{
+    "name": "helloworld-portable",
+    "version": "0.0.1",
+    "scripts": {
+        "clean:temp": "vrs clean work target log -force",
+        "start": "vrs start -devel -nodejs",
+        "prod": "vrs start -nodejs"
+    },
+    "author": "Plan-Vision",
+    "license": "ISC",
+    "description": "Portable subsys example",
+    "icon": "ar_on_you",
+    "dependencies": {
+    }
+}
