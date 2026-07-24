@@ -3,7 +3,7 @@
 /data/
 /upload/
 /target/
-/.visionr/
+/.*/
 /node_modules/
 *.log
 /backup/
