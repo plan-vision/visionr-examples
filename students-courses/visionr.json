@@ -1,0 +1,51 @@
+{
+    "code": "11_STUDENTS_COURSES",
+    "logging": {
+        "level": "info"
+    },
+    "scripting": {
+        "srcDirs": [
+            "src/srv"
+        ]
+    },
+    "db": {
+        "engine": "sqlite"
+    },
+    "server": {
+        "chromeDebugPort": 0,
+        "http": {
+            "enabled": true,
+            "port": 8585
+        },
+        "https": {
+            "enabled": false,
+            "port": 8448
+        },
+        "registration": {
+            "enabled": true
+        },
+        "devel": false
+    },
+    "files": {
+        "formsDir": "src/forms",
+        "loader": "src/srv/loader.js",
+        "model": "src/model/index.js",
+        "module": "courses",
+        "sourceCode": true
+    },
+    "modules": [],
+    "tasks": {},
+    "project": {
+        "files": [
+            ".gitignore",
+            "AGENTS.md",
+            "src",
+            "share/documents",
+            "share/public",
+            "target/client",
+            "target/forms",
+            "target/import",
+            "target/doc.sync"
+        ]
+    }
+}

@@ -1,0 +1,170 @@
+{
+    "module:courses": {
+        "en-US": "Student Management",
+        "de-DE": "Studierendenverwaltung"
+    },
+    "objectdef:courses.department": {
+        "en-US": "Department",
+        "de-DE": "Fachbereich"
+    },
+    "objectdef:courses.student": {
+        "en-US": "Student",
+        "de-DE": "Studierende Person"
+    },
+    "objectdef:courses.course": {
+        "en-US": "Course",
+        "de-DE": "Kurs"
+    },
+    "objectdef:courses.course_status": {
+        "en-US": "Course status",
+        "de-DE": "Kursstatus"
+    },
+    "property:courses.department.parent": {
+        "en-US": "Parent department",
+        "de-DE": "Übergeordneter Fachbereich"
+    },
+    "property:courses.department.color": {
+        "en-US": "Color",
+        "de-DE": "Farbe"
+    },
+    "property:courses.department.children": {
+        "en-US": "Subdepartments",
+        "de-DE": "Untergeordnete Fachbereiche"
+    },
+    "property:courses.department.courses": {
+        "en-US": "Courses",
+        "de-DE": "Kurse"
+    },
+    "property:courses.department.documents": {
+        "en-US": "Documents",
+        "de-DE": "Dokumente"
+    },
+    "property:courses.student.email": {
+        "en-US": "Email",
+        "de-DE": "E-Mail"
+    },
+    "property:courses.student.courses": {
+        "en-US": "Courses",
+        "de-DE": "Kurse"
+    },
+    "property:courses.student.documents": {
+        "en-US": "Documents",
+        "de-DE": "Dokumente"
+    },
+    "property:courses.course.department": {
+        "en-US": "Department",
+        "de-DE": "Fachbereich"
+    },
+    "property:courses.course.status": {
+        "en-US": "Status",
+        "de-DE": "Status"
+    },
+    "property:courses.course_status.color": {
+        "en-US": "Color",
+        "de-DE": "Farbe"
+    },
+    "property:courses.course.credits": {
+        "en-US": "Credits",
+        "de-DE": "Leistungspunkte"
+    },
+    "property:courses.course.begin_time": {
+        "en-US": "Begin time",
+        "de-DE": "Beginn"
+    },
+    "property:courses.course.end_time": {
+        "en-US": "End time",
+        "de-DE": "Ende"
+    },
+    "property:courses.course.participants": {
+        "en-US": "Participants",
+        "de-DE": "Teilnehmende"
+    },
+    "property:courses.course.documents": {
+        "en-US": "Documents",
+        "de-DE": "Dokumente"
+    },
+    "category:main.academics": {
+        "en-US": "Academic details",
+        "de-DE": "Akademische Details"
+    },
+    "category:documents.basic": {
+        "en-US": "Documents",
+        "de-DE": "Dokumente"
+    },
+    "message:LABEL_COURSES_COURSES_PAGE": {
+        "en-US": "Courses",
+        "de-DE": "Kurse"
+    },
+    "message:LABEL_COURSES_ACADEMICS": {
+        "en-US": "Academics",
+        "de-DE": "Lehre"
+    },
+    "message:LABEL_COURSES_DASHBOARD": {
+        "en-US": "Dashboard",
+        "de-DE": "Übersicht"
+    },
+    "message:LABEL_COURSES_CALENDAR": {
+        "en-US": "Calendar",
+        "de-DE": "Kalender"
+    },
+    "message:LABEL_COURSES_CALENDAR_LAYOUT": {
+        "en-US": "Calendar layout",
+        "de-DE": "Kalenderdarstellung"
+    },
+    "message:LABEL_COURSES_ALL_COURSES": {
+        "en-US": "All courses",
+        "de-DE": "Alle Kurse"
+    },
+    "message:LABEL_COURSES_BY_DEPARTMENT_ALL": {
+        "en-US": "By department (all)",
+        "de-DE": "Nach Fachbereich (alle)"
+    },
+    "message:LABEL_COURSES_BY_DEPARTMENT_OCCUPIED": {
+        "en-US": "By department (occupied only)",
+        "de-DE": "Nach Fachbereich (nur belegte)"
+    },
+    "message:LABEL_COURSES_DEPARTMENTS": {
+        "en-US": "Departments",
+        "de-DE": "Fachbereiche"
+    },
+    "message:LABEL_COURSES_COURSE_STATUS": {
+        "en-US": "Course status",
+        "de-DE": "Kursstatus"
+    },
+    "message:LABEL_COURSES_COURSES": {
+        "en-US": "Courses",
+        "de-DE": "Kurse"
+    },
+    "message:LABEL_COURSES_COURSES_BY_DEPARTMENT": {
+        "en-US": "Courses by department",
+        "de-DE": "Kurse nach Fachbereich"
+    },
+    "message:LABEL_COURSES_PARTICIPANTS_BY_COURSE": {
+        "en-US": "Participants by course",
+        "de-DE": "Teilnehmende nach Kurs"
+    },
+    "message:LABEL_COURSES_PARTICIPATION_CALENDAR": {
+        "en-US": "Participation calendar",
+        "de-DE": "Teilnahmekalender"
+    },
+    "message:LABEL_COURSES_NO_DEPARTMENT": {
+        "en-US": "No department",
+        "de-DE": "Kein Fachbereich"
+    },
+    "message:LABEL_COURSES_CREDITS": {
+        "en-US": "credits",
+        "de-DE": "Leistungspunkte"
+    },
+    "message:LABEL_COURSES_PARTICIPANT": {
+        "en-US": "participant",
+        "de-DE": "teilnehmende Person"
+    },
+    "message:LABEL_COURSES_PARTICIPANTS": {
+        "en-US": "participants",
+        "de-DE": "Teilnehmende"
+    },
+    "message:ERROR_COURSES_BEGIN_BEFORE_END": {
+        "en-US": "Begin time must be less than end time",
+        "de-DE": "Der Beginn muss vor dem Ende liegen"
+    }
+}

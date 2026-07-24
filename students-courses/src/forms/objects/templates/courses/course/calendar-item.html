@@ -1,0 +1,8 @@
+<ng-template #template export let-item="item" let-selected="selected">
+    <div
+        [matTooltip]="item.DETAILS"
+        style="padding:2px 5px;box-sizing:border-box;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
+        <strong>{{item.NAME}}</strong>
+        <span> &middot; {{item.PARTICIPANTS}}</span>
+    </div>
+</ng-template>

@@ -1,0 +1,30 @@
+<!-- @ABSTRACT -->
+
+<ng-template #dashboardTemplate
+    let-filter="filter"
+    let-filterSchema="filterSchema"
+    let-filterState="filterState">
+
+    <variable #dashboardConfig [value]="{
+        categorySet: [],
+        templates: [
+            templateStatusDistribution,
+            templateDepartmentDistribution,
+            templateParticipantLoad,
+            templateCourseWorkingSet
+        ],
+        params: {},
+        templateContext: {
+            filter: filter,
+            filterSchema: filterSchema,
+            filterState: filterState
+        }
+    }"></variable>
+
+    <include shared ref="/widgets/forms/dashboard/dashboard-embed-4x4"></include>
+</ng-template>
+
+<include shared ref="/pages/main/includes/courses/dashboard/status-distribution"></include>
+<include shared ref="/pages/main/includes/courses/dashboard/department-distribution"></include>
+<include shared ref="/pages/main/includes/courses/dashboard/participant-load"></include>
+<include shared ref="/pages/main/includes/courses/dashboard/course-working-set"></include>

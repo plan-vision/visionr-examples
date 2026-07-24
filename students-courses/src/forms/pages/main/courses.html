@@ -1,0 +1,183 @@
+<!-- @ICON school -->
+<!-- NAME@en-US Courses -->
+<!-- NAME@de-DE Kurse -->
+<!-- DESCRIPTION@en-US Course, student, department, calendar, and dashboard management -->
+<!-- DESCRIPTION@de-DE Verwaltung von Kursen, Studierenden, Fachbereichen, Kalendern und Übersichten -->
+<!-- @ORDER 1000 -->
+
+<include shared ref="/pages/main/includes/courses/dashboard"></include>
+
+<variable #name value@i18n="LABEL_COURSES_COURSES_PAGE"></variable>
+<variable #pagedef [value]="{
+    defaultEntry: 'dashboard',
+    categories: [
+        { code: 'academics', name: root.i18n('LABEL_COURSES_ACADEMICS') }
+    ],
+    entries: [
+        {
+            code: 'dashboard',
+            type: 'template',
+            schema: 'courses.course',
+            category: 'academics',
+            name: root.i18n('LABEL_COURSES_DASHBOARD'),
+            icon: 'dashboard',
+            filterSchema: 'courses.course',
+            filter: {
+                status: true,
+                department: true,
+                code: true,
+                name: true
+            },
+            ngTemplate: dashboardTemplate
+        },
+        {
+            code: 'courses',
+            type: 'schema',
+            schema: 'courses.course',
+            category: 'academics',
+            icon: 'school',
+            filter: {
+                status: true,
+                department: true,
+                code: true,
+                name: true
+            }
+        },
+        {
+            code: 'course_calendar',
+            type: 'template',
+            category: 'academics',
+            name: root.i18n('LABEL_COURSES_CALENDAR'),
+            icon: 'calendar_month',
+            filterSchema: 'courses.course',
+            filter: {
+                status: true,
+                department: true,
+                code: true,
+                name: true
+            },
+            ngTemplate: courseCalendar
+        },
+        {
+            code: 'students',
+            type: 'schema',
+            schema: 'courses.student',
+            category: 'academics',
+            icon: 'person'
+        },
+        {
+            code: 'departments',
+            type: 'schema',
+            schema: 'courses.department',
+            category: 'academics',
+            icon: 'account_tree'
+        }
+    ]
+}"></variable>
+
+<include shared ref="/widgets/model/page/common-main"></include>
+
+<ng-template #courseCalendar
+    let-filter="filter"
+    let-filterSchema="filterSchema"
+    let-filterState="filterState">
+
+    <filter-outlet #fo encodeQueryParams
+        [def]="filter"
+        [schema]="filterSchema"
+        [preview]="true"
+        (onInit)="fo.state=root.clone(filterState,true)"
+        style="display:contents">
+        <variable #filterStateValue
+            [value]="filterState"
+            (valueChange)="fo.state=root.clone(filterState,true)">
+        </variable>
+    </filter-outlet>
+
+    <div *ngIf="fo.ready"
+        fxLayout="column"
+        style="position:absolute;inset:0;min-height:0">
+
+        <variable #calendarGrouping persist [defaults]="{value:'all'}"></variable>
+        <variable #customExtent persist></variable>
+        <variable #calendarPeriod persist
+            [defaults]="{value:'user_defined'}"></variable>
+
+        <div fxLayout="row" fxLayoutAlign="start center"
+            style="padding:8px 12px 0;box-sizing:border-box">
+            <input-option
+                style="width:240px"
+                placeholder@i18n="LABEL_COURSES_CALENDAR_LAYOUT"
+                [(value)]="calendarGrouping.value"
+                [options]="[
+                    {code:'all',NAME:root.i18n('LABEL_COURSES_ALL_COURSES')},
+                    {code:'department_all',NAME:root.i18n('LABEL_COURSES_BY_DEPARTMENT_ALL')},
+                    {code:'department_occupied',NAME:root.i18n('LABEL_COURSES_BY_DEPARTMENT_OCCUPIED')}
+                ]">
+            </input-option>
+        </div>
+
+        <div fxFlex style="position:relative;min-height:0">
+            <timeline #allCoursesCalendar
+                *ngIf="calendarGrouping.value == 'all'"
+                disableOvarlays
+                class="timeline-single-no-border-bottom"
+                type="CALENDAR"
+                minZoom="day"
+                maxZoom="month"
+                [(customExtent)]="customExtent.value"
+                [(period)]="calendarPeriod.value"
+                (selectedChange)="
+                    $event ? allCoursesCalendar.clearSelectionAndOverlays() : 0;
+                    $event ? root.detailsDialog($event,'courses.course',{}) : 0
+                ">
+                <data-source schema="courses.course" by="[begin_time,end_time]">
+                    <line code="courses.course.calendar"
+                        schema="courses.course"
+                        time="[begin_time,end_time]"
+                        properties="code,name,department,credits,begin_time,end_time,participants,status,status.color"
+                        [attr.condition]="fo.filterCondition"
+                        limit="1000">
+                        <generator source="require('courses/calendar').course"></generator>
+                    </line>
+                </data-source>
+            </timeline>
+
+            <timeline #departmentCalendar
+                *ngIf="calendarGrouping.value == 'department_all' || calendarGrouping.value == 'department_occupied'"
+                disableOvarlays
+                class="timeline-single-no-border-bottom"
+                type="CALENDAR"
+                [dependency]="[calendarGrouping.value]"
+                minZoom="day"
+                maxZoom="month"
+                [(customExtent)]="customExtent.value"
+                [(period)]="calendarPeriod.value"
+                (selectedChange)="
+                    $event ? departmentCalendar.clearSelectionAndOverlays() : 0;
+                    $event ? root.detailsDialog($event,'courses.course',{}) : 0
+                ">
+                <data-source schema="courses.course" by="[begin_time,end_time]">
+                    <partition
+                        by="department"
+                        name@i18n="LABEL_COURSES_DEPARTMENTS"
+                        [attr.autofilter]="
+                            calendarGrouping.value == 'department_occupied' ? true : false
+                        ">
+                        <line code="courses.course.calendar.by_department"
+                            schema="courses.course"
+                            time="[begin_time,end_time]"
+                            properties="code,name,department,credits,begin_time,end_time,participants,status,status.color"
+                            groupProperties="code,name,icon"
+                            groupTemplate="objects/templates/courses/department/calendar-group"
+                            template="objects/templates/courses/course/calendar-item"
+                            [attr.condition]="fo.filterCondition"
+                            limit="1000">
+                            <generator source="require('courses/calendar').courseAndDepartment"></generator>
+                        </line>
+                    </partition>
+                </data-source>
+            </timeline>
+        </div>
+    </div>
+</ng-template>

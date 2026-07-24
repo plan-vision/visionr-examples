@@ -1,0 +1,41 @@
+<!-- @ABSTRACT -->
+
+<ng-template #templateCourseWorkingSet
+    let-filter="filter"
+    let-filterSchema="filterSchema"
+    let-filterState="filterState">
+
+    <div class="absolute-fill" fxLayout="column">
+        <include shared ref="/pages/main/includes/courses/dashboard/shared/filter-header"></include>
+
+        <div style="text-align:center;color:rgba(0,0,0,0.5);font-size:16px;margin-top:8px">
+            {{root.i18n('LABEL_COURSES_COURSES')}}
+        </div>
+
+        <div fxFlex style="position:relative;margin-top:-26px">
+            <objectsview
+                embed
+                [menu]="false"
+                title=""
+                schema="courses.course"
+                [sidenavOpen]="false"
+                [where]="fo.filterCondition"
+                [queryParams]="fo.queryParams"
+                [dependency]="fo"
+                orderBy="begin_time"
+                type="table"
+                [disableFullscreen]="true"
+                [summary]="false"
+                [newEnabled]="false"
+                [deleteEnabled]="false"
+                [editEnabled]="false"
+                [detailsEnabled]="true"
+                [executeEnabled]="false"
+                [reportEnabled]="false"
+                [exportEnabled]="false"
+                [printEnabled]="false"
+                [views]="['table','list']">
+            </objectsview>
+        </div>
+    </div>
+</ng-template>

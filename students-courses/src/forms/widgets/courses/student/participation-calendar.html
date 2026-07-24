@@ -1,0 +1,50 @@
+<variable #object export></variable>
+<variable #component export></variable>
+<variable #viewParams export></variable>
+<variable #mediaSize export></variable>
+
+<instance #student
+    [source]="object"
+    properties="code,name,courses">
+</instance>
+
+<variable #customExtent persist></variable>
+<variable #calendarPeriod persist
+    [defaults]="{value:'user_defined'}">
+</variable>
+
+<div *ngIf="student.ready" style="margin:0 4px">
+    <div style="margin-bottom:10px;color:rgba(0,0,0,0.35)">
+        {{root.i18n('LABEL_COURSES_PARTICIPATION_CALENDAR')}}
+    </div>
+
+    <timeline #participationCalendar
+        disableOvarlays
+        autoHeight
+        hideGroups
+        [emptyGroupMinHeight]="64"
+        class="timeline-single-no-border-bottom"
+        type="CALENDAR"
+        minZoom="day"
+        maxZoom="month"
+        [(customExtent)]="customExtent.value"
+        [(period)]="calendarPeriod.value"
+        (selectedChange)="
+            $event ? participationCalendar.clearSelectionAndOverlays() : 0;
+            $event ? root.detailsDialog($event,'courses.course',{}) : 0
+        ">
+        <data-source schema="courses.course" by="[begin_time,end_time]">
+            <line code="courses.student.participation_calendar"
+                schema="courses.course"
+                time="[begin_time,end_time]"
+                condition="id IN (SELECT courses.id FROM courses.student WHERE id = {{object.value.id}})"
+                properties="code,name,department,credits,begin_time,end_time,participants,status,status.color"
+                template="objects/templates/courses/course/calendar-item"
+                limit="1000">
+                <generator source="require('courses/calendar').course"></generator>
+            </line>
+        </data-source>
+    </timeline>
+</div>
+
+<variable #ready export [value]="student.ready"></variable>

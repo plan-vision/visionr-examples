@@ -1,0 +1,47 @@
+<ng-template #template export
+    let-group="group"
+    let-name="name"
+    let-dynamic="dynamic"
+    let-schema="schema">
+    <div
+        (click)="group.object ? root.detailsDialog(group.object) : 0"
+        style="
+            height:100%;
+            width:100%;
+            box-sizing:border-box;
+            overflow:hidden;
+            cursor:pointer;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:flex-start;
+            text-align:center">
+        <div
+            [matTooltip]="group.NAME || name"
+            style="
+            flex:0 0 auto;
+            width:100%;
+            padding:3px 4px;
+            box-sizing:border-box;
+            font-size:11px;
+            line-height:14px;
+            overflow:hidden">
+            <div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
+                {{group.CODE}}
+            </div>
+            <div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
+                {{group.NAME || name}}
+            </div>
+        </div>
+        <img
+            [src]="group.ICON"
+            style="
+                display:block;
+                flex:0 0 64px;
+                width:64px;
+                height:64px;
+                margin-top:-2px;
+                margin-bottom:4px;
+                object-fit:cover">
+    </div>
+</ng-template>

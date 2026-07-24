@@ -1,0 +1,38 @@
+<!-- @ABSTRACT -->
+
+<ng-template #templateDepartmentDistribution
+    let-filter="filter"
+    let-filterSchema="filterSchema"
+    let-filterState="filterState">
+
+    <div class="absolute-fill" fxLayout="column">
+        <include shared ref="/pages/main/includes/courses/dashboard/shared/filter-header"></include>
+
+        <remote #data
+            [dependency]="fo"
+            require="courses/reports"
+            api="getDepartmentDistribution"
+            [args]="[fo.filterCondition,fo.queryParams]">
+        </remote>
+
+        <div style="text-align:center;color:rgba(0,0,0,0.5);font-size:16px;margin-top:8px">
+            {{root.i18n('LABEL_COURSES_COURSES_BY_DEPARTMENT')}}
+        </div>
+
+        <div fxFlex style="position:relative;margin-bottom:8px">
+            <barchart-vertical
+                *ngIf="data.value"
+                [results]="data.value.rows"
+                [customColors]="data.value.colors"
+                (select)="$event.extra?.object ? root.detailsDialog($event.extra.object) : 0"
+                [showGridLines]="true"
+                [xAxis]="true"
+                [yAxis]="true"
+                [legend]="false"
+                [barPadding]="5"
+                [roundEdges]="false"
+                [yAxisTickFormatting]="root.app.format.formatDouble2">
+            </barchart-vertical>
+        </div>
+    </div>
+</ng-template>

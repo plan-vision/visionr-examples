@@ -57,7 +57,7 @@ Current example areas:
 | `helloworld` | runnable project for model/forms/server/API basics, public and restricted pages, and service/export examples |
 | `helloworld/portable` | minimal portable/runtime configuration exported from `helloworld` |
 | `infradash` | runnable multi-schema infrastructure dashboard with relations, initial data, i18n, generated data, docs, and a main page |
-| `students-courses` | prompt-only starter/reference for generating a student/course demo project |
+| `students-courses` | runnable student/course management project with nested departments, dashboards, calendars, i18n, seed data, and source-backed icons |
 
 Use project npm scripts when they exist and match the task, for example
 `npm run build`, `npm run import`, `npm run start`, or `npm run update`.
@@ -81,8 +81,9 @@ Prompt-only starters are intentionally different. A directory with a
 `PROMPT.txt` but no `visionr.json` is not a runnable VisionR project yet. Treat
 it as an optional empty project request: the user can enter that directory,
 paste the contents of `PROMPT.txt` to the agent, and ask the agent to build the
-project there. `students-courses` is the current successful tested example of
-this workflow.
+project there. A runnable project may retain its original `PROMPT.txt` as
+generation provenance; the presence of that file alone does not make it a
+prompt-only starter when `visionr.json` is also present.
 
 ## Example Work Rules
 

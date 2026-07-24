@@ -14,7 +14,7 @@ directory that contains `visionr.json`.
 | `helloworld` | runnable project | Minimal demo for model, forms, public/restricted pages, server-side code, REST service configuration, and system export basics. |
 | `helloworld/portable` | runnable project | Small portable configuration connected to the `helloworld` export workflow. |
 | `infradash` | runnable project | Infrastructure dashboard with multiple schemas, relations, i18n, initial data, generated incident data, docs, and a main UI page. |
-| `students-courses` | prompt-only starter | Empty starter with `PROMPT.txt`; paste that prompt to the agent from inside the directory to generate a project. This workflow has already been tested successfully. |
+| `students-courses` | runnable project | Student/course management demo with nested departments, a six-month calendar dataset, dashboards, full English/German i18n, and source-backed department icons. Its original `PROMPT.txt` is retained as generation provenance. |
 | `project-catalog.json` | catalog metadata | Release catalog entries for published runnable examples. |
 
 Runnable project directories usually contain:
@@ -76,21 +76,39 @@ npm run import
 npm run start
 ```
 
+### students-courses
+
+`students-courses` demonstrates a larger generated project using the `courses`
+module. It includes students, courses, statuses, nested departments, hierarchy
+navigation, dashboards, calendars, source-backed record icons, English/German
+i18n, expanded sample data, and a `verify-project` task.
+
+Typical commands:
+
+```console
+cd students-courses
+npm run build
+npm run import
+vr run verify-project
+npm run start
+```
+
 ## Prompt-Only Starters
 
 A directory with `PROMPT.txt` and no `visionr.json` is an optional empty
 project starter. It is not buildable yet.
 
-The intended workflow is:
+The intended workflow for such a starter is:
 
 ```console
-cd students-courses
+cd <prompt-only-directory>
 # paste PROMPT.txt to the agent and ask it to build the project here
 ```
 
 The agent should then create the normal VisionR project structure in that
 directory, add source files, and verify the result with build/import/task
-commands. `students-courses` is the current tested example of this pattern.
+commands. The runnable `students-courses` project retains its original
+`PROMPT.txt` as an example of the request that produced it.
 
 ## Root Scripts
 

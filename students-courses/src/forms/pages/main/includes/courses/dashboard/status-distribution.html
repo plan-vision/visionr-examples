@@ -1,0 +1,31 @@
+<!-- @ABSTRACT -->
+
+<ng-template #templateStatusDistribution
+    let-filter="filter"
+    let-filterSchema="filterSchema"
+    let-filterState="filterState">
+
+    <div class="absolute-fill" fxLayout="column">
+        <include shared ref="/pages/main/includes/courses/dashboard/shared/filter-header"></include>
+
+        <remote #data
+            [dependency]="fo"
+            require="courses/reports"
+            api="getStatusDistribution"
+            [args]="[fo.filterCondition,fo.queryParams]">
+        </remote>
+
+        <div style="text-align:center;color:rgba(0,0,0,0.5);font-size:16px;margin-top:8px">
+            {{root.i18n('LABEL_COURSES_COURSE_STATUS')}} &middot;
+            {{data.value?.count || 0}} {{root.i18n('LABEL_COURSES_COURSES')}}
+        </div>
+
+        <div fxFlex style="position:relative">
+            <piechart class="absolute-fill"
+                *ngIf="data.value?.pie"
+                [data]="data.value.pie"
+                (select)="$event.object ? root.detailsDialog($event.object) : 0">
+            </piechart>
+        </div>
+    </div>
+</ng-template>

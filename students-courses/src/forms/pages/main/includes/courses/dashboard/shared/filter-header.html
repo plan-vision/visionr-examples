@@ -1,0 +1,38 @@
+<!-- @ABSTRACT -->
+
+<div class="user-select-none mat-elevation-z1"
+    fxLayout="row wrap"
+    [fxHide]="!fo.ready">
+    <div fxFlex></div>
+
+    <filter-outlet #fo
+        style="display:contents"
+        paramPrefix="DASHBOARD_"
+        [def]="filter"
+        [schema]="filterSchema"
+        (onInit)="fo.state=root.clone(filterState,true)"
+        [preview]="true"
+        mode="dashboard">
+    </filter-outlet>
+
+    <variable #filterStateValue [value]="filterState">
+        <observe
+            [event]="filterStateValue.valueChange"
+            (dispatch)="fo.state=root.clone(filterState,true)">
+        </observe>
+    </variable>
+
+    <div fxFlex></div>
+    <div fxLayout="row" style="margin-left:-56px">
+        <mat-icon matRipple
+            style="color:rgba(0,0,0,0.3);cursor:pointer;font-size:20px;width:20px;height:20px;padding:4px"
+            [matTooltip]="root.i18n('INFO_REFRESH')"
+            [matTooltipShowDelay]="500"
+            (click)="fo.updateFilter()">refresh</mat-icon>
+        <mat-icon matRipple
+            style="color:rgba(0,0,0,0.3);cursor:pointer;font-size:20px;width:20px;height:20px;padding:4px"
+            [matTooltip]="root.i18n('LABEL_SETTINGS')"
+            [matTooltipShowDelay]="500"
+            (click)="fo.openPopup()">settings</mat-icon>
+    </div>
+</div>
