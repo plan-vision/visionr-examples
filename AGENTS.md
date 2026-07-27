@@ -40,15 +40,23 @@ it.
 
 ## Examples Repository Defaults
 
-The repository root is not a VisionR application project. Work from an example
-project directory that contains `visionr.json`, such as:
+This repository is a collection of separate VisionR projects. The repository
+root is not itself a VisionR application and is not the place to run project
+compile, import, development-server, or agent-runner commands.
+
+Choose exactly one example directory containing `visionr.json` and use it as
+the working directory for the whole project operation:
 
 ```console
 cd helloworld
-vrs compile
-vrs import
-vrs start -devel
+npm run devel
 ```
+
+Do not treat sibling examples as modules of one application. Each runnable
+example has its own `visionr.json`, npm scripts, database, generated state,
+logs, uploads, server lifecycle, and project-local agent-runner state. Before
+running any npm, `vrs`, or `vr run` command, confirm the current directory and
+read that project's `package.json` plus any nested `AGENTS.md`.
 
 Current example areas:
 
@@ -59,8 +67,91 @@ Current example areas:
 | `infradash` | runnable multi-schema infrastructure dashboard with relations, initial data, i18n, generated data, docs, and a main page |
 | `students-courses` | runnable student/course management project with nested departments, dashboards, calendars, i18n, seed data, and source-backed icons |
 
-Use project npm scripts when they exist and match the task, for example
-`npm run build`, `npm run import`, `npm run start`, or `npm run update`.
+For normal work on examples, development is the priority. Prefer the selected
+project's development scripts and live server over production builds or release
+packaging.
+
+## Development Workflow
+
+Run these commands from the selected example project, never from the repository
+root.
+
+For manual live development:
+
+```console
+npm run devel
+```
+
+This starts that project in development mode and normally remains attached to
+the terminal. Keep it running while editing backend JavaScript and Forms
+sources that development mode reloads. Use `npm run start` only when its
+project-specific extra options are wanted; inspect `package.json` because
+`start` and `devel` need not be identical.
+
+For a project-local agent-managed live server:
+
+```console
+vrs agent status
+vrs agent start
+```
+
+The local agent runner owns one server for the current project. It is not the
+AI agent and it is not repository-wide. Use it when the development session
+needs persistent server lifecycle, logs, or backend evaluation. Do not also
+start `npm run devel` for the same project.
+
+Apply model/schema changes through the current project's development update
+script:
+
+```console
+npm run update:devel
+```
+
+The exact implementation differs by example. Always inspect the script rather
+than replacing it with an assumed command. For example,
+`students-courses` uses the model schema-development compile/import workflow,
+while older examples currently use their own development compile/import
+wrapper.
+
+Some projects may provide:
+
+```console
+npm run reset:devel
+```
+
+This is not a routine refresh. It can drop or replace the local project
+database before rebuilding the development schema. Only use it when the script
+exists and the user explicitly wants a disposable development reset after
+being told what data will be lost. At present, do not assume this script exists
+outside `students-courses`.
+
+### Switching Between Example Projects
+
+Project commands and agent-runner commands resolve their project from the
+current directory. When moving to a sibling example, stop the current
+project-owned server before changing directories:
+
+```console
+# Run in the old project directory
+vrs agent status
+vrs agent stop
+
+cd ..\students-courses
+
+# Run in the new project directory
+vrs agent status
+vrs agent start
+```
+
+If the old project was started manually with `npm run devel`, stop that
+foreground process in its terminal before switching. Do not issue
+`vrs agent stop` from the new project and expect it to stop the old project:
+agent state is project-local. Do not use `vrs kill all` for ordinary switching.
+
+After switching, re-read the new project's `package.json`, nested
+`AGENTS.md`, `visionr.json`, and agent status. Never reuse assumptions about
+ports, scripts, schema-development mode, database state, or running processes
+from the previous example.
 
 ## Directory Structure
 
@@ -95,18 +186,22 @@ prompt-only starter when `visionr.json` is also present.
 - Prefer the model API under `src/model` for new schemas, i18n, initial data,
   server APIs, and generated form defaults.
 - Add or update form pages only when the example goal includes a visible UI.
-- Verify meaningful changes with the narrowest useful command, usually
-  `vrs compile`, `vrs import`, and a project task through `vr run <task>`.
+- Prefer live development and the project's `npm run update:devel` workflow.
+  Verify meaningful changes with the narrowest useful project task through
+  `vr run <task>` or the running local agent before broad stable
+  compile/import checks.
 - Do not edit generated/runtime folders by hand: `target`, `data`, `work`,
   `log`, or `upload`.
 - Do not run release/upload scripts unless the user explicitly asks for release
   work.
 - Do not commit unless the user explicitly asks for a commit.
 
-## Repository Release Scripts
+## Production And Release Work
 
-Root `package.json` scripts are for packaging and publishing examples, not for
-normal project development:
+Production builds and releases are exceptional repository-maintenance tasks,
+not the default way to develop or verify examples. Root `package.json` scripts
+package or publish the example collection and must not be used as a substitute
+for working inside one example:
 
 ```console
 npm run build:generated

@@ -2,7 +2,7 @@
     "name": "helloworld-portable",
     "version": "0.0.1",
     "scripts": {
-        "clean:temp": "vrs clean work target log -force",
+        "clean:temp": "vrs clean work target log",
         "start": "vrs start -devel -nodejs",
         "prod": "vrs start -nodejs"
     },
