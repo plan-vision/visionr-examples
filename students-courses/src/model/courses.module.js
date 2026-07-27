@@ -13,3 +13,4 @@ vr.defineModule("courses", {
 
 require("./data/department-icons.data");
 require("./data/academics.data");
+require("./data/course-report.data");

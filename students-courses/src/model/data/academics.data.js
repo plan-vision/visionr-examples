@@ -107,6 +107,10 @@ define("courses.course", "ADM-301", {
         "en-US": "Applied Data Modeling",
         "de-DE": "Angewandte Datenmodellierung"
     },
+    description: {
+        "en-US": "Practical relational and analytical data modeling.",
+        "de-DE": "Praktische relationale und analytische Datenmodellierung."
+    },
     department: ref("courses.department", "DS"),
     status: ref("courses.course_status", "completed"),
     credits: 6,
@@ -268,6 +272,10 @@ define("courses.course", "AI-401", {
     name: {
         "en-US": "Introduction to Artificial Intelligence",
         "de-DE": "Einführung in die Künstliche Intelligenz"
+    },
+    description: {
+        "en-US": "Foundations of intelligent agents and machine learning.",
+        "de-DE": "Grundlagen intelligenter Agenten und maschinellen Lernens."
     },
     department: ref("courses.department", "AI"),
     status: ref("courses.course_status", "planned"),
