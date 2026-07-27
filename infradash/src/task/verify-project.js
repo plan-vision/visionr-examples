@@ -23,6 +23,20 @@ try {
             primaryCity: String(
                 database.colocation.byCode("AMS1").city
             ),
+            importCodes: [
+                "infra.001.cities.europa",
+                "infra.002.data-centers",
+                "infra.003.rack",
+                "infra.004.component",
+                "infra.005.server-assets"
+            ].filter(function(code) {
+                const dataImport = db.core.data_import_xls.byCode(code);
+                return dataImport &&
+                    dataImport.status.code === "active" &&
+                    dataImport.data_file.extension.code === "XLSX" &&
+                    String(dataImport.template).indexOf('mode="lookup"') >= 0 &&
+                    String(dataImport.template).indexOf('cond="code=') >= 0;
+            }).join(","),
             rackCount: database.rack.COUNT(),
             serverCount: database.server.COUNT(),
             componentCount: database.component.COUNT(),
@@ -55,6 +69,13 @@ try {
         cityCount: 2,
         amsterdamCountry: "NL",
         primaryCity: "Amsterdam",
+        importCodes: [
+            "infra.001.cities.europa",
+            "infra.002.data-centers",
+            "infra.003.rack",
+            "infra.004.component",
+            "infra.005.server-assets"
+        ].join(","),
         rackCount: 3,
         serverCount: 5,
         componentCount: 4,

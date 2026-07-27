@@ -42,6 +42,7 @@
             ".gitignore",
             "AGENTS.md",
             "src",
+            "share/documents",
             "share/public",
             "target/client",
             "target/forms",

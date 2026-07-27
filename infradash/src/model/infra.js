@@ -23,6 +23,7 @@ vr.defineModule('infra',{
 });
 
 require("./data/infrastructure.data");
+require("./data/infrastructure-imports.data");
 
 
 /* 
