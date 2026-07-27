@@ -48,8 +48,8 @@ vr.defineObject({
     code: "courses.course-participants",
     values: {
         name: {
-            "en-US": "Course participants",
-            "de-DE": "Kursteilnehmer"
+            "en-US": "Course participants (XLSX)",
+            "de-DE": "Kursteilnehmer (XLSX)"
         },
         description: {
             "en-US": "Course participant list for the selected courses.",
