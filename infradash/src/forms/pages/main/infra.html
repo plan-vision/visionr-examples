@@ -1,92 +1,91 @@
-
-<!-- @ICON folder_managed --> 
-
+<!-- @ICON domain -->
 <!-- NAME@en-US Infrastructure -->
 <!-- NAME@de-DE Infrastruktur -->
-<!-- NAME@bg-BG Инфраструктура -->
 <!-- NAME@fr-FR Infrastructure -->
-
+<!-- NAME@bg-BG Инфраструктура -->
+<!-- DESCRIPTION@en-US Data-center inventory, service hosting, and incident operations -->
+<!-- DESCRIPTION@de-DE Rechenzentrumsinventar, Service-Hosting und Störungsbetrieb -->
+<!-- DESCRIPTION@fr-FR Inventaire des centres de données, hébergement et incidents -->
+<!-- DESCRIPTION@bg-BG Инвентар, хостинг на услуги и управление на инциденти -->
 <!-- @ORDER 1000 -->
-  
-<variable #name value="Test"></variable>
+
+<variable #name value@i18n="LABEL_INFRA_PAGE"></variable>
 <variable #pagedef [value]="{
-	categories : [
-		{
-			code : 'overview',
-			name : 'Overview',
-		},	
-		{
-			code : 'settings',
-			name : root.i18n('LABEL_SETTINGS'),
-			expanded : false
-		}	
-	],
-	entries : [
-		{
-			code : 'colocation',
-			type : 'schema',
-			schema : 'infra.colocation',
-			category : 'overview',
-			hierarchy : 'infra.colocation:infra.colocation',
-			filter : {
-				status: true
-			}
-		},
-		{
-			code : 'server',
-			type : 'schema',
-			schema : 'infra.server',
-			category : 'overview',
-			hierarchy : 'infra.server:infra.colocation.racks.servers',
-			filter : {
-				status: true
-			}
-		},
-		{
-			code : 'rack',
-			type : 'schema',
-			schema : 'infra.rack',
-			category : 'overview',
-			hierarchy : 'infra.rack:infra.colocation.racks',
-			filter : {
-				status: true
-			}
-		},
-		{
-			code : 'service',
-			type : 'schema',
-			schema : 'infra.service',
-			category : 'overview',
-			hierarchy : 'infra.service:infra.colocation.racks.servers.services',
-			filter : {
-				status: true
-			}
-		},
-		{
-			code : 'incident',
-			type : 'schema',
-			schema : 'infra.incident',
-			category : 'overview',
-			hierarchy : 'infra.incident:infra.colocation.servers.incidents',
-			filter : {
-				status: true
-			}
-		},
-		{
-			code : 'component',
-			type : 'schema',
-			schema : 'infra.component',
-			category : 'overview',
-			filter : {
-				status: true
-			}
-		},
-		{
-			type : 'settings',
-			category : 'settings',
-			module : 'infra'
-		}	
-	]
+    defaultEntry: 'incidents',
+    categories: [
+        {code:'operations', name:root.i18n('LABEL_INFRA_OPERATIONS')},
+        {code:'inventory', name:root.i18n('LABEL_INFRA_INVENTORY')},
+        {code:'catalog', name:root.i18n('LABEL_INFRA_CATALOG'), expanded:false}
+    ],
+    entries: [
+        {
+            code:'incidents',
+            type:'schema',
+            schema:'infra.incident',
+            category:'operations',
+            icon:'warning',
+            hierarchy:'infra.incident_impact',
+            filter:{status:true,severity:true,server:true,service:true,reported_at:true}
+        },
+        {
+            code:'services',
+            type:'schema',
+            schema:'infra.service',
+            category:'operations',
+            icon:'cloud',
+            hierarchy:'infra.service_hosting',
+            filter:{status:true,criticality:true,owner_team:true}
+        },
+        {
+            code:'servers',
+            type:'schema',
+            schema:'infra.server',
+            category:'inventory',
+            icon:'dns',
+            hierarchy:'infra.physical_inventory',
+            filter:{status:true,environment:true,device_model:true,rack:true,asset_tag:true}
+        },
+        {
+            code:'components',
+            type:'schema',
+            schema:'infra.component',
+            category:'inventory',
+            icon:'memory',
+            hierarchy:'infra.physical_components',
+            filter:{status:true,component_type:true,server:true}
+        },
+        {
+            code:'racks',
+            type:'schema',
+            schema:'infra.rack',
+            category:'inventory',
+            icon:'dns',
+            filter:{status:true,colocation:true,row:true}
+        },
+        {
+            code:'data_centers',
+            type:'schema',
+            schema:'infra.colocation',
+            category:'inventory',
+            icon:'domain',
+            filter:{status:true,country:true,city:true}
+        },
+        {
+            code:'device_models',
+            type:'schema',
+            schema:'infra.device_model',
+            category:'catalog',
+            icon:'developer_board',
+            filter:{vendor:true,model_number:true}
+        },
+        {
+            code:'vendors',
+            type:'schema',
+            schema:'infra.vendor',
+            category:'catalog',
+            icon:'factory'
+        }
+    ]
 }"></variable>
 
 <include shared ref="/widgets/model/page/common-main"></include>

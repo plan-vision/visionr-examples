@@ -8,8 +8,21 @@
     "logging": {
         "level": "info"
     },
+    "scripting": {
+        "srcDirs": [
+            "src/srv"
+        ]
+    },
     "server": {
-        "engine": "native",
+        "chromeDebugPort": 0,
+        "http": {
+            "enabled": true,
+            "port": 8585
+        },
+        "https": {
+            "enabled": false,
+            "port": 8449
+        },
         "devel": false,
         "registration": {
             "enabled": false
@@ -21,11 +34,13 @@
         "formsDir": "src/forms",
         "model": "src/model/index.js",	
 		"module" : "infra",
-        "loader": "src/srv/loader.js"
+        "loader": "src/srv/loader.js",
+        "sourceCode": true
     },
     "project": {
         "files": [
             ".gitignore",
+            "AGENTS.md",
             "src",
             "share/public",
             "target/client",

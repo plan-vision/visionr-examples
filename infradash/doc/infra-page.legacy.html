@@ -1,0 +1,92 @@
+
+<!-- Legacy page retained as migration reference. -->
+
+<!-- NAME@en-US Infrastructure -->
+<!-- NAME@de-DE Infrastruktur -->
+<!-- NAME@bg-BG Инфраструктура -->
+<!-- NAME@fr-FR Infrastructure -->
+
+<!-- @ORDER 1000 -->
+  
+<variable #name value="Test"></variable>
+<variable #pagedef [value]="{
+	categories : [
+		{
+			code : 'overview',
+			name : 'Overview',
+		},	
+		{
+			code : 'settings',
+			name : root.i18n('LABEL_SETTINGS'),
+			expanded : false
+		}	
+	],
+	entries : [
+		{
+			code : 'colocation',
+			type : 'schema',
+			schema : 'infra.colocation',
+			category : 'overview',
+			hierarchy : 'infra.colocation:infra.colocation',
+			filter : {
+				status: true
+			}
+		},
+		{
+			code : 'server',
+			type : 'schema',
+			schema : 'infra.server',
+			category : 'overview',
+			hierarchy : 'infra.server:infra.colocation.racks.servers',
+			filter : {
+				status: true
+			}
+		},
+		{
+			code : 'rack',
+			type : 'schema',
+			schema : 'infra.rack',
+			category : 'overview',
+			hierarchy : 'infra.rack:infra.colocation.racks',
+			filter : {
+				status: true
+			}
+		},
+		{
+			code : 'service',
+			type : 'schema',
+			schema : 'infra.service',
+			category : 'overview',
+			hierarchy : 'infra.service:infra.colocation.racks.servers.services',
+			filter : {
+				status: true
+			}
+		},
+		{
+			code : 'incident',
+			type : 'schema',
+			schema : 'infra.incident',
+			category : 'overview',
+			hierarchy : 'infra.incident:infra.colocation.servers.incidents',
+			filter : {
+				status: true
+			}
+		},
+		{
+			code : 'component',
+			type : 'schema',
+			schema : 'infra.component',
+			category : 'overview',
+			filter : {
+				status: true
+			}
+		},
+		{
+			type : 'settings',
+			category : 'settings',
+			module : 'infra'
+		}	
+	]
+}"></variable>
+
+<include shared ref="/widgets/model/page/common-main"></include>

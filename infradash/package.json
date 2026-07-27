@@ -26,6 +26,9 @@
         "release": "npm run build:release && npm run upload:release",
         "release:full": "npm run build:release && npm run compile:demo.installer && npm run upload:release"
     },
+    "tasks": {
+        "verify-project": "./src/task/verify-project.js"
+    },
     "author": "Plan-Vision",
     "license": "ISC",
     "description": "Simple infrastructure dashboard",

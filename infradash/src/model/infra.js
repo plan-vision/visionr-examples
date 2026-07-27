@@ -1,26 +1,28 @@
 /* define i18n messages */
 vr.defineI18n(require('./infra.i18n.json'));
+vr.defineI18n(require("./infra.model.i18n.json"));
 
 /* define module */
 vr.defineModule('infra',{
 	//sortId : 1000
 	alias : 'infra',
 	objectdefs : {
-		component: require("./schema/component"),
-		colocation: require("./schema/colocation"), 
-		incident: require("./schema/incident"),
-		server: require("./schema/server"), 
-		rack: require("./schema/rack"),
-		service: require("./schema/service"),
+		colocation: require("./schema/colocation.model"),
+		rack: require("./schema/rack.model"),
+		vendor: require("./schema/vendor.model"),
+		device_model: require("./schema/device_model.model"),
+		lifecycle_status: require("./schema/lifecycle_status.model"),
+		incident_status: require("./schema/incident_status.model"),
+		impact_level: require("./schema/impact_level.model"),
+		server: require("./schema/server.model"),
+		component: require("./schema/component.model"),
+		service: require("./schema/service.model"),
+		incident: require("./schema/incident.model"),
 	},
 	version : '1.2'
 });
 
-require("./data/colocation.data");
-require("./data/rack.data");
-require("./data/server.data");
-require("./data/service.data");
-require("./data/incident.data");
+require("./data/infrastructure.data");
 
 
 /* 

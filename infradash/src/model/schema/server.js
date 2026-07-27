@@ -12,7 +12,10 @@ module.exports = {
 			},
 			code: 'infra.colocation.racks.servers',
 			path: 'infra.colocation.racks.servers',
-			showElementCount: true,
+			count: true,
+			visibleWithLeaf: false,
+			leafs: false,
+			defaultRecursive: false,
 			// defaultRecursive: true,
 			// expandInitialDepth: 4,
 			// showLeafs: true

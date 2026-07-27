@@ -12,7 +12,10 @@ module.exports = {
             },
             code: 'infra.colocation.racks.servers.incidents',
             path: 'infra.colocation.racks.servers.incidents',
-            showElementCount: true,
+            count: true,
+            visibleWithLeaf: false,
+            leafs: false,
+            defaultRecursive: false,
         },
     ],
 	properties: {
