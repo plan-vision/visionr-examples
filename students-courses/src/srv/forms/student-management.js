@@ -16,7 +16,11 @@ forms.define({
             count: true,
             leafs: true,
             expandInitialDepth: 3,
-            schemaSet: ["courses.department"]
+            schemaSet: ["courses.department"],
+            setupNew: {
+                remote: "courses/hierarchy.remote",
+                api: "setupNewDepartment"
+            }
         }],
         orderBy: "name"
     },
@@ -73,7 +77,11 @@ forms.define({
             nameI18n: "LABEL_COURSES_COURSES_BY_DEPARTMENT",
             count: true,
             expandInitialDepth: 3,
-            schemaSet: ["courses.department", "courses.course"]
+            schemaSet: ["courses.department", "courses.course"],
+            setupNew: {
+                remote: "courses/hierarchy.remote",
+                api: "setupNewCourseHierarchy"
+            }
         }],
         orderBy: "name"
     }

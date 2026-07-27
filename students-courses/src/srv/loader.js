@@ -1,2 +1,2 @@
-// Project server loader and CommonJS root.
+// Forms-definition loader; its module code also identifies the CommonJS root.
 require("./forms/index");

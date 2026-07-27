@@ -9,7 +9,11 @@ module.exports = {
             },
             status: {
                 template: "relation.obligatory",
-                related: "courses.course_status"
+                related: "courses.course_status",
+                default: {
+                    SCHEMA: "courses.course_status",
+                    code: "in_progress"
+                }
             },
             credits: "integer.obligatory",
             begin_time: {
