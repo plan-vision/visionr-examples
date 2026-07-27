@@ -98,6 +98,43 @@ exports.getDepartmentDistribution = function(condition, queryParams) {
     };
 };
 
+exports.getDepartmentChartRows = function(selection) {
+    const objects = selection == null
+        ? []
+        : (Array.isArray(selection) ? selection : Array.from(selection));
+    const departments = objects.filter(function(object) {
+        return object instanceof db.courses.department;
+    });
+    const courses = objects.filter(function(object) {
+        return object instanceof db.courses.course;
+    });
+    const params = {};
+    let condition = null;
+
+    if (departments.length) {
+        const placeholders = departments.map(function(department, index) {
+            const key = "DEPARTMENT_" + index;
+            params[key] = department.id;
+            return ":" + key;
+        });
+        condition = "department.id IN (" + placeholders.join(",") + ")";
+    } else if (courses.length) {
+        const placeholders = courses.map(function(course, index) {
+            const key = "COURSE_" + index;
+            params[key] = course.id;
+            return ":" + key;
+        });
+        condition = "id IN (" + placeholders.join(",") + ")";
+    }
+
+    return exports.getDepartmentDistribution(condition, params).rows.map(function(row) {
+        return {
+            name: row.name,
+            count: row.value
+        };
+    });
+};
+
 exports.getParticipantLoad = function(condition, queryParams) {
     const rows = db.courses.course.VSQL({
         select: "id,COUNT(participants.id)",

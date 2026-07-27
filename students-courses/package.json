@@ -8,6 +8,7 @@
         "reset:devel": "vrs db drop -emptydb && npm run update:devel",
         "build": "vrs compile",
         "build:course-report-template": "node tools/generate-course-template.js",
+        "build:department-chart-template": "node tools/generate-department-chart-template.js",
         "build:devel": "vrs compile model -schemadevel",
         "build:generated": "npm run generate:changelog",
         "build:full.clean": "npm run clean:temp && npm run build",
@@ -29,7 +30,9 @@
     },
     "tasks": {
         "verify-project": "./src/task/verify-project.js",
-        "generate-course-report": "./src/task/generate-course-report.js"
+        "generate-course-report": "./src/task/generate-course-report.js",
+        "generate-department-html-report": "./src/task/generate-department-html-report.js",
+        "generate-department-xlsx-report": "./src/task/generate-department-xlsx-report.js"
     },
     "author": "",
     "license": "ISC",
