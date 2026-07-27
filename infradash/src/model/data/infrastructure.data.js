@@ -73,10 +73,29 @@ define("infra.device_model", "HPE-DL380-G11", {
     rack_units: 2
 });
 
+define("library.city", "AMSTERDAM", {
+    name: {
+        "en-US": "Amsterdam",
+        "de-DE": "Amsterdam",
+        "fr-FR": "Amsterdam",
+        "bg-BG": "Амстердам"
+    },
+    country: ref("library.country", "NL")
+});
+define("library.city", "FRANKFURT", {
+    name: {
+        "en-US": "Frankfurt",
+        "de-DE": "Frankfurt",
+        "fr-FR": "Francfort",
+        "bg-BG": "Франкфурт"
+    },
+    country: ref("library.country", "DE")
+});
+
 define("infra.colocation", "AMS1", {
     name: {"en-US": "Amsterdam Primary Data Center", "de-DE": "Primäres Rechenzentrum Amsterdam", "fr-FR": "Centre de données principal d’Amsterdam", "bg-BG": "Основен център за данни Амстердам"},
     country: ref("library.country", "NL"),
-    city: "Amsterdam",
+    city: ref("library.city", "AMSTERDAM"),
     address: "Science Park 100, Amsterdam",
     timezone: "Europe/Amsterdam",
     status: ref("infra.lifecycle_status", "active")
@@ -84,7 +103,7 @@ define("infra.colocation", "AMS1", {
 define("infra.colocation", "FRA1", {
     name: {"en-US": "Frankfurt Recovery Data Center", "de-DE": "Recovery-Rechenzentrum Frankfurt", "fr-FR": "Centre de reprise de Francfort", "bg-BG": "Резервен център за данни Франкфурт"},
     country: ref("library.country", "DE"),
-    city: "Frankfurt",
+    city: ref("library.city", "FRANKFURT"),
     address: "Hanauer Landstrasse 200, Frankfurt",
     timezone: "Europe/Berlin",
     status: ref("infra.lifecycle_status", "active")

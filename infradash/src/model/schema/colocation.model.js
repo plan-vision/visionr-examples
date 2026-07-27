@@ -4,7 +4,7 @@ module.exports = {
         "main.location": {
             code: "code.unique",
             country: {template: "relation.obligatory", related: "library.country"},
-            city: "varchar",
+            city: {template: "relation.obligatory", related: "library.city"},
             address: "text",
             timezone: "varchar",
             status: {

@@ -14,6 +14,15 @@ try {
             vendorCount: database.vendor.COUNT(),
             deviceModelCount: database.device_model.COUNT(),
             dataCenterCount: database.colocation.COUNT(),
+            cityCount: db.library.city.SELECT({
+                where: "code IN ('AMSTERDAM','FRANKFURT')"
+            }).length,
+            amsterdamCountry: String(
+                db.library.city.byCode("AMSTERDAM").country.code
+            ),
+            primaryCity: String(
+                database.colocation.byCode("AMS1").city
+            ),
             rackCount: database.rack.COUNT(),
             serverCount: database.server.COUNT(),
             componentCount: database.component.COUNT(),
@@ -43,6 +52,9 @@ try {
         vendorCount: 2,
         deviceModelCount: 2,
         dataCenterCount: 2,
+        cityCount: 2,
+        amsterdamCountry: "NL",
+        primaryCity: "Amsterdam",
         rackCount: 3,
         serverCount: 5,
         componentCount: 4,
