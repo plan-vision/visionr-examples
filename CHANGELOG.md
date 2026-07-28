@@ -1,5 +1,12 @@
 ## 1.0.0
 
+### release
+| Commit | Timestamp | Type | Description |
+| ------ | --------- | ---- | ----------- |
+| [f11811b](https://github.com/plan-vision/visionr-examples/commit/f11811b7ac357e8ecc3cb5688c68e97ea122fad9) | 2026-07-28 12:07 | fix | point catalog at stable release |
+| [272eaf6](https://github.com/plan-vision/visionr-examples/commit/272eaf6f924ea63b92b192cbf601bc6d83ab2aaa) | 2026-07-28 11:29 | fix | use upload-compatible archive names |
+| [7f014e4](https://github.com/plan-vision/visionr-examples/commit/7f014e4c0759c274c26238276be56dae559425a4) | 2026-07-28 11:23 | fix | generate repository changelog only once |
+
 ### students-courses
 | Commit | Timestamp | Type | Description |
 | ------ | --------- | ---- | ----------- |
@@ -19,12 +26,6 @@
 | [e0e2509](https://github.com/plan-vision/visionr-examples/commit/e0e250930e1b1cf4b6b8041b91a2d68cf2b030d3) | 2026-07-28 11:16 | chore | stop ignoring workflow files |
 | [10759c7](https://github.com/plan-vision/visionr-examples/commit/10759c7b9b0069f0371efe338978f552a6ab051b) | 2026-07-28 11:15 | ci | run Linux builds on Ubuntu 26.04 |
 | [f765081](https://github.com/plan-vision/visionr-examples/commit/f7650812fe15aff592c5cae98aba1be84fc22a8f) | 2026-07-28 10:20 | ci | use Node.js 24 for Linux builds |
-
-### release
-| Commit | Timestamp | Type | Description |
-| ------ | --------- | ---- | ----------- |
-| [272eaf6](https://github.com/plan-vision/visionr-examples/commit/272eaf6f924ea63b92b192cbf601bc6d83ab2aaa) | 2026-07-28 11:29 | fix | use upload-compatible archive names |
-| [7f014e4](https://github.com/plan-vision/visionr-examples/commit/7f014e4c0759c274c26238276be56dae559425a4) | 2026-07-28 11:23 | fix | generate repository changelog only once |
 
 ### examples
 | Commit | Timestamp | Type | Description |
