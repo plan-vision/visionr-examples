@@ -34,7 +34,7 @@ jobs:
         if: steps.cache-visionr.outputs.cache-hit != 'true'
         run: |
           ASSET_URL=$(curl -s https://api.github.com/repos/plan-vision/visionr-engine.binary/releases/latest | grep "browser_download_url" | grep "visionr-engine-NPM-package" | cut -d '"' -f 4)
-          echo "Installing VisionR-Engine globally from source $ASSET_URL ..."
+          echo "Installing VisionR-Engine globally from release npm package $ASSET_URL ..."
           npm install -g "$ASSET_URL"
 
       - name: Compile release and upload to GitHub  
