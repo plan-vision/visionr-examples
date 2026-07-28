@@ -4,8 +4,9 @@
     "scripts": {
         "helloworld:release" : "cd helloworld && npm run release",
         "infradash:release" : "cd infradash && npm run release",
+        "students-courses:release": "cd students-courses && npm run release",
         "build:generated": "vr run @visionr/engine/gen-git-changelog && vr run @visionr/engine/gen-project-catalog",
-        "build:release": "npm run build:generated && npm run helloworld:release && npm run infradash:release",
+        "build:release": "npm run build:generated && npm run helloworld:release && npm run infradash:release && npm run students-courses:release",
         "upload:release" : "vr run @visionr/engine/upl-git-release",
         "release": "npm run build:release && npm run upload:release"
     },

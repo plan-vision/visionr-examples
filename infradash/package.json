@@ -1,6 +1,6 @@
 {
     "name": "infradash",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "scripts": {
         "clean:temp": "vrs clean data work target log",
         "reset:all": "vrs clean data work target log upload && npm run build && npm run import",

@@ -1,20 +1,29 @@
 {
     "helloworld": {
-        "name": "helloworld-0.0.1-release.zip",
-        "ver": "0.0.1",
+        "name": "helloworld-1.0.0-release.zip",
+        "ver": "1.0.0",
         "description": "Hello world public page with second restricted greetings page",
         "icon": "ar_on_you",
-        "releaseURL": "https://github.com/plan-vision/visionr-examples/releases/download/0.0.1-alpha2.1/helloworld-0.0.1-release.zip",
-        "updateURL": "https://github.com/plan-vision/visionr-examples/releases/download/0.0.1-alpha2.1/helloworld-0.0.1-update.zip",
-        "sourceURL": "https://github.com/plan-vision/visionr-examples/releases/download/0.0.1-alpha2.1/helloworld-0.0.1-source.zip"
+        "releaseURL": "https://github.com/plan-vision/visionr-examples/releases/download/0.0.1-alpha2.1/helloworld-1.0.0-release.zip",
+        "updateURL": "https://github.com/plan-vision/visionr-examples/releases/download/0.0.1-alpha2.1/helloworld-1.0.0-update.zip",
+        "sourceURL": "https://github.com/plan-vision/visionr-examples/releases/download/0.0.1-alpha2.1/helloworld-1.0.0-source.zip"
     },
     "infradash": {
-        "name": "infradash-0.0.1-release.zip",
-        "ver": "0.0.1",
+        "name": "infradash-1.0.0-release.zip",
+        "ver": "1.0.0",
         "description": "Simple infrastructure dashboard",
         "icon": "public",
-        "releaseURL": "https://github.com/plan-vision/visionr-examples/releases/download/0.0.1-alpha2.1/infradash-0.0.1-release.zip",
-        "updateURL": "https://github.com/plan-vision/visionr-examples/releases/download/0.0.1-alpha2.1/infradash-0.0.1-update.zip",
-        "sourceURL": "https://github.com/plan-vision/visionr-examples/releases/download/0.0.1-alpha2.1/infradash-0.0.1-source.zip"
+        "releaseURL": "https://github.com/plan-vision/visionr-examples/releases/download/0.0.1-alpha2.1/infradash-1.0.0-release.zip",
+        "updateURL": "https://github.com/plan-vision/visionr-examples/releases/download/0.0.1-alpha2.1/infradash-1.0.0-update.zip",
+        "sourceURL": "https://github.com/plan-vision/visionr-examples/releases/download/0.0.1-alpha2.1/infradash-1.0.0-source.zip"
+    },
+    "students-courses": {
+        "name": "students-courses-1.0.0-release.zip",
+        "ver": "1.0.0",
+        "description": "",
+        "icon": "sdk",
+        "releaseURL": "https://github.com/plan-vision/visionr-examples/releases/download/0.0.1-alpha2.1/students-courses-1.0.0-release.zip",
+        "updateURL": "https://github.com/plan-vision/visionr-examples/releases/download/0.0.1-alpha2.1/students-courses-1.0.0-update.zip",
+        "sourceURL": "https://github.com/plan-vision/visionr-examples/releases/download/0.0.1-alpha2.1/students-courses-1.0.0-source.zip"
     }
 }
