@@ -4,6 +4,8 @@
 /upload/
 /target/
 /.*/
+!/.github/
+!/.github/**
 /node_modules/
 *.log
 /backup/
