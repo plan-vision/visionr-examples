@@ -68,10 +68,12 @@ vr.defineObject({
         },
         format: {
             SCHEMA: "documents.extension",
+            mode: "lookup",
             code: "XLSX"
         },
         output_extension: {
             SCHEMA: "documents.extension",
+            mode: "lookup",
             code: "XLSX"
         },
         data_file: template,

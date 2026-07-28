@@ -263,6 +263,7 @@ vr.defineObject({
         }],
         format: {
             SCHEMA: "documents.extension",
+            mode: "lookup",
             code: "HTML"
         },
         file_encoding: null,
