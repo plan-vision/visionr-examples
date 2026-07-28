@@ -1,6 +1,6 @@
 {
     "name": "visionr-examples",
-    "version": "0.0.1-alpha2.1",
+    "version": "1.0.0",
     "scripts": {
         "helloworld:release" : "cd helloworld && npm run release",
         "infradash:release" : "cd infradash && npm run release",
