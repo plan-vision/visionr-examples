@@ -15,7 +15,7 @@ on:
 jobs:
   build-ubuntu:
     name: Linux (Ubuntu) build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
 
     env:
       VISIONR_VERSION: latest
