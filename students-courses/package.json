@@ -7,8 +7,6 @@
         "reset": "npm run clean:temp && npm run build && npm run import",
         "reset:devel": "vrs db drop -emptydb && npm run update:devel",
         "build": "vrs compile",
-        "build:course-report-template": "node tools/generate-course-template.js",
-        "build:department-chart-template": "node tools/generate-department-chart-template.js",
         "build:devel": "vrs compile model -schemadevel",
         "build:full.clean": "npm run clean:temp && npm run build",
         "update": "vrs compile && vrs import modules",
@@ -34,13 +32,5 @@
     },
     "author": "",
     "license": "ISC",
-    "description": "",
-    "devDependencies": {
-        "exceljs": "^4.4.0"
-    },
-    "overrides": {
-        "archiver": "8.0.0",
-        "brace-expansion": "5.0.8",
-        "uuid": "14.0.1"
-    }
+    "description": ""
 }
