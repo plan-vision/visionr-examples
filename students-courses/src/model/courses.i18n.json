@@ -67,6 +67,30 @@
         "en-US": "Credits",
         "de-DE": "Leistungspunkte"
     },
+    "property:courses.course.delivery_mode": {
+        "en-US": "Delivery mode",
+        "de-DE": "Unterrichtsform"
+    },
+    "property:courses.course.requires_lab": {
+        "en-US": "Requires laboratory",
+        "de-DE": "Benötigt Labor"
+    },
+    "option_set:course_delivery_mode": {
+        "en-US": "Course delivery mode",
+        "de-DE": "Unterrichtsform"
+    },
+    "option:course_delivery_mode.on_campus": {
+        "en-US": "On campus",
+        "de-DE": "Präsenz"
+    },
+    "option:course_delivery_mode.hybrid": {
+        "en-US": "Hybrid",
+        "de-DE": "Hybrid"
+    },
+    "option:course_delivery_mode.online": {
+        "en-US": "Online",
+        "de-DE": "Online"
+    },
     "property:courses.course.begin_time": {
         "en-US": "Begin time",
         "de-DE": "Beginn"

@@ -13,9 +13,14 @@ function departmentIcon(code) {
 
 function define(schema, code, values, propertyModes) {
     if (schema === "courses.course" && values.begin_time) {
-        const courseDate = values.begin_time.slice(0, 10);
-        values.begin_time = courseDate + "T09:00:00.000Z";
-        values.end_time = courseDate + "T19:00:00.000Z";
+        if (values.delivery_mode == null) {
+            values.delivery_mode = /^(AI|DS|STAT)-/.test(code)
+                ? "hybrid"
+                : /^(CS|SE)-/.test(code) ? "online" : "on_campus";
+        }
+        if (values.requires_lab == null) {
+            values.requires_lab = /^(BIO|CHEM|PHYS)-/.test(code);
+        }
     }
 
     vr.defineObject({
@@ -440,6 +445,14 @@ define("courses.course", "DS-410", {
     });
 });
 
+define("courses.student", "STU-021", {
+    name: {
+        "en-US": "Sophie Germain",
+        "de-DE": "Sophie Germain"
+    },
+    email: "sophie@example.edu"
+});
+
 function defineCourse(code, name, nameDe, department, status, credits,
     beginTime, endTime, participants) {
     define("courses.course", code, {
@@ -584,3 +597,15 @@ function defineCourse(code, name, nameDe, department, status, credits,
 ].forEach(function(course) {
     defineCourse.apply(null, course);
 });
+
+defineCourse(
+    "OPEN-000",
+    "Open Research Seminar",
+    "Offenes Forschungsseminar",
+    "CS",
+    "planned",
+    3,
+    "2027-01-11T09:00:00.000Z",
+    "2027-01-11T11:00:00.000Z",
+    []
+);

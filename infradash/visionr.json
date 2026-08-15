@@ -8,6 +8,9 @@
     "logging": {
         "level": "info"
     },
+	"i18n": {
+		"active": "en-US,de-DE,en-GB,bg-BG"
+	},
     "scripting": {
         "srcDirs": [
             "src/srv"
@@ -61,6 +64,67 @@
         "engine": "sqlite"
     },
     "modules": null,
+    "ai": {
+        "enabled": true,
+        "defaultConnection": "chatbot",
+        "connections": {
+            "chatbot": {
+                "enabled": true,
+                "protocol": "openai_chat_completions",
+                "endpoint": "https://openrouter.ai/api/v1",
+                "apiKey": "AES@WpfdA5u4fp00OPLUsFxWV0EAU25IUNLpI0uOo0rUGNGAmApNJa6YQ2u+hEniQaaPivh7GyU9wF7qkcetK0bp52ADiqKW9YvnZaabeHbmT9Fto9hgIYvDK0U",
+                "model": "google/gemma-4-26B-A4B-it",
+                "contextWindowTokens": 262144,
+                "temperature": 0.2,
+                "parallelism": 4,
+                "timeoutSeconds": 120
+            },
+            "qwen-coder-30b-a3b": {
+                "enabled": true,
+                "protocol": "openai_chat_completions",
+                "endpoint": "https://openrouter.ai/api/v1",
+                "apiKey": "AES@WpfdA5u4fp00OPLUsFxWV0EAU25IUNLpI0uOo0rUGNGAmApNJa6YQ2u+hEniQaaPivh7GyU9wF7qkcetK0bp52ADiqKW9YvnZaabeHbmT9Fto9hgIYvDK0U",
+                "model": "qwen/qwen3-coder-30b-a3b-instruct",
+                "contextWindowTokens": 262144,
+                "temperature": 0.2,
+                "parallelism": 4,
+                "timeoutSeconds": 120
+            },
+            "poolside-laguna-s-2.1-free": {
+                "enabled": true,
+                "protocol": "openai_chat_completions",
+                "endpoint": "https://openrouter.ai/api/v1",
+                "apiKey": "AES@WpfdA5u4fp00OPLUsFxWV0EAU25IUNLpI0uOo0rUGNGAmApNJa6YQ2u+hEniQaaPivh7GyU9wF7qkcetK0bp52ADiqKW9YvnZaabeHbmT9Fto9hgIYvDK0U",
+                "model": "poolside/laguna-s-2.1:free",
+                "contextWindowTokens": 262144,
+                "temperature": 0.2,
+                "parallelism": 4,
+                "timeoutSeconds": 120
+            },
+            "deepseek-v4-pro-0813": {
+                "enabled": true,
+                "protocol": "openai_chat_completions",
+                "endpoint": "https://openrouter.ai/api/v1",
+                "apiKey": "AES@WpfdA5u4fp00OPLUsFxWV0EAU25IUNLpI0uOo0rUGNGAmApNJa6YQ2u+hEniQaaPivh7GyU9wF7qkcetK0bp52ADiqKW9YvnZaabeHbmT9Fto9hgIYvDK0U",
+                "model": "deepseek/deepseek-v4-pro-0813",
+                "contextWindowTokens": 1048576,
+                "temperature": 0.2,
+                "parallelism": 4,
+                "timeoutSeconds": 120
+            },
+            "qwen-coder-next": {
+                "enabled": true,
+                "protocol": "openai_chat_completions",
+                "endpoint": "https://openrouter.ai/api/v1",
+                "apiKey": "AES@WpfdA5u4fp00OPLUsFxWV0EAU25IUNLpI0uOo0rUGNGAmApNJa6YQ2u+hEniQaaPivh7GyU9wF7qkcetK0bp52ADiqKW9YvnZaabeHbmT9Fto9hgIYvDK0U",
+                "model": "qwen/qwen3-coder-next",
+                "contextWindowTokens": 262144,
+                "temperature": 0.2,
+                "parallelism": 4,
+                "timeoutSeconds": 120
+            }
+        }
+    },
 	"tasks":
    	{
    		"backup:clone" : {

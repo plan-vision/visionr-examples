@@ -36,6 +36,17 @@ forms.define({
                 }
             }
         },
+        searchAI: function(details) {
+            return {
+                guidance: "This is the student directory. Prefer exact email/code filters and " +
+                    "case-insensitive name containment. Course participation may be combined " +
+                    "with student fields when its reflected path is available. Seeded-data " +
+                    "acceptance examples include: students whose email contains a domain, " +
+                    "students participating in a named course, and names containing a phrase. " +
+                    "The current context exposes " + details.searchAI.properties.length +
+                    " reflected search properties."
+            };
+        },
         orderBy: "name"
     },
     "courses.course_status": {
@@ -51,8 +62,20 @@ forms.define({
         view: "table",
         viewParams: {
             table: {
-                columns: "icon,code,name@300,status,department,credits,begin_time,end_time,participants"
+                columns: "icon,code,name@300,status,department,credits,delivery_mode,requires_lab,begin_time,end_time,participants"
             }
+        },
+        searchAI: function(details) {
+            return {
+                guidance: "This is the seeded course catalog. Interpret status names through " +
+                    "the reflected status relation, department names/codes through department, " +
+                    "credits as a number, delivery mode through its reflected option code, " +
+                    "laboratory requirement as a boolean, and begin/end values as ISO dates or datetimes. " +
+                    "Prefer a direct condition. Seeded-data acceptance examples include: " +
+                    "planned AI-department courses with at least 5 credits, completed courses, " +
+                    "and courses beginning within a requested date range. The current context " +
+                    "exposes " + details.searchAI.properties.length + " reflected search properties."
+            };
         },
         checkConstraints: function(details) {
             const course = details.object;

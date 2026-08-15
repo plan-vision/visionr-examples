@@ -1,0 +1,240 @@
+<!-- @ICON smart_toy -->
+<!-- NAME@en-US AI search evaluation -->
+<!-- NAME@de-DE KI-Suche evaluieren -->
+
+<variable #name [value]="'AI search evaluation'"></variable>
+<variable #corpus></variable>
+<variable #connectionOptions [value]="[]"></variable>
+<variable #connections [value]="[]"></variable>
+<variable #connection></variable>
+<variable #language [value]="'all'"></variable>
+<variable #caseFilter [value]="''"></variable>
+<variable #working [value]="false"></variable>
+<variable #current></variable>
+<variable #progress></variable>
+<variable #results [value]="[]"></variable>
+<variable #summary></variable>
+<variable #error></variable>
+<variable #controller></variable>
+
+<script #score [params]="{corpus:corpus,results:results,summary:summary}">
+    var rows=results.value||[];
+    var thresholds=corpus.value?.thresholds||{};
+    var invalid=rows.filter(function(row){return row.invalid;}).length;
+    var valid=rows.length-invalid;
+    var exact=rows.filter(function(row){return row.exact;}).length;
+    var criticalRows=rows.filter(function(row){return row.critical;});
+    var criticalExact=criticalRows.filter(function(row){return row.exact;}).length;
+    var highRisk=rows.filter(function(row){return row.plan?.risk == 'high';}).length;
+    var exactRate=rows.length ? exact/rows.length : 0;
+    var criticalRate=criticalRows.length ? criticalExact/criticalRows.length : 1;
+    var invalidRate=rows.length ? invalid/rows.length : 0;
+    summary.value={
+        total:rows.length,valid:valid,invalid:invalid,exact:exact,
+        exactRate:exactRate,criticalRate:criticalRate,highRisk:highRisk,
+        pass:rows.length > 0 &&
+            exactRate >= thresholds.exactMatchRate &&
+            criticalRate >= thresholds.criticalExactMatchRate &&
+            invalidRate <= thresholds.maximumInvalidRate &&
+            highRisk <= thresholds.maximumHighRiskPlans
+    };
+</script>
+
+<script #load (onReady)="load.execute()"
+	[params]="{root:root,corpus:corpus,connectionOptions:connectionOptions,connections:connections,connection:connection,error:error}">
+    root.db.remote('courses/ai-search-evaluation.remote').getCorpus().done(function(value){
+        corpus.value=value;
+    }).error(function(reason){
+        error.value=reason?.message||String(reason);
+    });
+	root.app.scripting.aiAutomation.connections().then(function(values){
+		connections.value=values||[];
+        connectionOptions.value=(values||[]).map(function(value){
+            return {code:value.code,NAME:value.name+(value.model?' — '+value.model:'')};
+        });
+        var selected=(values||[]).find(function(value){return value.default;})||(values||[])[0];
+        connection.value=selected?.code;
+    }).catch(function(reason){
+        error.value=reason?.message||String(reason);
+    });
+</script>
+
+<script #preflight
+    [params]="{root:root,working:working,current:current,progress:progress,results:results,summary:summary,error:error,score:score}">
+    if (working.value) return;
+    working.value=true;error.value=undefined;results.value=[];summary.value=undefined;
+    current.value='Compiling server-side gold programs';progress.value=undefined;
+    root.db.remote('courses/ai-search-evaluation.remote').preflight().done(function(value){
+        results.value=value.results||[];
+        score.execute();
+        working.value=false;current.value=undefined;
+    }).error(function(reason){
+        working.value=false;current.value=undefined;
+        error.value=reason?.message||String(reason);
+    });
+</script>
+
+<script #runLive
+	[params]="{root:root,corpus:corpus,connections:connections,connection:connection,language:language,caseFilter:caseFilter,working:working,current:current,progress:progress,results:results,summary:summary,error:error,controller:controller,score:score}">
+    if (working.value||!corpus.value||!connection.value) return;
+    var abortController=new AbortController();
+    controller.value=abortController;
+    working.value=true;error.value=undefined;results.value=[];summary.value=undefined;
+    var languages=language.value == 'all' ? corpus.value.languages : [language.value];
+    var queue=[];
+    var requestedCase=String(caseFilter.value||'').trim().toLowerCase();
+    (corpus.value.cases||[]).filter(function(entry){
+        return !requestedCase||String(entry.id||'').toLowerCase().indexOf(requestedCase)>=0;
+    }).forEach(function(entry){
+        languages.forEach(function(lang){queue.push({entry:entry,language:lang});});
+    });
+	if (!queue.length) {
+		working.value=false;controller.value=undefined;
+		error.value='No corpus case matches the case-id filter';
+		return;
+	}
+	var remote=root.db.remote('courses/ai-search-evaluation.remote');
+	var descriptor=(connections.value||[]).find(function(value){return value.code == connection.value;})||{};
+    var index=0;
+    var finish=function(){
+        working.value=false;current.value=undefined;progress.value=undefined;controller.value=undefined;
+        score.execute();
+    };
+    var addInvalid=function(item,reason){
+        results.value=(results.value||[]).concat([{
+            caseId:item.entry.id,language:item.language,schema:item.entry.schema,
+            tags:item.entry.tags,critical:item.entry.critical,exact:false,invalid:true,
+            error:reason?.message||String(reason)
+        }]);
+        score.execute();
+    };
+    var next=function(){
+        if (abortController.signal.aborted||index>=queue.length) return finish();
+        var item=queue[index++];
+		current.value=(index)+' / '+queue.length+' — '+item.entry.id+' ['+item.language+']';
+		progress.value=undefined;
+		var generate=function(prepared){
+			if (abortController.signal.aborted) return;
+			var linking=prepared.phase == 'schema-link' && prepared.link;
+			var definition=linking ? linking.definition : prepared.definition;
+			if (!definition) throw new Error('AI search evaluation preparation is invalid');
+			return root.app.scripting.aiAutomation.run(definition,prepared.prompt,{
+				connection:connection.value,
+				signal:abortController.signal,
+				onProgress:function(value){
+					if (!value) return;
+					progress.value=linking ? {
+						title:value.title,
+						detail:'Schema part '+linking.partition+' of '+linking.partitions+(value.detail?' · '+value.detail:'')
+					} : value;
+				}
+			}).then(function(generated){
+				if (!generated?.valid||!generated?.draft)
+					throw new Error((generated?.errors||[]).map(function(issue){return issue.message||String(issue);}).join('; ')||'Model result is invalid');
+				if (!linking) return generated;
+				return remote.continueSchemaLink({
+					caseId:item.entry.id,language:item.language,
+					link:Object.assign({token:linking.token,signature:linking.signature},generated.draft)
+				}).then(generate);
+			});
+		};
+		remote.prepare({
+			caseId:item.entry.id,language:item.language,connection:connection.value,
+			contextWindowTokens:descriptor.contextWindowTokens
+		}).then(generate).then(function(generated){
+			if (abortController.signal.aborted||!generated) return;
+			return generated;
+		}).then(function(generated){
+			if (abortController.signal.aborted||!generated) return;
+			return remote.evaluate({caseId:item.entry.id,language:item.language,draft:generated.draft});
+        }).then(function(evaluated){
+            if (abortController.signal.aborted||!evaluated) return;
+            results.value=(results.value||[]).concat([evaluated]);
+            score.execute();
+        }).catch(function(reason){
+            if (!abortController.signal.aborted) addInvalid(item,reason);
+        }).then(next);
+    };
+    root.onDestroy.once(function(){abortController.abort();});
+    next();
+</script>
+
+<script #stop [params]="{controller:controller}">
+    controller.value?.abort();
+</script>
+
+<script #download [params]="{corpus:corpus,connection:connection,results:results,summary:summary}">
+    var report={
+        generatedAt:new Date().toISOString(),corpus:corpus.value?.name,
+        corpusVersion:corpus.value?.version,connection:connection.value,
+        thresholds:corpus.value?.thresholds,summary:summary.value,results:results.value
+    };
+    var blob=new Blob([JSON.stringify(report,null,2)],{type:'application/json'});
+    var url=URL.createObjectURL(blob);
+    var link=document.createElement('a');
+    link.href=url;link.download='students-courses-ai-search-evaluation-'+Date.now()+'.json';
+    document.body.appendChild(link);link.click();link.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},60000);
+</script>
+
+<div style="position:absolute;inset:0;overflow:auto;padding:18px;box-sizing:border-box">
+    <div fxLayout="row" fxLayoutAlign="start center" style="margin-bottom:14px">
+        <mat-icon style="font-size:30px;width:38px;height:32px">smart_toy</mat-icon>
+        <div>
+            <h2 style="margin:0">AI search ORDBM acceptance</h2>
+            <div style="color:rgba(0,0,0,.62)">{{corpus.value?.cases?.length||0}} semantic cases · English and German · exact object-set scoring</div>
+        </div>
+    </div>
+
+    <div class="mat-elevation-z1" style="padding:14px;margin-bottom:14px;background:var(--vr-colors-background)" fxLayout="row wrap" fxLayoutGap="12px" fxLayoutAlign="start center">
+        <input-option style="width:280px" placeholder="AI connection" [(value)]="connection.value" [options]="connectionOptions.value"></input-option>
+        <input-option style="width:190px" placeholder="Prompt languages" [(value)]="language.value" [options]="[
+            {code:'all',NAME:'English + German'},
+            {code:'en-US',NAME:'English'},
+            {code:'de-DE',NAME:'Deutsch'}
+        ]"></input-option>
+        <input-varchar style="width:260px" placeholder="Case id contains" [(value)]="caseFilter.value"></input-varchar>
+        <button mat-stroked-button (click)="preflight.execute()" [disabled]="working.value||!corpus.value">
+            <mat-icon>fact_check</mat-icon> Gold preflight
+        </button>
+        <button mat-flat-button color="primary" (click)="runLive.execute()" [disabled]="working.value||!corpus.value||!connection.value">
+            <mat-icon>play_arrow</mat-icon> Run live model
+        </button>
+        <button mat-stroked-button color="warn" (click)="stop.execute()" [disabled]="!working.value">
+            <mat-icon>stop</mat-icon> Stop
+        </button>
+        <button mat-stroked-button (click)="download.execute()" [disabled]="!results.value?.length">
+            <mat-icon>download</mat-icon> Export JSON
+        </button>
+    </div>
+
+    <mat-progress-bar *ngIf="working.value" mode="indeterminate"></mat-progress-bar>
+    <div *ngIf="current.value" style="margin:9px 0">{{current.value}}</div>
+    <div *ngIf="progress.value" style="font-size:12px;color:rgba(0,0,0,.65);margin-bottom:9px">{{progress.value.title}}<span *ngIf="progress.value.detail"> — {{progress.value.detail}}</span></div>
+    <div *ngIf="error.value" style="white-space:pre-wrap;color:var(--vr-colors-warn);margin:10px 0">{{error.value}}</div>
+
+    <div *ngIf="summary.value" class="mat-elevation-z1" style="padding:13px;margin-bottom:14px" [style.border-left]="summary.value.pass?'5px solid #2e7d32':'5px solid #c62828'">
+        <b>{{summary.value.pass?'PASS':'NOT PASSING'}}</b>
+        · Exact {{summary.value.exact}} / {{summary.value.total}} ({{(summary.value.exactRate*100).toFixed(1)}}%)
+        · Critical {{(summary.value.criticalRate*100).toFixed(1)}}%
+        · Invalid {{summary.value.invalid}}
+        · High-risk plans {{summary.value.highRisk}}
+    </div>
+
+    <div *ngFor="let row of results.value" class="mat-elevation-z1" style="padding:11px 13px;margin-bottom:8px" [style.border-left]="row.exact?'4px solid #2e7d32':'4px solid #c62828'">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+            <mat-icon>{{row.exact?'check_circle':row.invalid?'error':'cancel'}}</mat-icon>
+            <b>{{row.caseId}}</b><span>[{{row.language}}]</span>
+            <span fxFlex></span>
+            <span *ngIf="row.plan">{{row.plan.risk}} risk · {{row.actualCodes?.length||0}} objects</span>
+        </div>
+        <div *ngIf="row.error" style="white-space:pre-wrap;color:var(--vr-colors-warn);margin-top:5px">{{row.error}}</div>
+        <div *ngIf="!row.exact&&!row.invalid" style="font-size:12px;margin-top:5px">
+            Missing: {{(row.missing||[]).join(', ')||'—'}} · Unexpected: {{(row.unexpected||[]).join(', ')||'—'}}
+        </div>
+        <details *ngIf="row.condition" style="margin-top:6px">
+            <summary>Compiled condition and EXPLAIN</summary>
+            <pre style="white-space:pre-wrap;overflow:auto">{{row.condition}}\n\n{{(row.plan?.lines||[]).join('\n')}}</pre>
+        </details>
+    </div>
+</div>

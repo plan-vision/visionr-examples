@@ -3,7 +3,10 @@ module.exports = {
     properties: {
         "main.academics": {
             code: "code.unique",
-            email: "varchar",
+            email: {
+                template: "varchar",
+                index: "eml"
+            },
             courses: {
                 template: "relation",
                 parent: "courses.course.participants"

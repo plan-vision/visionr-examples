@@ -20,6 +20,9 @@
         "zip:release": "vrs backup target/students-courses-NPM_PACKAGE_VERSION-release.zip full native db upload -dbformat json",
         "compile:demo.installer": "vrs compile installer",
         "build:release": "npm run build:full.clean && npm run import && npm run zip:source && npm run zip:update && npm run zip:release",
+        "test:ai-search-corpus": "node src/test/ai-search-corpus.test.js",
+        "generate:ai-search-performance": "vr run -java generate-ai-search-performance-fixture",
+        "benchmark:ai-search-performance": "vr run -java benchmark-ai-search-performance",
         "upload:release": "vr run @visionr/engine/upl-git-release",
         "release": "npm run build:release && npm run upload:release",
         "release:full": "npm run build:release && npm run compile:demo.installer && npm run upload:release"
@@ -28,7 +31,9 @@
         "verify-project": "./src/task/verify-project.js",
         "generate-course-report": "./src/task/generate-course-report.js",
         "generate-department-html-report": "./src/task/generate-department-html-report.js",
-        "generate-department-xlsx-report": "./src/task/generate-department-xlsx-report.js"
+        "generate-department-xlsx-report": "./src/task/generate-department-xlsx-report.js",
+        "generate-ai-search-performance-fixture": "./src/task/generate-ai-search-performance-fixture.js",
+        "benchmark-ai-search-performance": "./src/task/benchmark-ai-search-performance.js"
     },
     "author": "",
     "license": "ISC",

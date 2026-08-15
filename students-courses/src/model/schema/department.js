@@ -6,7 +6,8 @@ module.exports = {
             color: "varchar.color",
             parent: {
                 template: "relation",
-                related: "courses.department"
+                related: "courses.department",
+                index: "par"
             },
             children: {
                 template: "relation",
