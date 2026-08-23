@@ -22,6 +22,9 @@ forms.define({
                 api: "setupNewDepartment"
             }
         }],
+		searchAI: {
+			workingSet: ["courses.status.code"]
+		},
         orderBy: "name"
     },
     "courses.student": {
@@ -38,6 +41,7 @@ forms.define({
         },
         searchAI: function(details) {
             return {
+				workingSet: ["courses.status.code"],
                 guidance: "This is the student directory. Prefer exact email/code filters and " +
                     "case-insensitive name containment. Course participation may be combined " +
                     "with student fields when its reflected path is available. Seeded-data " +
@@ -67,6 +71,18 @@ forms.define({
         },
         searchAI: function(details) {
             return {
+                literalMappings: [{
+                    path: "department.code",
+                    value: "AI",
+                    aliases: ["AI", "KI"]
+				}, {
+					path: "requires_lab",
+					value: true,
+					aliases: [
+						"require a laboratory", "requires a laboratory", "laboratory required",
+						"Labor benötigen", "Labor benötigt", "benötigt Labor"
+					]
+                }],
                 guidance: "This is the seeded course catalog. Interpret status names through " +
                     "the reflected status relation, department names/codes through department, " +
                     "credits as a number, delivery mode through its reflected option code, " +

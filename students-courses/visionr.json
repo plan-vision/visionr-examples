@@ -43,8 +43,9 @@
                 "protocol": "openai_chat_completions",
                 "endpoint": "https://openrouter.ai/api/v1",
                 "apiKey": "AES@WpfdA5u4fp00OPLUsFxWV0EAU25IUNLpI0uOo0rUGNGAmApNJa6YQ2u+hEniQaaPivh7GyU9wF7qkcetK0bp52ADiqKW9YvnZaabeHbmT9Fto9hgIYvDK0U",
-                "model": "google/gemma-4-26B-A4B-it",
+                "model": "google/gemma-4-26b-a4b-it",
                 "contextWindowTokens": 262144,
+                "reviewValidPreprocessing": true,
                 "temperature": 0.2,
                 "parallelism": 4,
                 "timeoutSeconds": 120
@@ -92,6 +93,21 @@
                 "temperature": 0.2,
                 "parallelism": 4,
                 "timeoutSeconds": 120
+            },
+            "runpod-cypher-ri": {
+                "enabled": true,
+            "protocol": "runpod_vllm_completions",
+            "endpoint": "https://api.runpod.ai/v2/yw9oqkc4upp83s",
+                "apiKey": "AES@W4yRM6/YO5xDSKK7xicpPy55AwtLfPC8DCH+0zuCHt7jnHo0RZLnTxWN+Wi1Qqad2evKTDGlPLNdZh0b45cvavRs",
+                "model": "Anonymous234/Cypher-RI",
+                "contextWindowTokens": 32768,
+                "structuredOutput": false,
+                "requiredToolChoice": false,
+                "reviewValidPreprocessing": false,
+                "reasoningEnabled": false,
+                "temperature": 0,
+                "parallelism": 1,
+            "timeoutSeconds": 1200
             }
         }
     },

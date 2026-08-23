@@ -29,9 +29,27 @@
     var exactRate=rows.length ? exact/rows.length : 0;
     var criticalRate=criticalRows.length ? criticalExact/criticalRows.length : 1;
     var invalidRate=rows.length ? invalid/rows.length : 0;
+	var measured=rows.filter(function(row){return row.metrics;});
+	var durations=measured.map(function(row){return Number(row.metrics.durationMs||0);}).sort(function(a,b){return a-b;});
+	var percentile=function(values,fraction){
+		return values.length ? values[Math.min(values.length-1,Math.ceil(values.length*fraction)-1)] : 0;
+	};
+	var usage=measured.reduce(function(total,row){
+		for (var key of ['modelCalls','toolCalls','inputTokens','outputTokens','totalTokens','costUsd'])
+			total[key]+=Number(row.metrics[key]||0);
+		for (var model of row.metrics.models||[])
+			if (total.models.indexOf(model)<0) total.models.push(model);
+		return total;
+	},{modelCalls:0,toolCalls:0,inputTokens:0,outputTokens:0,totalTokens:0,costUsd:0,models:[]});
     summary.value={
         total:rows.length,valid:valid,invalid:invalid,exact:exact,
         exactRate:exactRate,criticalRate:criticalRate,highRisk:highRisk,
+		metrics:{
+			measured:measured.length,averageDurationMs:measured.length ? Math.round(durations.reduce(function(a,b){return a+b;},0)/measured.length) : 0,
+			p50DurationMs:percentile(durations,.5),p95DurationMs:percentile(durations,.95),
+			modelCalls:usage.modelCalls,toolCalls:usage.toolCalls,inputTokens:usage.inputTokens,
+			outputTokens:usage.outputTokens,totalTokens:usage.totalTokens,costUsd:usage.costUsd,models:usage.models
+		},
         pass:rows.length > 0 &&
             exactRate >= thresholds.exactMatchRate &&
             criticalRate >= thresholds.criticalExactMatchRate &&
@@ -100,11 +118,11 @@
         working.value=false;current.value=undefined;progress.value=undefined;controller.value=undefined;
         score.execute();
     };
-    var addInvalid=function(item,reason){
+	var addInvalid=function(item,reason,metrics){
         results.value=(results.value||[]).concat([{
             caseId:item.entry.id,language:item.language,schema:item.entry.schema,
             tags:item.entry.tags,critical:item.entry.critical,exact:false,invalid:true,
-            error:reason?.message||String(reason)
+			error:reason?.message||String(reason),metrics:metrics||reason?.metrics
         }]);
         score.execute();
     };
@@ -113,6 +131,26 @@
         var item=queue[index++];
 		current.value=(index)+' / '+queue.length+' — '+item.entry.id+' ['+item.language+']';
 		progress.value=undefined;
+		var startedAt=Date.now();
+		var caseMetrics={durationMs:0,modelCalls:0,toolCalls:0,inputTokens:0,outputTokens:0,totalTokens:0,costUsd:0,hasCost:false,models:[]};
+		var mergeMetrics=function(value){
+			if (!value) return;
+			for (var key of ['modelCalls','toolCalls','inputTokens','outputTokens','totalTokens'])
+				caseMetrics[key]+=Number(value[key]||0);
+			if (Number.isFinite(Number(value.costUsd))) {
+				caseMetrics.costUsd+=Number(value.costUsd);
+				caseMetrics.hasCost=true;
+			}
+			for (var model of value.models||[])
+				if (caseMetrics.models.indexOf(model)<0) caseMetrics.models.push(model);
+		};
+		var finalMetrics=function(){
+			caseMetrics.durationMs=Date.now()-startedAt;
+			var value=Object.assign({},caseMetrics);
+			delete value.hasCost;
+			if (!caseMetrics.hasCost) delete value.costUsd;
+			return value;
+		};
 		var generate=function(prepared){
 			if (abortController.signal.aborted) return;
 			var linking=prepared.phase == 'schema-link' && prepared.link;
@@ -129,6 +167,7 @@
 					} : value;
 				}
 			}).then(function(generated){
+				mergeMetrics(generated?.metrics);
 				if (!generated?.valid||!generated?.draft)
 					throw new Error((generated?.errors||[]).map(function(issue){return issue.message||String(issue);}).join('; ')||'Model result is invalid');
 				if (!linking) return generated;
@@ -147,12 +186,14 @@
 		}).then(function(generated){
 			if (abortController.signal.aborted||!generated) return;
 			return remote.evaluate({caseId:item.entry.id,language:item.language,draft:generated.draft});
-        }).then(function(evaluated){
+		}).then(function(evaluated){
             if (abortController.signal.aborted||!evaluated) return;
+			evaluated.metrics=finalMetrics();
             results.value=(results.value||[]).concat([evaluated]);
             score.execute();
-        }).catch(function(reason){
-            if (!abortController.signal.aborted) addInvalid(item,reason);
+		}).catch(function(reason){
+			mergeMetrics(reason?.metrics);
+			if (!abortController.signal.aborted) addInvalid(item,reason,finalMetrics());
         }).then(next);
     };
     root.onDestroy.once(function(){abortController.abort();});
@@ -219,6 +260,11 @@
         · Critical {{(summary.value.criticalRate*100).toFixed(1)}}%
         · Invalid {{summary.value.invalid}}
         · High-risk plans {{summary.value.highRisk}}
+		<div *ngIf="summary.value.metrics?.measured" style="font-size:12px;margin-top:5px">
+			Latency p50 {{summary.value.metrics.p50DurationMs}} ms · p95 {{summary.value.metrics.p95DurationMs}} ms
+			· {{summary.value.metrics.modelCalls}} model calls · {{summary.value.metrics.totalTokens}} tokens
+			<span *ngIf="summary.value.metrics.costUsd"> · ${{summary.value.metrics.costUsd.toFixed(4)}}</span>
+		</div>
     </div>
 
     <div *ngFor="let row of results.value" class="mat-elevation-z1" style="padding:11px 13px;margin-bottom:8px" [style.border-left]="row.exact?'4px solid #2e7d32':'4px solid #c62828'">
@@ -228,6 +274,10 @@
             <span fxFlex></span>
             <span *ngIf="row.plan">{{row.plan.risk}} risk · {{row.actualCodes?.length||0}} objects</span>
         </div>
+		<div *ngIf="row.metrics" style="font-size:12px;color:rgba(0,0,0,.62);margin-top:4px">
+			{{row.metrics.durationMs}} ms · {{row.metrics.modelCalls}} model calls · {{row.metrics.totalTokens}} tokens
+			<span *ngIf="row.metrics.costUsd"> · ${{row.metrics.costUsd.toFixed(5)}}</span>
+		</div>
         <div *ngIf="row.error" style="white-space:pre-wrap;color:var(--vr-colors-warn);margin-top:5px">{{row.error}}</div>
         <div *ngIf="!row.exact&&!row.invalid" style="font-size:12px;margin-top:5px">
             Missing: {{(row.missing||[]).join(', ')||'—'}} · Unexpected: {{(row.unexpected||[]).join(', ')||'—'}}

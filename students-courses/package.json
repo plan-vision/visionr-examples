@@ -21,6 +21,9 @@
         "compile:demo.installer": "vrs compile installer",
         "build:release": "npm run build:full.clean && npm run import && npm run zip:source && npm run zip:update && npm run zip:release",
         "test:ai-search-corpus": "node src/test/ai-search-corpus.test.js",
+        "evaluate:ai-search-planning-recall": "vr run -java evaluate-ai-search-planning-recall",
+        "evaluate:cypher-ri-protocol": "vr run -java evaluate-cypher-ri-protocol",
+        "evaluate:cypher-ri-shadow": "vr run -java evaluate-cypher-ri-shadow",
         "generate:ai-search-performance": "vr run -java generate-ai-search-performance-fixture",
         "benchmark:ai-search-performance": "vr run -java benchmark-ai-search-performance",
         "upload:release": "vr run @visionr/engine/upl-git-release",
@@ -33,7 +36,10 @@
         "generate-department-html-report": "./src/task/generate-department-html-report.js",
         "generate-department-xlsx-report": "./src/task/generate-department-xlsx-report.js",
         "generate-ai-search-performance-fixture": "./src/task/generate-ai-search-performance-fixture.js",
-        "benchmark-ai-search-performance": "./src/task/benchmark-ai-search-performance.js"
+        "benchmark-ai-search-performance": "./src/task/benchmark-ai-search-performance.js",
+        "evaluate-ai-search-planning-recall": "./src/task/evaluate-ai-search-planning-recall.js",
+        "evaluate-cypher-ri-protocol": "./src/task/evaluate-cypher-ri-protocol.js",
+        "evaluate-cypher-ri-shadow": "./src/task/evaluate-cypher-ri-shadow.js"
     },
     "author": "",
     "license": "ISC",
