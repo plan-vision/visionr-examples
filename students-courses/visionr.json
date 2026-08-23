@@ -36,6 +36,7 @@
     "modules": [],
     "ai": {
         "enabled": true,
+        "nlSearchModel": "runpod-cypher-ri",
         "defaultConnection": "qwen-coder-next",
         "connections": {
             "chatbot": {

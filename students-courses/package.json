@@ -23,7 +23,7 @@
         "test:ai-search-corpus": "node src/test/ai-search-corpus.test.js",
         "evaluate:ai-search-planning-recall": "vr run -java evaluate-ai-search-planning-recall",
         "evaluate:cypher-ri-protocol": "vr run -java evaluate-cypher-ri-protocol",
-        "evaluate:cypher-ri-shadow": "vr run -java evaluate-cypher-ri-shadow",
+        "evaluate:cypher-ri-production": "vr run -java evaluate-cypher-ri-production",
         "generate:ai-search-performance": "vr run -java generate-ai-search-performance-fixture",
         "benchmark:ai-search-performance": "vr run -java benchmark-ai-search-performance",
         "upload:release": "vr run @visionr/engine/upl-git-release",
@@ -39,7 +39,7 @@
         "benchmark-ai-search-performance": "./src/task/benchmark-ai-search-performance.js",
         "evaluate-ai-search-planning-recall": "./src/task/evaluate-ai-search-planning-recall.js",
         "evaluate-cypher-ri-protocol": "./src/task/evaluate-cypher-ri-protocol.js",
-        "evaluate-cypher-ri-shadow": "./src/task/evaluate-cypher-ri-shadow.js"
+        "evaluate-cypher-ri-production": "./src/task/evaluate-cypher-ri-production.js"
     },
     "author": "",
     "license": "ISC",
