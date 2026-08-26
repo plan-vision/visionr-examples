@@ -1,4 +1,6 @@
 const assert = require("assert");
+const fs = require("fs");
+const path = require("path");
 const corpus = require("../srv/ai-search-evaluation.corpus");
 
 const languages = ["en-US", "de-DE"];
@@ -81,6 +83,15 @@ function run() {
     assert.deepStrictEqual([...coveredSchemas].sort(), ["courses.course", "courses.department", "courses.student"]);
     for (const required of ["aggregate", "average", "grouped", "count", "zero", "none", "all", "option", "boolean", "datetime", "relation"])
         assert(coveredTags.has(required), `missing semantic coverage tag ${required}`);
+
+    const benchmarkSource = fs.readFileSync(path.resolve(__dirname,
+        "../task/benchmark-ai-search-performance.js"), "utf8");
+    assert.match(benchmarkSource,
+        /function executableCondition[\s\S]*split\("⟦EXTCOND⟧"\)\.join\(replacement\)/,
+        "scale execution must replace the live external-scope placeholder");
+    assert.match(benchmarkSource,
+        /conditionForExecution = executableCondition\(compiled\.condition, scope\)[\s\S]*AND \(\" \+ conditionForExecution/,
+        "the benchmark must execute the scoped condition rather than raw compiled placeholder text");
 
     console.log(`AI search corpus: ok (${corpus.cases.length} cases, ${languages.length} languages)`);
 }

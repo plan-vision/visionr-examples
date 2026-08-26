@@ -120,6 +120,11 @@ try {
             Object.keys(value || {}).forEach(function(key) { result[key] = value[key]; });
             return result;
         }
+        function executableCondition(condition, scopeCondition) {
+            var replacement = scopeCondition ?
+                "(id IN (SELECT id WHERE " + scopeCondition + "))" : "(0 = 0)";
+            return String(condition || "").split("⟦EXTCOND⟧").join(replacement);
+        }
         var results = [];
         for (var definition of definitions) {
             var course = definition.schema === "courses.course";
@@ -151,7 +156,8 @@ try {
                 var compileMilliseconds = Date.now() - compileStarted;
                 if (!compiled.plan || !compiled.plan.lines || !compiled.plan.lines.length)
                     throw new Error(definition.id + ": EXPLAIN diagnostics are missing");
-                var where = "(" + scope + ") AND (" + compiled.condition + ")";
+                var conditionForExecution = executableCondition(compiled.condition, scope);
+                var where = "(" + scope + ") AND (" + conditionForExecution + ")";
                 var countStarted = Date.now();
                 var count = db.find(definition.schema).COUNT({where: where});
                 var countMilliseconds = Date.now() - countStarted;

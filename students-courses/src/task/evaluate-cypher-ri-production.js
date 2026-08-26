@@ -33,7 +33,8 @@ try {
 
     const summary={version:1,languages,corpusCases:manifest.length,evaluations:0,
         prepared:0,planned:0,compiled:0,executed:0,exact:0,modelCalls:0,
-        promptTokens:0,completionTokens:0,failures:[]};
+        promptTokens:0,completionTokens:0,durationMs:0,phaseModelCalls:{},
+        phaseDurationMs:{},modelCallDistribution:{},failures:[]};
 
     for (const entry of manifest) for (const language of languages) {
         const artifact=await VR.srv.call(function(configuration) {
@@ -125,6 +126,16 @@ try {
         summary.modelCalls+=artifact.metrics&&artifact.metrics.modelCalls||0;
         summary.promptTokens+=artifact.metrics&&artifact.metrics.inputTokens||0;
         summary.completionTokens+=artifact.metrics&&artifact.metrics.outputTokens||0;
+        summary.durationMs+=artifact.metrics&&artifact.metrics.durationMs||0;
+        var callBucket=String(artifact.metrics&&artifact.metrics.modelCalls||0);
+        summary.modelCallDistribution[callBucket]=(summary.modelCallDistribution[callBucket]||0)+1;
+        for (var phaseName of Object.keys(artifact.metrics&&artifact.metrics.phases||{})) {
+            var phaseMetrics=artifact.metrics.phases[phaseName]||{};
+            summary.phaseModelCalls[phaseName]=(summary.phaseModelCalls[phaseName]||0)+
+                (phaseMetrics.modelCalls||0);
+            summary.phaseDurationMs[phaseName]=(summary.phaseDurationMs[phaseName]||0)+
+                (phaseMetrics.durationMs||0);
+        }
         if (artifact.error||!artifact.exact)
             summary.failures.push({id:entry.id,language,error:artifact.error,
                 errors:artifact.errors,missing:artifact.missing,unexpected:artifact.unexpected});

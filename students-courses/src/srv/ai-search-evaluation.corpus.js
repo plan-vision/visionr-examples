@@ -25,14 +25,62 @@ var corpus = {
         {
             id: "course.by-code",
             schema: "courses.course",
-            tags: ["scalar", "exact", "critical"],
+            tags: ["scalar", "similar", "critical"],
             prompts: {
                 "en-US": "course with code ALG-201",
                 "de-DE": "Kurs mit dem Code ALG-201"
             },
-            program: program([{path: "code", operator: "equals", value: "ALG-201"}]),
-            expectedCodes: ["ALG-201"]
+            program: program([{path: "code", operator: "similar", value: "ALG-201"}]),
+            expectedCodes: ["ALG-201", "ALG-330"]
         },
+		{
+			id: "course.by-code-explicit-exact",
+			schema: "courses.course",
+			tags: ["scalar", "exact", "operator-profile", "critical"],
+			prompts: {
+				"en-US": "course whose code is exactly ALG-201",
+				"de-DE": "Kurs, dessen Code exakt ALG-201 ist"
+			},
+			program: program([{path: "code", operator: "equals", value: "ALG-201"}]),
+			expectedCodes: ["ALG-201"]
+		},
+		{
+			id: "course.code-prefix-ai",
+			schema: "courses.course",
+			tags: ["scalar", "begins-with", "operator-profile", "critical"],
+			prompts: {
+				"en-US": "courses whose code starts with AI-",
+				"de-DE": "Kurse, deren Code mit AI- beginnt"
+			},
+			program: program([{path: "code", operator: "begins_with", value: "AI-"}]),
+			expectedCodes: ["AI-250", "AI-401", "AI-420"]
+		},
+		{
+			id: "student.email-prefix-ada",
+			schema: "courses.student",
+			tags: ["scalar", "begins-with", "operator-profile", "critical"],
+			prompts: {
+				"en-US": "students whose email starts with ada@",
+				"de-DE": "Studierende, deren E-Mail mit ada@ beginnt"
+			},
+			program: program([{path: "email", operator: "begins_with", value: "ada@"}]),
+			expectedCodes: ["STU-001"]
+		},
+		{
+			id: "student.email-domain-suffix",
+			schema: "courses.student",
+			tags: ["scalar", "ends-with", "operator-profile", "critical"],
+			prompts: {
+				"en-US": "students whose email ends with @example.edu",
+				"de-DE": "Studierende, deren E-Mail mit @example.edu endet"
+			},
+			program: program([{path: "email", operator: "ends_with", value: "@example.edu"}]),
+			expectedCodes: [
+				"STU-001", "STU-002", "STU-003", "STU-004", "STU-005", "STU-006", "STU-007",
+				"STU-008", "STU-009", "STU-010", "STU-011", "STU-012", "STU-013", "STU-014",
+				"STU-015", "STU-016", "STU-017", "STU-018", "STU-019", "STU-020", "STU-021"
+			]
+		},
         {
             id: "course.completed",
             schema: "courses.course",
