@@ -36,69 +36,26 @@
     "modules": [],
     "ai": {
         "enabled": true,
-        "nlSearchModel": "runpod-cypher-ri",
-        "defaultConnection": "qwen-coder-next",
+        "nlSearchModel": "cypher-ri",
+        "defaultConnection": "qwen3-30b-a3b-instruct-2507",
         "connections": {
-            "chatbot": {
+            "qwen3-30b-a3b-instruct-2507": {
                 "enabled": true,
                 "protocol": "openai_chat_completions",
-                "endpoint": "https://openrouter.ai/api/v1",
-                "apiKey": "AES@WpfdA5u4fp00OPLUsFxWV0EAU25IUNLpI0uOo0rUGNGAmApNJa6YQ2u+hEniQaaPivh7GyU9wF7qkcetK0bp52ADiqKW9YvnZaabeHbmT9Fto9hgIYvDK0U",
-                "model": "google/gemma-4-26b-a4b-it",
-                "contextWindowTokens": 262144,
+                "endpoint": "https://router.eu.requesty.ai/v1",
+                "apiKey": "AES@W42DGJC4e8c0eKKUs18hGRxhfQpKX9b7Iy/W3AeOfKTp5UYhLaL+KBu75Ry1EOqr6fw7GzcB11a58LDeUyG1vDdNp63Cj+Pcd7nvKhNhv9thAPt9HRajKcq1LBXBJqONjqQvpu5DjMLjwV/EYa4c7aKMJr5L1NxrafeO6QRBkCCphXI0Bg",
+                "model": "nebius/qwen/qwen3-30b-a3b-instruct-2507",
+                "contextWindowTokens": 128000,
                 "reviewValidPreprocessing": true,
+                "reasoningEnabled": false,
                 "temperature": 0.2,
                 "parallelism": 4,
                 "timeoutSeconds": 120
             },
-            "qwen-coder-30b-a3b": {
+            "cypher-ri": {
                 "enabled": true,
-                "protocol": "openai_chat_completions",
-                "endpoint": "https://openrouter.ai/api/v1",
-                "apiKey": "AES@WpfdA5u4fp00OPLUsFxWV0EAU25IUNLpI0uOo0rUGNGAmApNJa6YQ2u+hEniQaaPivh7GyU9wF7qkcetK0bp52ADiqKW9YvnZaabeHbmT9Fto9hgIYvDK0U",
-                "model": "qwen/qwen3-coder-30b-a3b-instruct",
-                "contextWindowTokens": 262144,
-                "temperature": 0.2,
-                "parallelism": 4,
-                "timeoutSeconds": 120
-            },
-            "poolside-laguna-s-2.1-free": {
-                "enabled": true,
-                "protocol": "openai_chat_completions",
-                "endpoint": "https://openrouter.ai/api/v1",
-                "apiKey": "AES@WpfdA5u4fp00OPLUsFxWV0EAU25IUNLpI0uOo0rUGNGAmApNJa6YQ2u+hEniQaaPivh7GyU9wF7qkcetK0bp52ADiqKW9YvnZaabeHbmT9Fto9hgIYvDK0U",
-                "model": "poolside/laguna-s-2.1:free",
-                "contextWindowTokens": 262144,
-                "temperature": 0.2,
-                "parallelism": 4,
-                "timeoutSeconds": 120
-            },
-            "deepseek-v4-pro-0813": {
-                "enabled": true,
-                "protocol": "openai_chat_completions",
-                "endpoint": "https://openrouter.ai/api/v1",
-                "apiKey": "AES@WpfdA5u4fp00OPLUsFxWV0EAU25IUNLpI0uOo0rUGNGAmApNJa6YQ2u+hEniQaaPivh7GyU9wF7qkcetK0bp52ADiqKW9YvnZaabeHbmT9Fto9hgIYvDK0U",
-                "model": "deepseek/deepseek-v4-pro-0813",
-                "contextWindowTokens": 1048576,
-                "temperature": 0.2,
-                "parallelism": 4,
-                "timeoutSeconds": 120
-            },
-            "qwen-coder-next": {
-                "enabled": true,
-                "protocol": "openai_chat_completions",
-                "endpoint": "https://openrouter.ai/api/v1",
-                "apiKey": "AES@WpfdA5u4fp00OPLUsFxWV0EAU25IUNLpI0uOo0rUGNGAmApNJa6YQ2u+hEniQaaPivh7GyU9wF7qkcetK0bp52ADiqKW9YvnZaabeHbmT9Fto9hgIYvDK0U",
-                "model": "qwen/qwen3-coder-next",
-                "contextWindowTokens": 262144,
-                "temperature": 0.2,
-                "parallelism": 4,
-                "timeoutSeconds": 120
-            },
-            "runpod-cypher-ri": {
-                "enabled": true,
-            "protocol": "runpod_vllm_completions",
-            "endpoint": "https://api.runpod.ai/v2/yw9oqkc4upp83s",
+                "protocol": "runpod_vllm_completions",
+                "endpoint": "https://api.runpod.ai/v2/yw9oqkc4upp83s",
                 "apiKey": "AES@W4yRM6/YO5xDSKK7xicpPy55AwtLfPC8DCH+0zuCHt7jnHo0RZLnTxWN+Wi1Qqad2evKTDGlPLNdZh0b45cvavRs",
                 "model": "Anonymous234/Cypher-RI",
                 "contextWindowTokens": 32768,
@@ -108,7 +65,7 @@
                 "reasoningEnabled": false,
                 "temperature": 0,
                 "parallelism": 1,
-            "timeoutSeconds": 1200
+                "timeoutSeconds": 1200
             }
         }
     },

@@ -6,7 +6,7 @@
  * model output but neither lowers nor executes model-authored Cypher.
  */
 
-const connection = "runpod-cypher-ri";
+const connection = "cypher-ri";
 
 try {
     const report = await VR.srv.call(function(configuration) {
