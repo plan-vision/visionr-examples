@@ -36,7 +36,7 @@
     "modules": [],
     "ai": {
         "enabled": true,
-        "nlSearchModel": "cypher-ri",
+        "nlSearchModel": "cypher-ri:serverless",
         "defaultConnection": "qwen3-30b-a3b-instruct-2507",
         "connections": {
             "qwen3-30b-a3b-instruct-2507": {
@@ -58,6 +58,21 @@
                 "endpoint": "https://6t4h6ma9hta83w-8080.proxy.runpod.net/v1",
                 "apiKey": "AES@QZqvGLP8Y9Z4d/Gy8jcuLit5WQg2R8baLgL72DnQQaLh7msBZx0dFDiKoE3hsXYq4mf7+Gc",
                 "model": "mradermacher/Cypher-RI-GGUF:Q6_K",
+                "contextWindowTokens": 32768,
+                "structuredOutput": false,
+                "requiredToolChoice": false,
+                "reviewValidPreprocessing": false,
+                "reasoningEnabled": false,
+                "temperature": 0,
+                "parallelism": 1,
+                "timeoutSeconds": 1200
+            },
+            "cypher-ri:serverless": {
+                "enabled": true,
+                "protocol": "runpod_vllm_completions",
+                "endpoint": "https://api.runpod.ai/v2/5gnla9zctn7za3",
+                "apiKey": "AES@W4yRM6/YO5xDSKK7xicpPy55AwtLfPC8DCH+0zuCHt7jnHo0RZLnTxWN+Wi1Qqad2evKTDGlPLNdZh0b45cvavRs",
+                "model": "Anonymous234/Cypher-RI",
                 "contextWindowTokens": 32768,
                 "structuredOutput": false,
                 "requiredToolChoice": false,
