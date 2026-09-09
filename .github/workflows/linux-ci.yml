@@ -33,7 +33,11 @@ jobs:
       - name: Install VisionR-Engine Globally (Linux)
         if: steps.cache-visionr.outputs.cache-hit != 'true'
         run: |
-          ASSET_URL=$(curl -s https://api.github.com/repos/plan-vision/visionr-engine.binary/releases/latest | grep "browser_download_url" | grep "visionr-engine-NPM-package" | cut -d '"' -f 4)
+          ASSET_URL=$(curl --fail --silent --show-error --location https://api.github.com/repos/plan-vision/visionr-engine.binary/releases/latest | jq --exit-status --raw-output '
+            .tag_name as $version
+            | [.assets[] | select(.name == ("visionr-engine-NPM-package-" + $version + ".tgz")) | .browser_download_url]
+            | if length == 1 then .[0] else error("Expected exactly one VisionR npm .tgz release asset") end
+          ')
           echo "Installing VisionR-Engine globally from release npm package $ASSET_URL ..."
           npm install -g "$ASSET_URL"
 
@@ -43,4 +47,3 @@ jobs:
         run: |
           npm run release
         shell: bash
-
