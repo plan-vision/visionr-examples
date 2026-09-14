@@ -10,3 +10,4 @@
 *.log
 /backup/
 /updates/
+*.lock
