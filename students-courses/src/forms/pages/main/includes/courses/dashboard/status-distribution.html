@@ -22,6 +22,7 @@
 
         <div fxFlex style="position:relative">
             <piechart class="absolute-fill"
+                [accessibleName]="root.i18n('LABEL_COURSES_COURSE_STATUS')"
                 *ngIf="data.value?.pie"
                 [data]="data.value.pie"
                 (select)="$event.object ? root.detailsDialog($event.object) : 0">

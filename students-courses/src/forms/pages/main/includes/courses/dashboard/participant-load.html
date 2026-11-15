@@ -21,6 +21,7 @@
 
         <div fxFlex style="position:relative;margin-bottom:8px">
             <barchart-vertical
+                [caption]="root.i18n('LABEL_COURSES_PARTICIPANTS_BY_COURSE')"
                 *ngIf="data.value"
                 [results]="data.value.rows"
                 [customColors]="data.value.colors"
