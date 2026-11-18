@@ -37,20 +37,27 @@
     "ai": {
         "enabled": true,
         "nlSearchModel": "cypher-ri:serverless",
-        "defaultConnection": "qwen3-30b-a3b-instruct-2507",
+        "defaultConnection": "deepseek-v4.1-flash-1017",
         "connections": {
-            "qwen3-30b-a3b-instruct-2507": {
+            "deepseek-v4.1-flash-1017": {
                 "enabled": true,
                 "protocol": "openai_chat_completions",
-                "endpoint": "https://router.eu.requesty.ai/v1",
-                "apiKey": "AES@W42DGJC4e8c0eKKUs18hGRxhfQpKX9b7Iy/W3AeOfKTp5UYhLaL+KBu75Ry1EOqr6fw7GzcB11a58LDeUyG1vDdNp63Cj+Pcd7nvKhNhv9thAPt9HRajKcq1LBXBJqONjqQvpu5DjMLjwV/EYa4c7aKMJr5L1NxrafeO6QRBkCCphXI0Bg",
-                "model": "nebius/qwen/qwen3-30b-a3b-instruct-2507",
-                "contextWindowTokens": 128000,
+                "endpoint": "https://openrouter.ai/api/v1",
+                "apiKey": "AES@WpfdA5u4fp00OPLUsFxWV0EAU25IUNLpI0uOo0rUGNGAmApNJa6YQ2u+hEniQaaPivh7GyU9wF7qkcetK0bp52ADiqKW9YvnZaabeHbmT9Fto9hgIYvDK0U",
+                "model": "deepseek/deepseek-v4.1-flash-1017",
+                "contextWindowTokens": 1048576,
                 "reviewValidPreprocessing": true,
                 "reasoningEnabled": false,
                 "temperature": 0.2,
                 "parallelism": 4,
-                "timeoutSeconds": 120
+                "timeoutSeconds": 120,
+                "provider": {
+                    "require_parameters": true,
+                    "max_price": {
+                        "prompt": 1,
+                        "completion": 2
+                    }
+                }
             },
             "cypher-ri": {
                 "enabled": true,

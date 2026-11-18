@@ -6,7 +6,7 @@ const OIMG_CLEAN = misc.OIMG_CLEAN;
 
 function label(code) {
     const message = db.core.message.byCode(code);
-    return message ? message.getI18nActive("name") : code;
+    return message ? String(message.name) : code;
 }
 
 function courseItem(course) {

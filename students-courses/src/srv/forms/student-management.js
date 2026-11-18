@@ -101,7 +101,7 @@ forms.define({
                 );
                 return [{
                     message: translated
-                        ? translated.getI18nActive("name")
+                        ? String(translated.name)
                         : "ERROR_COURSES_BEGIN_BEFORE_END",
                     type: "error",
                     key: "begin_time_before_end_time",

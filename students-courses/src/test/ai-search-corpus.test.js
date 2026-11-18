@@ -66,7 +66,9 @@ function run() {
         assert(!ids.has(entry.id), `duplicate corpus case ${entry.id}`);
         ids.add(entry.id);
         assert.match(entry.schema, /^courses\.[a-z_]+$/);
-        assert.strictEqual(entry.scopeCondition, "code < 'PERF-' OR code >= 'PERF.'",
+        assert.strictEqual(entry.scopeCondition,
+            "(code < 'PERF-' OR code >= 'PERF.') AND " +
+            "(code < 'BULK-' OR code >= 'BULK.')",
             `${entry.id}: deterministic primary acceptance scope`);
         coveredSchemas.add(entry.schema);
         assert(Array.isArray(entry.tags) && entry.tags.length > 0, `${entry.id}: tags`);

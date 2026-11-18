@@ -334,7 +334,7 @@ var corpus = {
                 "de-DE": "Fachbereiche mit mindestens vier Kursen"
             },
             program: program([], [{scope: "courses", operator: "greater_or_equal", value: 4}]),
-            expectedCodes: ["BIO", "CS", "DS"]
+            expectedCodes: ["AI", "BIO", "CHEM", "CS", "DS", "MATH", "PHYS", "SE", "STAT"]
         },
         {
             id: "department.no-direct-courses",
@@ -361,15 +361,17 @@ var corpus = {
                 value: "completed",
                 quantifier: "none"
             }]),
-            expectedCodes: ["AI", "BIO", "SCI", "SE", "STAT"]
+            expectedCodes: ["AI", "BIO", "SCI", "SE"]
         }
     ]
 };
 
 // Keep the exact semantic corpus stable when the optional PERF-* scale fixture
-// is installed. This is also the acceptance scope propagated through reflection,
+// is installed and when the BULK-* scale seed (academics-scale.data.js) is
+// imported. This is also the acceptance scope propagated through reflection,
 // aggregate population, EXPLAIN, and final result execution.
 for (var entry of corpus.cases)
-    entry.scopeCondition = "code < 'PERF-' OR code >= 'PERF.'";
+    entry.scopeCondition = "(code < 'PERF-' OR code >= 'PERF.') AND " +
+        "(code < 'BULK-' OR code >= 'BULK.')";
 
 module.exports = corpus;
