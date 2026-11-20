@@ -21,6 +21,7 @@
         "compile:demo.installer": "vrs compile installer",
         "build:release": "npm run build:full.clean && npm run import && npm run zip:source && npm run zip:update && npm run zip:release",
         "test:ai-search-corpus": "node src/test/ai-search-corpus.test.js",
+        "test:ai-search-browser": "node src/test/ai-search-corpus.browser.js",
         "evaluate:ai-search-planning-recall": "vr run -java evaluate-ai-search-planning-recall",
         "evaluate:cypher-ri-protocol": "vr run -java evaluate-cypher-ri-protocol",
         "evaluate:cypher-ri-production": "vr run -java evaluate-cypher-ri-production",
