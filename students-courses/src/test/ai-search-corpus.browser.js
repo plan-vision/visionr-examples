@@ -108,10 +108,13 @@ async function submit(page, prompt) {
         const tab = page.getByRole('tab', {name:/KI-Suche|AI Search/i});
         if (await tab.count()) {
             await tab.click();
-            const field = page.locator('mat-dialog-content textarea:visible');
-            await field.pressSequentially(prompt, {delay:10});
+            const panel = page.getByRole('tabpanel', {name:/KI-Suche|AI Search/i});
+            const field = panel.locator('textarea:visible');
+            await field.click(); // Wait for the selected tab to finish sliding into view.
+            await field.fill(prompt);
             await field.press('Tab');
-            await page.locator('mat-dialog-actions [dialog-submit]:visible').click();
+            assert.equal(await field.inputValue(), prompt);
+            await panel.locator('xpath=ancestor::mat-dialog-container').locator('[dialog-submit]').click();
             return;
         }
         await page.getByRole('button', {name:/Cancel|Abbrechen/i}).last().click();
@@ -176,6 +179,8 @@ async function run() {
                         phase = 'submit';
                         await page.evaluate(observeSearch, {schema:test.schema, scopeCondition:test.scopeCondition, prompt:test.prompts[lang]});
                         await submit(page, test.prompts[lang]);
+                        phase = 'start-search';
+                        await page.waitForFunction(() => window.corpusSearch?.started, null, {timeout:60000});
                         phase = 'wait-for-dialog';
                         const dialog = page.locator('mat-dialog-container:visible').last();
                         const apply = dialog.getByRole('button', {name:/^(Anwenden|Apply)$/i});
@@ -184,12 +189,13 @@ async function run() {
                         metrics = await page.evaluate(verify, {schema:test.schema, expectedCodes:test.expectedCodes});
                         if (metrics.compiled && !await apply.isVisible()) throw Error('Draft unavailable for review');
                         await dialog.getByRole('button', {name:/^(Cancel|Abbrechen|Close|Schließen)$/i}).first().click();
-                    } catch {
+                        await page.locator('mat-dialog-container').waitFor({state:'detached'});
+                    } catch (failure) {
                         const state = await page.evaluate(() => ({
                             promptIssued:!!window.corpusSearch?.scope, started:!!window.corpusSearch?.started,
                             received:!!window.corpusSearch?.received, dialogVisible:!!document.querySelector('mat-dialog-container')
                         })).catch(() => ({}));
-                        metrics = {error:phase, compiled:false, exact:false, route, ...state};
+                        metrics = {error:phase, reason:failure.name, compiled:false, exact:false, route, ...state};
                         current = undefined; // Reload closes any remaining dialog before the next case.
                     } finally {
                         await page.evaluate(() => window.corpusSearch?.restore()).catch(() => {});
