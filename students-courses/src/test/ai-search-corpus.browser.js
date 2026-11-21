@@ -154,10 +154,14 @@ async function run() {
     fs.mkdirSync(directory, {recursive:true});
     const out = path.join(fs.mkdtempSync(path.join(directory, 'ai-search-corpus-')), 'receipts.jsonl');
     console.log('Receipts', out);
-    const browser = await chromium.launch({executablePath:process.env.VISIONR_CHROMIUM_EXECUTABLE});
+    const headed=process.env.VISIONR_TEST_HEADED==='1';
+    const args=[];
+    if(headed && process.env.VISIONR_TEST_WINDOW_POSITION)args.push('--window-position='+process.env.VISIONR_TEST_WINDOW_POSITION);
+    if(headed && process.env.VISIONR_TEST_WINDOW_SIZE)args.push('--window-size='+process.env.VISIONR_TEST_WINDOW_SIZE);
+    const browser = await chromium.launch({executablePath:process.env.VISIONR_CHROMIUM_EXECUTABLE,headless:!headed,args});
     try {
         for (const lang of languages) {
-            const options={locale:lang, timezoneId:'Europe/Berlin', ignoreHTTPSErrors:true};
+            const options={locale:lang, timezoneId:'Europe/Berlin', ignoreHTTPSErrors:true,...(headed?{viewport:null}:{})};
             let context = await browser.newContext(options);
             try {
                 let page = await context.newPage();
