@@ -1,49 +1,78 @@
 name: Build on Linux (Ubuntu)
 
-permissions:
-  contents: write  # Needed for 'gh release create' to work with GITHUB_TOKEN
-
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
   workflow_dispatch:
 
-# linux does downloading and extraction fast, skip cache configuration
+permissions:
+  contents: write
+
+concurrency:
+  group: linux-release-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   build-ubuntu:
     name: Linux (Ubuntu) build
+    # The engine is private. Fork and Dependabot PRs cannot use its read token.
+    if: github.event_name != 'pull_request' || (github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot[bot]')
     runs-on: ubuntu-26.04
-
-    env:
-      VISIONR_VERSION: latest
-      PROJECT_NAME: visionr-examples
-
     steps:
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v6
         with:
           node-version: '24'
+          package-manager-cache: false
 
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Install VisionR-Engine Globally (Linux)
-        if: steps.cache-visionr.outputs.cache-hit != 'true'
+      - name: Install VisionR runtime libraries
         run: |
-          ASSET_URL=$(curl --fail --silent --show-error --location https://api.github.com/repos/plan-vision/visionr-engine.binary/releases/latest | jq --exit-status --raw-output '
-            .tag_name as $version
-            | [.assets[] | select(.name == ("visionr-engine-NPM-package-" + $version + ".tgz")) | .browser_download_url]
-            | if length == 1 then .[0] else error("Expected exactly one VisionR npm .tgz release asset") end
-          ')
-          echo "Installing VisionR-Engine globally from release npm package $ASSET_URL ..."
-          npm install -g "$ASSET_URL"
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libcairo2 libcups2t64 libx11-xcb1 libxinerama1 libnss3 libxslt1.1
 
-      - name: Compile release and upload to GitHub  
+      - name: Install the latest Ubuntu 26 x64 engine release
+        working-directory: ${{ runner.temp }}
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          npm run release
+          GH_TOKEN: ${{ secrets.VISIONR_ENGINE_READ_TOKEN }}
+          ENGINE_REPO: plan-vision/visionr-engine
         shell: bash
+        run: |
+          : "${GH_TOKEN:?Set VISIONR_ENGINE_READ_TOKEN with Contents read access to plan-vision/visionr-engine}"
+          asset=$(gh api --paginate "repos/$ENGINE_REPO/releases?per_page=100" | jq -ers '
+            [ .[][] | select(.draft == false and .prerelease == false)
+              | . as $release | .assets[]
+              | select(.state == "uploaded" and .name == ("visionr-engine-" + $release.tag_name + "-linux_ubuntu_26_x64.tar.gz"))
+              | {version: $release.tag_name, published: $release.published_at, id, digest} ]
+            | max_by(.published) // error("No stable Ubuntu 26 x64 engine release found")')
+          version=$(jq -r .version <<< "$asset")
+          checksum=$(jq -er '.digest | capture("^sha256:(?<hash>[0-9a-f]{64})$").hash' <<< "$asset")
+          echo "Downloading VisionR $version for Ubuntu 26 x64"
+          gh api -H 'Accept: application/octet-stream' "repos/$ENGINE_REPO/releases/assets/$(jq -r .id <<< "$asset")" > engine.tar.gz
+          echo "$checksum  engine.tar.gz" | sha256sum --check
+          mkdir visionr-engine
+          tar -xzf engine.tar.gz -C visionr-engine
+          rm engine.tar.gz
+          jq -e --arg version "$version" '.name == "@visionr/engine" and .version == $version' visionr-engine/package.json
+          test "$(visionr-engine/vrs dir)" = "$RUNNER_TEMP/visionr-engine"
+          echo "$RUNNER_TEMP/visionr-engine" >> "$GITHUB_PATH"
+
+      - name: Build example release archives
+        shell: bash
+        run: |
+          npm run build:generated
+          project_names=$(jq -er 'keys[]' project-catalog.json)
+          mapfile -t projects <<< "$project_names"
+          for project in "${projects[@]}"; do
+            npm --prefix "$project" ci
+            npm --prefix "$project" run build:release
+          done
+
+      - name: Publish example archives
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: vr run @visionr/engine/upl-git-release

@@ -122,3 +122,17 @@ npm run release
 ```
 
 Use child project scripts for normal project work.
+
+## GitHub Actions releases
+
+Each push to `main` builds the catalog projects on Ubuntu 26.04 x64 and
+publishes their source, update, and release ZIPs after all projects build.
+A manual run on `main` can retry publication. Same-repository pull requests
+build the archives without publishing. Fork and Dependabot pull requests skip
+the private-engine build.
+
+Set the Actions secret `VISIONR_ENGINE_READ_TOKEN` to a fine-grained token
+with **Contents: read** on `plan-vision/visionr-engine`. CI selects the most
+recent stable release containing the Ubuntu 26 x64 standalone archive and
+checks its SHA-256 digest before extraction. Publication uses the examples
+repository’s built-in `GITHUB_TOKEN` with **Contents: write**.
